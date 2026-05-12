@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
@@ -17,11 +17,19 @@ const ProductScreen = () => {
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
+  const [activeTab, setActiveTab] = useState('description');
+  const [mainImage, setMainImage] = useState('');
 
   const { data: product, isLoading, refetch, error } = useGetProductDetailsQuery(productId);
   const [createReview, { isLoading: loadingProductReview }] = useCreateReviewMutation();
 
   const { userInfo } = useSelector((state) => state.auth) || {};
+
+  useEffect(() => {
+    if (product && product.images?.length > 0) {
+      setMainImage(product.images[0].url);
+    }
+  }, [product]);
 
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty }));
@@ -47,7 +55,7 @@ const ProductScreen = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 pb-20">
       <Link to="/" className="inline-flex items-center gap-2 text-primary font-bold hover:underline mb-4">
         <ArrowLeft size={20} /> Go Back
       </Link>
@@ -57,180 +65,245 @@ const ProductScreen = () => {
       ) : error ? (
         <Message variant='danger'>{error?.data?.message || error.error}</Message>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Image Gallery */}
-          <div className="space-y-4">
-            <div className="aspect-square rounded-3xl overflow-hidden shadow-lg bg-white">
-              <img 
-                src={product.images[0]?.url} 
-                alt={product.name} 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="grid grid-cols-4 gap-4">
-              {product.images.map((img, idx) => (
-                <div key={idx} className="aspect-square rounded-xl overflow-hidden border-2 border-transparent hover:border-primary cursor-pointer">
-                  <img src={img.url} alt="" className="w-full h-full object-cover" />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Product Info */}
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <h1 className="text-3xl md:text-4xl font-bold font-hindi">{product.hindiName || product.name}</h1>
-              <div className="flex items-center gap-4">
-                <Rating value={product.rating} text={`${product.numReviews} reviews`} />
-                <span className={`px-3 py-1 rounded-full text-sm font-bold ${product.countInStock > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                  {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
-                </span>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {/* Image Gallery */}
+            <div className="space-y-6">
+              <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl bg-white border border-gray-100 p-2">
+                <img 
+                  src={mainImage} 
+                  alt={product.name} 
+                  className="w-full h-full object-contain rounded-2xl"
+                />
+              </div>
+              <div className="grid grid-cols-4 gap-4">
+                {product.images.map((img, idx) => (
+                  <div 
+                    key={idx} 
+                    onClick={() => setMainImage(img.url)}
+                    className={`aspect-square rounded-xl overflow-hidden border-2 cursor-pointer transition-all ${
+                      mainImage === img.url ? 'border-primary shadow-md scale-105' : 'border-village hover:border-gray-300'
+                    }`}
+                  >
+                    <img src={img.url} alt="" className="w-full h-full object-cover" />
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div className="border-y border-gray-100 py-6">
+            {/* Product Info */}
+            <div className="space-y-8">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-primary font-bold text-sm tracking-widest uppercase">
+                  <span>Authentic Bihar</span>
+                  <span className="w-8 h-[2px] bg-primary"></span>
+                </div>
+                <h1 className="text-4xl md:text-5xl font-bold font-hindi leading-tight">
+                  {product.hindiName || product.name}
+                </h1>
+                <div className="flex items-center gap-4">
+                  <Rating value={product.rating} text={`${product.numReviews} reviews`} />
+                  <div className="h-4 w-[1px] bg-gray-200"></div>
+                  <span className={`px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest ${product.countInStock > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                    {product.countInStock > 0 ? 'Freshly Available' : 'Currently Out'}
+                  </span>
+                </div>
+              </div>
+
               <div className="flex items-baseline gap-4">
-                <span className="text-4xl font-bold text-primary">₹{product.price}</span>
+                <span className="text-5xl font-black text-primary tracking-tighter">₹{product.price}</span>
                 {product.discount > 0 && (
-                  <span className="text-xl text-gray-400 line-through">₹{(product.price / (1 - product.discount/100)).toFixed(0)}</span>
+                  <div className="flex flex-col">
+                    <span className="text-xl text-gray-400 line-through">₹{(product.price / (1 - product.discount/100)).toFixed(0)}</span>
+                    <span className="text-sm text-green-600 font-bold">{product.discount}% OFF</span>
+                  </div>
                 )}
               </div>
-              <p className="text-gray-600 mt-4 leading-relaxed">{product.description}</p>
-            </div>
 
-            {/* Features */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-gray-100">
-                <ShieldCheck className="text-primary" />
-                <div>
-                  <h4 className="font-bold text-sm">Pure and Fresh</h4>
-                  <p className="text-xs text-gray-500">No Preservatives</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-gray-100">
-                <Truck className="text-primary" />
-                <div>
-                  <h4 className="font-bold text-sm">Fast Delivery</h4>
-                  <p className="text-xs text-gray-500">Across India</p>
-                </div>
-              </div>
-            </div>
+              {/* Short Description */}
+              <div 
+                className="text-gray-600 leading-relaxed border-l-4 border-primary/20 pl-4 py-1"
+                dangerouslySetInnerHTML={{ __html: product.shortDescription }} 
+              />
 
-            {/* Quantity and Actions */}
-            {product.countInStock > 0 && (
-              <div className="space-y-6">
-                <div className="flex items-center gap-6">
-                  <span className="font-bold">Quantity:</span>
-                  <div className="flex items-center bg-white border border-gray-200 rounded-full overflow-hidden">
-                    <button 
-                      onClick={() => setQty(Math.max(1, qty - 1))}
-                      className="p-3 hover:bg-gray-50 transition"
-                    >
-                      <Minus size={20} />
-                    </button>
-                    <span className="w-12 text-center font-bold">{qty}</span>
-                    <button 
-                      onClick={() => setQty(Math.min(product.countInStock, qty + 1))}
-                      className="p-3 hover:bg-gray-50 transition"
-                    >
-                      <Plus size={20} />
-                    </button>
+              {/* Badges */}
+              <div className="grid grid-cols-2 gap-4 py-4 border-y border-village">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-primary/5 rounded-lg text-primary">
+                    <ShieldCheck size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-xs">100% Homemade</h4>
+                    <p className="text-[10px] text-gray-400">Traditional Methods</p>
                   </div>
                 </div>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button 
-                    onClick={addToCartHandler}
-                    className="flex-1 village-button-primary flex items-center justify-center gap-2"
-                  >
-                    <ShoppingCart size={20} /> Add to Cart
-                  </button>
-                  <button className="flex-1 village-button-secondary">Buy Now</button>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-primary/5 rounded-lg text-primary">
+                    <Truck size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-xs">Free Delivery</h4>
+                    <p className="text-[10px] text-gray-400">Orders above ₹500</p>
+                  </div>
                 </div>
               </div>
-            )}
 
-            {/* Details Tabs */}
-            <div className="bg-white rounded-3xl p-8 border border-gray-100 space-y-4">
-              <h3 className="text-xl font-bold font-hindi">Details</h3>
-              <div className="grid grid-cols-2 gap-y-4 text-sm">
-                <span className="text-gray-500">Weight:</span>
-                <span className="font-medium font-hindi">500g</span>
-                <span className="text-gray-500">Shelf Life:</span>
-                <span className="font-medium font-hindi">{product.shelfLife || '3 Months'}</span>
-                <span className="text-gray-500">Ingredients:</span>
-                <span className="font-medium font-hindi">{product.ingredients || 'Natural Ingredients'}</span>
-              </div>
+              {/* Quantity and Actions */}
+              {product.countInStock > 0 && (
+                <div className="space-y-6">
+                  <div className="flex items-center gap-6">
+                    <span className="font-black text-gray-700">Quantity:</span>
+                    <div className="flex items-center bg-village rounded-2xl overflow-hidden border border-gray-100">
+                      <button 
+                        onClick={() => setQty(Math.max(1, qty - 1))}
+                        className="p-4 hover:bg-gray-200 transition"
+                      >
+                        <Minus size={18} />
+                      </button>
+                      <span className="w-12 text-center font-black text-lg">{qty}</span>
+                      <button 
+                        onClick={() => setQty(Math.min(product.countInStock, qty + 1))}
+                        className="p-4 hover:bg-gray-200 transition"
+                      >
+                        <Plus size={18} />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <button 
+                      onClick={addToCartHandler}
+                      className="flex-[2] village-button-primary py-5 flex items-center justify-center gap-3 text-lg"
+                    >
+                      <ShoppingCart size={24} /> Add to Cart
+                    </button>
+                    <button className="flex-1 village-button-secondary py-5">Buy Now</button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
-        </div>
-      )}
 
-      {/* Reviews Section */}
-      <section className="mt-16 space-y-8">
-        <h2 className="text-3xl font-bold font-hindi">Customer Reviews</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Review List */}
-          <div className="space-y-6">
-            {product?.reviews.length === 0 && <Message>No Reviews Yet</Message>}
-            {product?.reviews.map((review) => (
-              <div key={review._id} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-50">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="font-bold">{review.name}</span>
-                  <Rating value={review.rating} />
-                </div>
-                <p className="text-gray-600">{review.comment}</p>
-                <p className="text-xs text-gray-400 mt-4">{review.createdAt.substring(0, 10)}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Write a Review */}
-          <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 h-fit">
-            <h3 className="text-xl font-bold font-hindi mb-6">Write a Review</h3>
-            {loadingProductReview && <Loader />}
-            {userInfo ? (
-              <form onSubmit={submitHandler} className="space-y-4">
-                <div className="space-y-2">
-                  <label className="font-bold">Rating</label>
-                  <select
-                    className="w-full p-3 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary"
-                    value={rating}
-                    onChange={(e) => setRating(e.target.value)}
-                  >
-                    <option value="">Select...</option>
-                    <option value="1">1 - Poor</option>
-                    <option value="2">2 - Fair</option>
-                    <option value="3">3 - Good</option>
-                    <option value="4">4 - Very Good</option>
-                    <option value="5">5 - Excellent</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="font-bold">Review</label>
-                  <textarea
-                    rows="4"
-                    className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                  ></textarea>
-                </div>
-                <button 
-                  disabled={loadingProductReview}
-                  type="submit" 
-                  className="village-button-primary w-full"
+          {/* Detailed Info Tabs */}
+          <div className="mt-20 bg-white rounded-[40px] shadow-sm border border-gray-100 overflow-hidden">
+            <div className="flex border-b border-gray-100 overflow-x-auto">
+              {[
+                { id: 'description', label: 'Description' },
+                { id: 'additional', label: 'Additional Information' },
+                { id: 'reviews', label: `Reviews (${product.numReviews})` }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-10 py-6 text-sm font-black uppercase tracking-widest transition-all whitespace-nowrap ${
+                    activeTab === tab.id 
+                      ? 'text-primary border-b-4 border-primary' 
+                      : 'text-gray-400 hover:text-gray-600'
+                  }`}
                 >
-                  Submit
+                  {tab.label}
                 </button>
-              </form>
-            ) : (
-              <Message>
-                Please <Link to="/login" className="underline font-bold">login</Link> to write a review.
-              </Message>
-            )}
+              ))}
+            </div>
+
+            <div className="p-10 md:p-16">
+              {activeTab === 'description' && (
+                <div className="prose prose-primary max-w-none">
+                  <div 
+                    className="text-gray-600 leading-relaxed space-y-4 rich-text-content"
+                    dangerouslySetInnerHTML={{ __html: product.description }} 
+                  />
+                </div>
+              )}
+
+              {activeTab === 'additional' && (
+                <div className="prose prose-primary max-w-none">
+                  <div 
+                    className="text-gray-600 leading-relaxed space-y-4 rich-text-content"
+                    dangerouslySetInnerHTML={{ __html: product.additionalInfo }} 
+                  />
+                </div>
+              )}
+
+              {activeTab === 'reviews' && (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                  {/* Review List */}
+                  <div className="space-y-8">
+                    {product.reviews.length === 0 && (
+                      <div className="text-center py-12 bg-village rounded-3xl">
+                        <p className="text-gray-400 italic">No reviews yet. Be the first to share your experience!</p>
+                      </div>
+                    )}
+                    {product.reviews.map((review) => (
+                      <div key={review._id} className="bg-village/20 p-8 rounded-[32px] space-y-4 border border-transparent hover:border-primary/10 transition">
+                        <div className="flex justify-between items-center">
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 bg-primary text-white flex items-center justify-center rounded-full font-bold">
+                              {review.name[0]}
+                            </div>
+                            <span className="font-black text-gray-800">{review.name}</span>
+                          </div>
+                          <Rating value={review.rating} />
+                        </div>
+                        <p className="text-gray-600 leading-relaxed italic">"{review.comment}"</p>
+                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+                          {new Date(review.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Review Form */}
+                  <div className="bg-village/10 p-10 rounded-[40px] h-fit border border-village">
+                    <h3 className="text-2xl font-bold font-hindi mb-8">Tell us what you think</h3>
+                    {userInfo ? (
+                      <form onSubmit={submitHandler} className="space-y-6">
+                        <div className="space-y-2">
+                          <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 px-2">Your Rating</label>
+                          <select
+                            className="w-full p-4 bg-white border border-gray-200 rounded-2xl focus:outline-none focus:border-primary transition font-bold"
+                            value={rating}
+                            onChange={(e) => setRating(e.target.value)}
+                          >
+                            <option value="">Choose a rating...</option>
+                            <option value="5">5 - Excellent (Superb Taste)</option>
+                            <option value="4">4 - Very Good</option>
+                            <option value="3">3 - Good</option>
+                            <option value="2">2 - Fair</option>
+                            <option value="1">1 - Poor</option>
+                          </select>
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 px-2">Your Review</label>
+                          <textarea
+                            rows="5"
+                            placeholder="How was the taste? Was it authentic?"
+                            className="w-full p-6 bg-white border border-gray-200 rounded-[32px] focus:outline-none focus:border-primary transition"
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                          ></textarea>
+                        </div>
+                        <button 
+                          disabled={loadingProductReview}
+                          type="submit" 
+                          className="village-button-primary w-full py-5 text-lg"
+                        >
+                          {loadingProductReview ? 'Submitting...' : 'Post Review'}
+                        </button>
+                      </form>
+                    ) : (
+                      <div className="text-center py-8">
+                        <p className="text-gray-500 mb-6">Please login to write a review.</p>
+                        <Link to="/login" className="village-button-secondary px-10">Login Now</Link>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </>
+      )}
     </div>
   );
 };

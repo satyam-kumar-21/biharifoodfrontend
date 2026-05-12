@@ -8,7 +8,9 @@ import {
 } from '../../slices/productsApiSlice';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
-import { ArrowLeft, Upload } from 'lucide-react';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
+import { ArrowLeft, Upload, Plus, Trash2 } from 'lucide-react';
 
 const ProductEditScreen = () => {
   const { id: productId } = useParams();
@@ -21,6 +23,8 @@ const ProductEditScreen = () => {
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState('');
+  const [shortDescription, setShortDescription] = useState('');
+  const [additionalInfo, setAdditionalInfo] = useState('');
 
   const { data: product, isLoading, error } = useGetProductDetailsQuery(productId);
 
@@ -39,6 +43,8 @@ const ProductEditScreen = () => {
       setCategory(product.category);
       setCountInStock(product.countInStock);
       setDescription(product.description);
+      setShortDescription(product.shortDescription || '');
+      setAdditionalInfo(product.additionalInfo || '');
     }
   }, [product]);
 
@@ -55,6 +61,8 @@ const ProductEditScreen = () => {
         category,
         countInStock,
         description,
+        shortDescription,
+        additionalInfo,
       }).unwrap();
       toast.success('Product updated');
       navigate('/admin/productlist');
@@ -78,7 +86,7 @@ const ProductEditScreen = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-4xl mx-auto space-y-8 pb-20">
       <Link to="/admin/productlist" className="inline-flex items-center gap-2 text-primary font-bold hover:underline">
         <ArrowLeft size={20} /> Back to Product List
       </Link>
@@ -92,22 +100,22 @@ const ProductEditScreen = () => {
         ) : error ? (
           <Message variant='danger'>{error?.data?.message || error.error}</Message>
         ) : (
-          <form onSubmit={submitHandler} className="space-y-6">
+          <form onSubmit={submitHandler} className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="font-bold">Name (English)</label>
+                <label className="font-bold text-gray-700">Name (English)</label>
                 <input
                   type="text"
-                  className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none"
+                  className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary transition"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div className="space-y-2">
-                <label className="font-bold">Name (Hindi)</label>
+                <label className="font-bold text-gray-700">Name (Hindi)</label>
                 <input
                   type="text"
-                  className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none"
+                  className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary transition"
                   value={hindiName}
                   onChange={(e) => setHindiName(e.target.value)}
                 />
@@ -116,60 +124,91 @@ const ProductEditScreen = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                <label className="font-bold">Price (₹)</label>
+                <label className="font-bold text-gray-700">Price (₹)</label>
                 <input
                   type="number"
-                  className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none"
+                  className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary transition"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                 />
               </div>
               <div className="space-y-2">
-                <label className="font-bold">Stock</label>
+                <label className="font-bold text-gray-700">Stock</label>
                 <input
                   type="number"
-                  className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none"
+                  className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary transition"
                   value={countInStock}
                   onChange={(e) => setCountInStock(e.target.value)}
                 />
               </div>
               <div className="space-y-2">
-                <label className="font-bold">Category</label>
+                <label className="font-bold text-gray-700">Category</label>
                 <input
                   type="text"
-                  className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none"
+                  className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary transition"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 />
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="font-bold">Image</label>
-              <div className="flex items-center gap-4">
-                <input
-                  type="text"
-                  placeholder="Enter URL or choose file"
-                  className="flex-1 p-4 bg-village border border-gray-200 rounded-xl focus:outline-none"
-                  value={images.map(img => img.url).join(', ')}
-                  readOnly
-                />
-                <label className="cursor-pointer bg-primary text-white p-4 rounded-xl hover:bg-primary-dark transition">
-                  <Upload size={24} />
+            <div className="space-y-4">
+              <label className="font-bold text-gray-700">Product Images</label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                {images.map((img, index) => (
+                  <div key={index} className="relative aspect-square rounded-xl overflow-hidden border-2 border-village group">
+                    <img src={img.url} alt={`Product ${index}`} className="w-full h-full object-cover" />
+                    {index === 0 && (
+                      <span className="absolute top-2 left-2 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Thumbnail</span>
+                    )}
+                  </div>
+                ))}
+                <label className="aspect-square flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:bg-village/50 transition group">
+                  <Upload size={32} className="text-gray-400 group-hover:text-primary transition" />
+                  <span className="text-xs text-gray-400 mt-2 font-bold uppercase group-hover:text-primary transition">Upload New</span>
                   <input type="file" multiple className="hidden" onChange={uploadFileHandler} />
                 </label>
               </div>
               {loadingUpload && <Loader />}
+              <p className="text-xs text-gray-400 italic">* First image will be used in cart and listings.</p>
             </div>
 
             <div className="space-y-2">
-              <label className="font-bold">Description</label>
-              <textarea
-                rows="5"
-                className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              ></textarea>
+              <label className="font-bold text-gray-700">Short Description (Rich Text)</label>
+              <div className="bg-white rounded-xl overflow-hidden border border-gray-200">
+                <ReactQuill 
+                  theme="snow" 
+                  value={shortDescription} 
+                  onChange={setShortDescription} 
+                  className="h-32"
+                />
+              </div>
+              <p className="text-xs text-gray-400 italic mt-2">* This appears at the top near the price.</p>
+            </div>
+
+            <div className="space-y-2 pt-8">
+              <label className="font-bold text-gray-700">Full Description (Rich Text)</label>
+              <div className="bg-white rounded-xl overflow-hidden border border-gray-200">
+                <ReactQuill 
+                  theme="snow" 
+                  value={description} 
+                  onChange={setDescription} 
+                  className="h-64"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2 pt-12">
+              <label className="font-bold text-gray-700">Additional Information (Rich Text / Table)</label>
+              <div className="bg-white rounded-xl overflow-hidden border border-gray-200">
+                <ReactQuill 
+                  theme="snow" 
+                  value={additionalInfo} 
+                  onChange={setAdditionalInfo} 
+                  className="h-64"
+                />
+              </div>
+              <p className="text-xs text-gray-400 italic mt-2">* You can use the editor to create tables or formatted text.</p>
             </div>
 
             <button type="submit" className="w-full village-button-primary">

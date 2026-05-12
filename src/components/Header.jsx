@@ -171,6 +171,25 @@ const Header = () => {
             >
               Contact Us
             </Link>
+            {userInfo && (
+              <>
+                <div className="border-t border-gray-100 my-2"></div>
+                <Link
+                  to="/profile"
+                  className="text-2xl font-hindi font-bold"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Profile
+                </Link>
+                <Link
+                  to="/myorders"
+                  className="text-2xl font-hindi font-bold"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  My Orders
+                </Link>
+              </>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
