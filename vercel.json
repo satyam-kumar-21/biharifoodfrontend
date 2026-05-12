@@ -1,11 +1,15 @@
 {
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
+      "source": "/api/:path*",
+      "destination": "https://biharifoodbackend.vercel.app/api/:path*"
     },
     {
-      "source": "/((?!api/).*)",
+      "source": "/uploads/:path*",
+      "destination": "https://biharifoodbackend.vercel.app/uploads/:path*"
+    },
+    {
+      "source": "/((?!api/|uploads/).*)",
       "destination": "/index.html"
     }
   ]
