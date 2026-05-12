@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { 
   useGetCategoriesQuery, 
   useCreateCategoryMutation, 
-  useDeleteCategoryMutation 
+  useDeleteCategoryMutation,
+  useUpdateCategoryMutation
 } from '../../slices/categoriesApiSlice';
 import { useUploadProductImageMutation } from '../../slices/productsApiSlice';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
-import { Trash2, Plus, Grid, Upload, Image as ImageIcon } from 'lucide-react';
+import { Trash2, Plus, Grid, Upload, Image as ImageIcon, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 const CategoryListScreen = () => {
@@ -15,9 +16,23 @@ const CategoryListScreen = () => {
   const [hindiName, setHindiName] = useState('');
   const [image, setImage] = useState(null);
 
-  const { data: categories, isLoading, error, refetch } = useGetCategoriesQuery();
+  const { data: categories, isLoading, error, refetch } = useGetCategoriesQuery(true); // true for admin view
   const [createCategory, { isLoading: loadingCreate }] = useCreateCategoryMutation();
+  const [updateCategory] = useUpdateCategoryMutation();
   const [deleteCategory, { isLoading: loadingDelete }] = useDeleteCategoryMutation();
+
+  const toggleVisibilityHandler = async (category) => {
+    try {
+      await updateCategory({
+        _id: category._id,
+        isActive: !category.isActive,
+      }).unwrap();
+      refetch();
+      toast.success(`Category ${!category.isActive ? 'visible' : 'hidden'}`);
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
   const [uploadImage, { isLoading: loadingUpload }] = useUploadProductImageMutation();
 
   const uploadFileHandler = async (e) => {
@@ -147,31 +162,41 @@ const CategoryListScreen = () => {
           ) : error ? (
             <Message variant='danger'>{error?.data?.message || error.error}</Message>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {categories.map((category) => (
                 <div 
                   key={category._id} 
-                  className="flex items-center gap-4 p-4 bg-village rounded-2xl group hover:shadow-md transition"
+                  className={`flex items-center gap-6 p-6 bg-village/50 rounded-[32px] group hover:shadow-xl hover:bg-white border border-transparent hover:border-village transition-all duration-300 ${!category.isActive ? 'opacity-70 grayscale-[0.5]' : ''}`}
                 >
-                  <div className="w-16 h-16 rounded-xl overflow-hidden bg-white shrink-0">
+                  <div className="w-24 h-24 rounded-3xl overflow-hidden bg-white shrink-0 shadow-lg group-hover:scale-105 transition-transform">
                     {category.image ? (
                       <img src={category.image.url} alt={category.name} className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-gray-300">
-                        <ImageIcon size={24} />
+                        <ImageIcon size={32} />
                       </div>
                     )}
                   </div>
                   <div className="flex-1">
-                    <p className="font-bold">{category.name}</p>
-                    <p className="text-xs text-gray-500 font-hindi">{category.hindiName}</p>
+                    <p className="font-black text-xl text-primary">{category.name}</p>
+                    <p className="text-sm text-gray-500 font-hindi font-bold mt-1">{category.hindiName}</p>
+                    <div className="mt-4 flex gap-2">
+                      <button 
+                        onClick={() => toggleVisibilityHandler(category)}
+                        className={`p-3 rounded-2xl transition-all shadow-sm ${category.isActive ? 'bg-green-100 text-green-600 hover:bg-green-600 hover:text-white' : 'bg-gray-200 text-gray-500 hover:bg-gray-600 hover:text-white'}`}
+                        title={category.isActive ? 'Hide Category' : 'Show Category'}
+                      >
+                        {category.isActive ? <Eye size={18} /> : <EyeOff size={18} />}
+                      </button>
+                      <button 
+                        onClick={() => deleteHandler(category._id)}
+                        className="p-3 bg-red-100 text-red-500 rounded-2xl shadow-sm transition-all hover:bg-red-600 hover:text-white"
+                        title="Delete Category"
+                      >
+                        <Trash2 size={18} />
+                      </button>
+                    </div>
                   </div>
-                  <button 
-                    onClick={() => deleteHandler(category._id)}
-                    className="p-2 text-red-500 hover:bg-red-50 rounded-xl transition"
-                  >
-                    <Trash2 size={20} />
-                  </button>
                 </div>
               ))}
               {categories.length === 0 && (

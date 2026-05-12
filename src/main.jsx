@@ -30,6 +30,7 @@ import PrivacyScreen from './pages/PrivacyScreen.jsx';
 import ShippingPolicyScreen from './pages/ShippingPolicyScreen.jsx';
 import NotFoundScreen from './pages/NotFoundScreen.jsx';
 import MenuScreen from './pages/MenuScreen.jsx';
+import TrackOrderScreen from './pages/TrackOrderScreen.jsx';
 
 // Admin Screens
 import OrderListScreen from './pages/admin/OrderListScreen.jsx';
@@ -37,7 +38,10 @@ import ProductListScreen from './pages/admin/ProductListScreen.jsx';
 import ProductEditScreen from './pages/admin/ProductEditScreen.jsx';
 import AdminDashboardScreen from './pages/admin/AdminDashboardScreen.jsx';
 import UserListScreen from './pages/admin/UserListScreen.jsx';
+import UserEditScreen from './pages/admin/UserEditScreen.jsx';
+import AdminProfileScreen from './pages/admin/AdminProfileScreen.jsx';
 import CategoryListScreen from './pages/admin/CategoryListScreen.jsx';
+import SettingsScreen from './pages/admin/SettingsScreen.jsx';
 
 // Route Components
 import PrivateRoute from './components/PrivateRoute.jsx';
@@ -57,7 +61,8 @@ const router = createBrowserRouter(
       <Route path='/faq' element={<FAQScreen />} />
       <Route path='/menu' element={<MenuScreen />} />
       <Route path='/privacy' element={<PrivacyScreen />} />
-      <Route path='/shipping' element={<ShippingPolicyScreen />} />
+      <Route path='/shipping-policy' element={<ShippingPolicyScreen />} />
+      <Route path='/track-order' element={<TrackOrderScreen />} />
       
       {/* Registered users */}
       <Route path='' element={<PrivateRoute />}>
@@ -78,7 +83,10 @@ const router = createBrowserRouter(
           <Route path='/admin/productlist/:pageNumber' element={<ProductListScreen />} />
           <Route path='/admin/product/:id/edit' element={<ProductEditScreen />} />
           <Route path='/admin/userlist' element={<UserListScreen />} />
+          <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
+          <Route path='/admin/profile' element={<AdminProfileScreen />} />
           <Route path='/admin/categorylist' element={<CategoryListScreen />} />
+          <Route path='/admin/settings' element={<SettingsScreen />} />
         </Route>
       </Route>
 

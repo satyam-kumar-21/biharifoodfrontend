@@ -11,7 +11,9 @@ import {
 } from '../slices/ordersApiSlice';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { CheckCircle2, Clock, Truck, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, Clock, Truck, ShieldCheck, MapPin, History, Send } from 'lucide-react';
+import { useUpdateOrderStatusMutation } from '../slices/ordersApiSlice';
+import { useState } from 'react';
 
 const OrderScreen = () => {
   const { id: orderId } = useParams();
@@ -20,10 +22,34 @@ const OrderScreen = () => {
 
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
   const [deliverOrder, { isLoading: loadingDeliver }] = useDeliverOrderMutation();
+  const [updateOrderStatus, { isLoading: loadingStatusUpdate }] = useUpdateOrderStatusMutation();
   const [createRazorpayOrder] = useCreateRazorpayOrderMutation();
   const [verifyRazorpayPayment] = useVerifyRazorpayPaymentMutation();
 
+  const [status, setStatus] = useState('');
+  const [location, setLocation] = useState('');
+  const [description, setDescription] = useState('');
+
   const { userInfo } = useSelector((state) => state.auth) || {};
+
+  useEffect(() => {
+    if (order) {
+      setStatus(order.status);
+      setLocation(order.currentLocation || '');
+    }
+  }, [order]);
+
+  const updateStatusHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await updateOrderStatus({ orderId, status, location, description }).unwrap();
+      refetch();
+      toast.success('Order status updated');
+      setDescription('');
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
 
   // Load Razorpay Script
   const loadRazorpayScript = () => {
@@ -97,10 +123,23 @@ const OrderScreen = () => {
     <Message variant='danger'>{error?.data?.message || error.error}</Message>
   ) : (
     <div className="space-y-8">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <h1 className="text-3xl font-bold font-hindi">Order ID: #{order._id.substring(18)}</h1>
-        <div className={`px-6 py-2 rounded-full font-bold text-lg ${order.isDelivered ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>
-          {order.status}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="space-y-1">
+          <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Order Details</p>
+          <h1 className="text-2xl md:text-3xl font-bold font-hindi flex items-center gap-2">
+            ID: <span className="text-primary">{order._id}</span>
+          </h1>
+        </div>
+        <div className="flex items-center gap-4">
+          <Link 
+            to={`/track-order?id=${order._id}`} 
+            className="village-button-secondary py-3 px-8 flex items-center gap-2 text-sm"
+          >
+            <Truck size={18} /> Track Order
+          </Link>
+          <div className={`px-6 py-3 rounded-2xl font-black text-sm uppercase tracking-widest shadow-sm ${order.isDelivered ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>
+            {order.status}
+          </div>
         </div>
       </div>
 
@@ -141,6 +180,98 @@ const OrderScreen = () => {
               <Message variant='danger'>Not Paid</Message>
             )}
           </div>
+
+          {/* Tracking History */}
+          <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 space-y-6">
+            <h2 className="text-2xl font-bold font-hindi flex items-center gap-3">
+              <History className="text-primary" /> Tracking History
+            </h2>
+            <div className="relative pl-8 border-l-2 border-village space-y-8 py-2">
+              <div className="relative">
+                <div className="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-primary border-4 border-white"></div>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <h4 className="font-bold text-gray-800">Order Placed</h4>
+                  <span className="text-xs text-gray-400 font-bold">
+                    {new Date(order.createdAt).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-500">Warehouse</p>
+                <p className="text-sm text-gray-600 mt-1 italic">"We have received your order."</p>
+              </div>
+
+              {order.trackingHistory?.length > 0 && (
+                order.trackingHistory.map((step, idx) => (
+                  <div key={idx} className="relative">
+                    <div className={`absolute -left-[41px] top-1 w-4 h-4 rounded-full border-4 border-white ${idx === order.trackingHistory.length - 1 ? 'bg-primary' : 'bg-gray-300'}`}></div>
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <h4 className="font-bold text-gray-800">{step.status}</h4>
+                      <span className="text-xs text-gray-400 font-bold">
+                        {new Date(step.timestamp).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-500 flex items-center gap-1">
+                      <MapPin size={12} className="text-primary" /> {step.location}
+                    </p>
+                    <p className="text-sm text-gray-600 mt-1 italic">"{step.description}"</p>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+
+          {/* Admin Tracking Update */}
+          {userInfo && userInfo.isAdmin && !order.isDelivered && (
+            <div className="bg-village p-8 rounded-3xl space-y-6">
+              <h3 className="text-xl font-bold font-hindi">Update Tracking Info</h3>
+              <form onSubmit={updateStatusHandler} className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-2">Status</label>
+                    <select 
+                      className="w-full p-3 bg-white border border-gray-100 rounded-xl focus:outline-none focus:border-primary transition font-bold"
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value)}
+                    >
+                      <option value="Pending">Pending</option>
+                      <option value="Confirmed">Confirmed</option>
+                      <option value="Packed">Packed</option>
+                      <option value="Shipped">Shipped</option>
+                      <option value="Out for Delivery">Out for Delivery</option>
+                      <option value="Delivered">Delivered</option>
+                      <option value="Cancelled">Cancelled</option>
+                    </select>
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-2">Location</label>
+                    <input 
+                      type="text" 
+                      placeholder="e.g. Patna Hub"
+                      className="w-full p-3 bg-white border border-gray-100 rounded-xl focus:outline-none focus:border-primary transition"
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-2">Description</label>
+                  <textarea 
+                    rows="2"
+                    placeholder="e.g. Dispatched from hub..."
+                    className="w-full p-3 bg-white border border-gray-100 rounded-xl focus:outline-none focus:border-primary transition"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  ></textarea>
+                </div>
+                <button 
+                  disabled={loadingStatusUpdate}
+                  type="submit" 
+                  className="village-button-primary w-full flex items-center justify-center gap-2"
+                >
+                  <Send size={18} /> Update Tracking
+                </button>
+              </form>
+            </div>
+          )}
 
           {/* Order Items */}
           <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 space-y-6">

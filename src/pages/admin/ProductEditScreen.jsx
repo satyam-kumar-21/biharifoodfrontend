@@ -25,6 +25,7 @@ const ProductEditScreen = () => {
   const [description, setDescription] = useState('');
   const [shortDescription, setShortDescription] = useState('');
   const [additionalInfo, setAdditionalInfo] = useState('');
+  const [isActive, setIsActive] = useState(true);
 
   const { data: product, isLoading, error } = useGetProductDetailsQuery(productId);
 
@@ -45,6 +46,7 @@ const ProductEditScreen = () => {
       setDescription(product.description);
       setShortDescription(product.shortDescription || '');
       setAdditionalInfo(product.additionalInfo || '');
+      setIsActive(product.isActive !== undefined ? product.isActive : true);
     }
   }, [product]);
 
@@ -63,6 +65,7 @@ const ProductEditScreen = () => {
         description,
         shortDescription,
         additionalInfo,
+        isActive,
       }).unwrap();
       toast.success('Product updated');
       navigate('/admin/productlist');
@@ -150,6 +153,21 @@ const ProductEditScreen = () => {
                   onChange={(e) => setCategory(e.target.value)}
                 />
               </div>
+            </div>
+
+            {/* Visibility Toggle */}
+            <div className="bg-village/30 p-6 rounded-3xl border border-village flex items-center justify-between">
+              <div>
+                <h3 className="font-bold text-gray-700">Product Visibility</h3>
+                <p className="text-xs text-gray-500">Hide this product from the customer view without deleting it.</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsActive(!isActive)}
+                className={`flex items-center gap-2 px-6 py-2 rounded-xl font-bold uppercase text-xs transition-all ${isActive ? 'bg-green-600 text-white shadow-lg shadow-green-200' : 'bg-gray-400 text-white shadow-lg shadow-gray-200'}`}
+              >
+                {isActive ? 'Visible' : 'Hidden'}
+              </button>
             </div>
 
             <div className="space-y-4">

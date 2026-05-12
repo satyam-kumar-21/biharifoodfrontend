@@ -42,10 +42,10 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     updateOrderStatus: builder.mutation({
-      query: ({ orderId, status }) => ({
+      query: ({ orderId, status, location, description }) => ({
         url: `${ORDERS_URL}/${orderId}/status`,
         method: 'PUT',
-        body: { status },
+        body: { status, location, description },
       }),
     }),
     createRazorpayOrder: builder.mutation({

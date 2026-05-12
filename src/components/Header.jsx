@@ -7,7 +7,10 @@ import { ShoppingCart, User, Menu, X, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import { useGetSettingsQuery } from '../slices/settingsApiSlice';
+
 const Header = () => {
+  const { data: settings } = useGetSettingsQuery();
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth) || {};
 
@@ -35,9 +38,13 @@ const Header = () => {
       <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <span className="text-2xl md:text-3xl font-bold text-primary font-hindi">
-            Swaad Bihar Ka
-          </span>
+          {settings?.logo ? (
+            <img src={settings.logo} alt="Logo" className="h-10 md:h-12 w-auto object-contain" />
+          ) : (
+            <span className="text-2xl md:text-3xl font-bold text-primary font-hindi">
+              Swaad Bihar Ka
+            </span>
+          )}
         </Link>
 
         {/* Desktop Nav */}

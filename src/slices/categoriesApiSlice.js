@@ -4,8 +4,9 @@ import { apiSlice } from './apiSlice';
 export const categoriesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getCategories: builder.query({
-      query: () => ({
+      query: (isAdmin = false) => ({
         url: CATEGORIES_URL,
+        params: { admin: isAdmin },
       }),
       providesTags: ['Category'],
       keepUnusedDataFor: 5,
@@ -14,6 +15,14 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: CATEGORIES_URL,
         method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['Category'],
+    }),
+    updateCategory: builder.mutation({
+      query: (data) => ({
+        url: `${CATEGORIES_URL}/${data._id}`,
+        method: 'PUT',
         body: data,
       }),
       invalidatesTags: ['Category'],
@@ -32,4 +41,5 @@ export const {
   useGetCategoriesQuery,
   useCreateCategoryMutation,
   useDeleteCategoryMutation,
+  useUpdateCategoryMutation,
 } = categoriesApiSlice;

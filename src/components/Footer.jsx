@@ -2,7 +2,10 @@ import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 
+import { useGetSettingsQuery } from '../slices/settingsApiSlice';
+
 const Footer = () => {
+  const { data: settings } = useGetSettingsQuery();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -10,7 +13,11 @@ const Footer = () => {
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Brand Section */}
         <div className="space-y-6">
-          <Link to="/" className="text-3xl font-bold font-hindi">Swaad Bihar Ka</Link>
+          {settings?.logo ? (
+            <img src={settings.logo} alt="Logo" className="h-12 w-auto object-contain brightness-0 invert" />
+          ) : (
+            <Link to="/" className="text-3xl font-bold font-hindi text-secondary">Swaad Bihar Ka</Link>
+          )}
           <p className="text-gray-200 leading-relaxed">
             An effort to bring the traditional taste and culture of Bihar to your doorstep. Pure, authentic, and traditional.
           </p>
@@ -29,7 +36,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
-
+        
         {/* Quick Links */}
         <div>
           <h4 className="text-xl font-bold mb-6 font-hindi">Quick Links</h4>
@@ -47,7 +54,8 @@ const Footer = () => {
           <h4 className="text-xl font-bold mb-6 font-hindi">Policies</h4>
           <ul className="space-y-4 text-gray-200">
             <li><Link to="/privacy" className="hover:text-secondary transition">Privacy Policy</Link></li>
-            <li><Link to="/shipping" className="hover:text-secondary transition">Shipping Policy</Link></li>
+            <li><Link to="/shipping-policy" className="hover:text-secondary transition">Shipping Policy</Link></li>
+            <li><Link to="/track-order" className="hover:text-secondary transition">Track Order</Link></li>
             <li><Link to="/returns" className="hover:text-secondary transition">Return Policy</Link></li>
             <li><Link to="/terms" className="hover:text-secondary transition">Terms & Conditions</Link></li>
           </ul>
@@ -58,15 +66,15 @@ const Footer = () => {
           <h4 className="text-xl font-bold mb-6 font-hindi">Contact Details</h4>
           <div className="flex items-start gap-3">
             <MapPin className="text-secondary shrink-0" />
-            <p>Patna, Bihar, India - 800001</p>
+            <p>{settings?.address || 'Bihar, India'}</p>
           </div>
           <div className="flex items-center gap-3">
             <Phone className="text-secondary shrink-0" />
-            <p>+91 98765 43210</p>
+            <p>{settings?.phone || '+91 0000000000'}</p>
           </div>
           <div className="flex items-center gap-3">
             <Mail className="text-secondary shrink-0" />
-            <p>info@swaadbiharka.com</p>
+            <p>{settings?.email || 'contact@swadbiharka.com'}</p>
           </div>
         </div>
       </div>
