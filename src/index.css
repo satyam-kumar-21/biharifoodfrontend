@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-gray-900 font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-hindi;
+  }
+}
+
+.madhubani-border {
+  border: 10px solid;
+  border-image: repeating-linear-gradient(45deg, #8B4513, #8B4513 10px, #FFD700 10px, #FFD700 20px) 10;
+}
+
+.village-button {
+  @apply px-6 py-3 rounded-full font-bold text-lg shadow-lg transform transition active:scale-95;
+}
+
+.village-button-primary {
+  @apply village-button bg-primary text-white hover:bg-primary-dark;
+}
+
+.village-button-secondary {
+  @apply village-button bg-secondary text-primary hover:bg-secondary-dark;
+}
