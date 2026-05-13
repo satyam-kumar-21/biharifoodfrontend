@@ -87,7 +87,9 @@ const PlaceOrderScreen = () => {
                   <div key={index} className="flex items-center gap-4 py-4 border-b border-gray-50 last:border-0">
                     <img src={item.images[0]?.url} alt={item.name} className="w-16 h-16 rounded-lg object-cover" />
                     <div className="flex-1">
-                      <Link to={`/product/${item._id}`} className="font-bold hover:text-primary transition">{item.hindiName || item.name}</Link>
+                      <Link to={`/product/${item._id}`} className="font-bold hover:text-primary transition">
+                        {item.name} {item.unit && `(${item.unit})`}
+                      </Link>
                       <p className="text-sm text-gray-500">{item.qty} x ₹{item.price}</p>
                     </div>
                     <div className="font-bold">₹{(item.qty * item.price).toFixed(2)}</div>

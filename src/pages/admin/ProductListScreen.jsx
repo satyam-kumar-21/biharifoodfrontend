@@ -93,8 +93,8 @@ const ProductListScreen = () => {
                     <td className="p-8 font-bold text-gray-400 text-sm">#{product._id.substring(18)}</td>
                     <td className="p-8">
                       <div className="flex flex-col">
-                        <span className="font-black text-primary text-lg font-hindi">{product.hindiName}</span>
-                        <span className="text-xs text-gray-500 uppercase font-bold tracking-wider">{product.name}</span>
+                        <span className="font-black text-primary text-lg font-hindi">{product.name}</span>
+                        <span className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">{product.unit || 'No Unit'}</span>
                       </div>
                     </td>
                     <td className="p-8 font-black text-primary text-lg">₹{product.price}</td>

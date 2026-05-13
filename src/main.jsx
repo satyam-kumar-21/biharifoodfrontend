@@ -23,7 +23,7 @@ import PlaceOrderScreen from './pages/PlaceOrderScreen.jsx';
 import OrderScreen from './pages/OrderScreen.jsx';
 import ProfileScreen from './pages/ProfileScreen.jsx';
 import MyOrdersScreen from './pages/MyOrdersScreen.jsx';
-import StoryScreen from './pages/StoryScreen.jsx';
+import AboutUsScreen from './pages/AboutUsScreen.jsx';
 import ContactScreen from './pages/ContactScreen.jsx';
 import FAQScreen from './pages/FAQScreen.jsx';
 import PrivacyScreen from './pages/PrivacyScreen.jsx';
@@ -31,6 +31,8 @@ import ShippingPolicyScreen from './pages/ShippingPolicyScreen.jsx';
 import NotFoundScreen from './pages/NotFoundScreen.jsx';
 import MenuScreen from './pages/MenuScreen.jsx';
 import TrackOrderScreen from './pages/TrackOrderScreen.jsx';
+import BlogScreen from './pages/BlogScreen.jsx';
+import BlogDetailScreen from './pages/BlogDetailScreen.jsx';
 
 // Admin Screens
 import OrderListScreen from './pages/admin/OrderListScreen.jsx';
@@ -56,13 +58,15 @@ const router = createBrowserRouter(
       <Route path='/cart' element={<CartScreen />} />
       <Route path='/login' element={<LoginScreen />} />
       <Route path='/register' element={<RegisterScreen />} />
-      <Route path='/story' element={<StoryScreen />} />
+      <Route path='/about-us' element={<AboutUsScreen />} />
       <Route path='/contact' element={<ContactScreen />} />
       <Route path='/faq' element={<FAQScreen />} />
       <Route path='/menu' element={<MenuScreen />} />
       <Route path='/privacy' element={<PrivacyScreen />} />
       <Route path='/shipping-policy' element={<ShippingPolicyScreen />} />
       <Route path='/track-order' element={<TrackOrderScreen />} />
+      <Route path='/blogs' element={<BlogScreen />} />
+      <Route path='/blog/:id' element={<BlogDetailScreen />} />
       
       {/* Registered users */}
       <Route path='' element={<PrivateRoute />}>

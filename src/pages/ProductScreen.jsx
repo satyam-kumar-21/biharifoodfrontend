@@ -68,26 +68,29 @@ const ProductScreen = () => {
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Image Gallery */}
-            <div className="space-y-6">
-              <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl bg-white border border-gray-100 p-2">
-                <img 
-                  src={mainImage} 
-                  alt={product.name} 
-                  className="w-full h-full object-contain rounded-2xl"
-                />
-              </div>
-              <div className="grid grid-cols-4 gap-4">
+            <div className="flex flex-col-reverse md:flex-row gap-6">
+              {/* Thumbnails */}
+              <div className="flex md:flex-col gap-4 overflow-x-auto md:overflow-y-auto max-h-[500px] scrollbar-hide">
                 {product.images.map((img, idx) => (
                   <div 
                     key={idx} 
                     onClick={() => setMainImage(img.url)}
-                    className={`aspect-square rounded-xl overflow-hidden border-2 cursor-pointer transition-all ${
+                    className={`min-w-[80px] w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden border-2 cursor-pointer transition-all flex-shrink-0 ${
                       mainImage === img.url ? 'border-primary shadow-md scale-105' : 'border-village hover:border-gray-300'
                     }`}
                   >
                     <img src={img.url} alt="" className="w-full h-full object-cover" />
                   </div>
                 ))}
+              </div>
+              
+              {/* Main Image */}
+              <div className="flex-1 aspect-square rounded-3xl overflow-hidden shadow-2xl bg-white border border-gray-100 p-2">
+                <img 
+                  src={mainImage} 
+                  alt={product.name} 
+                  className="w-full h-full object-contain rounded-2xl"
+                />
               </div>
             </div>
 
@@ -99,7 +102,12 @@ const ProductScreen = () => {
                   <span className="w-8 h-[2px] bg-primary"></span>
                 </div>
                 <h1 className="text-4xl md:text-5xl font-bold font-hindi leading-tight">
-                  {product.hindiName || product.name}
+                  {product.name} 
+                  {product.unit && (
+                    <span className="text-xl md:text-2xl text-gray-400 font-normal ml-3 whitespace-nowrap">
+                      ({product.unit})
+                    </span>
+                  )}
                 </h1>
                 <div className="flex items-center gap-4">
                   <Rating value={product.rating} text={`${product.numReviews} reviews`} />
@@ -122,7 +130,7 @@ const ProductScreen = () => {
 
               {/* Short Description */}
               <div 
-                className="text-gray-600 leading-relaxed border-l-4 border-primary/20 pl-4 py-1"
+                className="text-gray-600 leading-relaxed border-l-4 border-primary/20 pl-4 py-1 break-words whitespace-normal"
                 dangerouslySetInnerHTML={{ __html: product.shortDescription }} 
               />
 
@@ -186,22 +194,27 @@ const ProductScreen = () => {
 
           {/* Detailed Info Tabs */}
           <div className="mt-20 bg-white rounded-[40px] shadow-sm border border-gray-100 overflow-hidden">
-            <div className="flex border-b border-gray-100 overflow-x-auto">
+            <div className="flex border-b border-gray-100 overflow-x-auto scrollbar-hide">
               {[
                 { id: 'description', label: 'Description' },
-                { id: 'additional', label: 'Additional Information' },
+                { id: 'additional', label: 'Additional' },
                 { id: 'reviews', label: `Reviews (${product.numReviews})` }
               ].map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`px-10 py-6 text-sm font-black uppercase tracking-widest transition-all whitespace-nowrap ${
+                  className={`flex-1 min-w-fit px-4 sm:px-10 py-4 sm:py-6 text-[10px] sm:text-sm font-black uppercase tracking-widest transition-all whitespace-nowrap ${
                     activeTab === tab.id 
-                      ? 'text-primary border-b-4 border-primary' 
+                      ? 'text-primary border-b-4 border-primary bg-primary/5' 
                       : 'text-gray-400 hover:text-gray-600'
                   }`}
                 >
-                  {tab.label}
+                  {tab.id === 'additional' ? (
+                    <>
+                      <span className="hidden sm:inline">Additional Information</span>
+                      <span className="sm:hidden">Info</span>
+                    </>
+                  ) : tab.label}
                 </button>
               ))}
             </div>
@@ -210,18 +223,32 @@ const ProductScreen = () => {
               {activeTab === 'description' && (
                 <div className="prose prose-primary max-w-none">
                   <div 
-                    className="text-gray-600 leading-relaxed space-y-4 rich-text-content"
+                    className="text-gray-600 leading-relaxed space-y-4 rich-text-content break-words whitespace-normal"
                     dangerouslySetInnerHTML={{ __html: product.description }} 
                   />
                 </div>
               )}
 
               {activeTab === 'additional' && (
-                <div className="prose prose-primary max-w-none">
-                  <div 
-                    className="text-gray-600 leading-relaxed space-y-4 rich-text-content"
-                    dangerouslySetInnerHTML={{ __html: product.additionalInfo }} 
-                  />
+                <div className="overflow-hidden rounded-2xl border border-village">
+                  <table className="w-full text-left">
+                    <tbody className="divide-y divide-village">
+                      {product.additionalInfo && product.additionalInfo.length > 0 ? (
+                        product.additionalInfo.map((info, idx) => (
+                          <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-village/10'}>
+                            <td className="py-4 px-6 font-black text-gray-700 text-sm w-1/3 uppercase tracking-wider break-words">{info.name}</td>
+                            <td className="py-4 px-6 text-gray-600 text-sm break-words">{info.value}</td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td className="py-8 px-6 text-center text-gray-400 italic" colSpan="2">
+                            No additional information available for this product.
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
                 </div>
               )}
 

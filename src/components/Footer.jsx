@@ -16,7 +16,11 @@ const Footer = () => {
           {settings?.logo ? (
             <img src={settings.logo} alt="Logo" className="h-12 w-auto object-contain brightness-0 invert" />
           ) : (
-            <Link to="/" className="text-3xl font-bold font-hindi text-secondary">Swaad Bihar Ka</Link>
+            <img 
+              src="/swadbiharkalogo.png" 
+              alt="Swad Bihar Ka Logo" 
+              className="h-14 w-auto object-contain brightness-0 invert" 
+            />
           )}
           <p className="text-gray-200 leading-relaxed">
             An effort to bring the traditional taste and culture of Bihar to your doorstep. Pure, authentic, and traditional.
@@ -43,7 +47,7 @@ const Footer = () => {
           <ul className="space-y-4 text-gray-200">
             <li><Link to="/" className="hover:text-secondary transition">Home</Link></li>
             <li><Link to="/menu" className="hover:text-secondary transition">Menu</Link></li>
-            <li><Link to="/story" className="hover:text-secondary transition">Our Story</Link></li>
+            <li><Link to="/about-us" className="hover:text-secondary transition">About Us</Link></li>
             <li><Link to="/contact" className="hover:text-secondary transition">Contact Us</Link></li>
             <li><Link to="/faq" className="hover:text-secondary transition">FAQ</Link></li>
           </ul>

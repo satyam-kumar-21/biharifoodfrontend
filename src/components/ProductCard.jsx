@@ -21,8 +21,11 @@ const ProductCard = ({ product }) => {
 
       <div className="p-5 space-y-3">
         <Link to={`/product/${product._id}`}>
-          <h3 className="text-xl font-bold font-hindi group-hover:text-primary transition-colors">
-            {product.hindiName || product.name}
+          <h3 className="text-xl font-bold font-hindi group-hover:text-primary transition-colors flex items-baseline gap-2">
+            <span>{product.name}</span>
+            {product.unit && (
+              <span className="text-xs text-gray-400 font-normal">({product.unit})</span>
+            )}
           </h3>
         </Link>
         

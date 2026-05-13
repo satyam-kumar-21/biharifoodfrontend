@@ -46,8 +46,11 @@ const CartScreen = () => {
                 </div>
                 
                 <div className="flex-1 space-y-1 text-center sm:text-left">
-                  <Link to={`/product/${item._id}`} className="text-xl font-bold font-hindi hover:text-primary transition">
-                    {item.hindiName || item.name}
+                  <Link to={`/product/${item._id}`} className="text-xl font-bold font-hindi hover:text-primary transition flex items-baseline gap-2">
+                    <span>{item.name}</span>
+                    {item.unit && (
+                      <span className="text-xs text-gray-400 font-normal">({item.unit})</span>
+                    )}
                   </Link>
                   <p className="text-gray-500">₹{item.price}</p>
                 </div>

@@ -30,3 +30,21 @@
 .village-button-secondary {
   @apply village-button bg-secondary text-primary hover:bg-secondary-dark;
 }
+
+.rich-text-content {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+* {
+  min-width: 0;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

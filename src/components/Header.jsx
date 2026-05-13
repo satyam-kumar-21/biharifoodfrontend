@@ -35,24 +35,27 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
-      <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
+      <nav className="container mx-auto px-4 py-2 md:py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           {settings?.logo ? (
-            <img src={settings.logo} alt="Logo" className="h-10 md:h-12 w-auto object-contain" />
+            <img src={settings.logo} alt="Logo" className="h-12 md:h-16 w-auto object-contain" />
           ) : (
-            <span className="text-2xl md:text-3xl font-bold text-primary font-hindi">
-              Swaad Bihar Ka
-            </span>
+            <img
+              src="/swadbiharkalogo.png"
+              alt="Swad Bihar Ka Logo"
+              className="h-12 md:h-20 w-auto object-contain hover:scale-105 transition-transform"
+            />
           )}
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
-          <Link to="/" className="font-medium hover:text-primary transition">Home</Link>
-          <Link to="/menu" className="font-medium hover:text-primary transition">Menu</Link>
-          <Link to="/story" className="font-medium hover:text-primary transition">Our Story</Link>
-          <Link to="/contact" className="font-medium hover:text-primary transition">Contact Us</Link>
+        <div className="hidden md:flex items-center gap-10">
+          <Link to="/" className="text-lg font-bold hover:text-primary transition">Home</Link>
+          <Link to="/menu" className="text-lg font-bold hover:text-primary transition">Menu</Link>
+          <Link to="/blogs" className="text-lg font-bold hover:text-primary transition">Blogs</Link>
+          <Link to="/about-us" className="text-lg font-bold hover:text-primary transition">About Us</Link>
+          <Link to="/contact" className="text-lg font-bold hover:text-primary transition">Contact Us</Link>
         </div>
 
         {/* Action Buttons */}
@@ -73,7 +76,7 @@ const Header = () => {
                 className="flex items-center gap-1 p-2 text-gray-700 hover:text-primary transition"
               >
                 <User size={24} />
-                <span className="hidden md:inline max-w-[100px] truncate">{userInfo.name}</span>
+                <span className="hidden md:inline max-w-[150px] truncate font-bold text-primary">Hi, {userInfo.name.split(' ')[0]}</span>
                 <ChevronDown size={16} />
               </button>
 
@@ -165,11 +168,18 @@ const Header = () => {
               Menu
             </Link>
             <Link
-              to="/story"
+              to="/blogs"
               className="text-2xl font-hindi font-bold"
               onClick={() => setIsMenuOpen(false)}
             >
-              Our Story
+              Blog
+            </Link>
+            <Link
+              to="/about-us"
+              className="text-2xl font-hindi font-bold"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              About Us
             </Link>
             <Link
               to="/contact"
