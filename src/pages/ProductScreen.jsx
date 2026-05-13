@@ -7,7 +7,8 @@ import { addToCart } from '../slices/cartSlice';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { ShoppingCart, ArrowLeft, Plus, Minus, ShieldCheck, Truck } from 'lucide-react';
+import Meta from '../components/Meta';
+import { ShoppingCart, Plus, Minus, ShieldCheck, Truck } from 'lucide-react';
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
@@ -56,9 +57,7 @@ const ProductScreen = () => {
 
   return (
     <div className="space-y-8 pb-20">
-      <Link to="/" className="inline-flex items-center gap-2 text-primary font-bold hover:underline mb-4">
-        <ArrowLeft size={20} /> Go Back
-      </Link>
+
 
       {isLoading ? (
         <Loader />
@@ -66,6 +65,14 @@ const ProductScreen = () => {
         <Message variant='danger'>{error?.data?.message || error.error}</Message>
       ) : (
         <>
+          <Meta 
+            title={`${product.name} - Swaad Bihar Ka`} 
+            description={product.shortDescription ? product.shortDescription.replace(/<[^>]*>?/gm, '') : `Buy authentic ${product.name} online. Hand-crafted in Bihar with traditional recipes.`}
+            keywords={`${product.name}, buy ${product.name} online, Bihari ${product.category}, authentic Bihari food, Swaad Bihar Ka, Bihar sweets`}
+            url={`https://swaadbiharka.com/product/${product._id}`}
+            image={product.images && product.images.length > 0 ? product.images[0].url : '/swadbiharkalogo.png'}
+            type="product"
+          />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Image Gallery */}
             <div className="flex flex-col-reverse md:flex-row gap-6">

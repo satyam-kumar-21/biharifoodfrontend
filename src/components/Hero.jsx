@@ -52,15 +52,15 @@ const Hero = () => {
       </div>
 
       {/* Right Image Album - Creative Masonry */}
-      <div className="w-full lg:w-1/2 min-h-[500px] lg:h-[750px] p-6 lg:p-12 order-1 lg:order-2 bg-village/20">
-        <div className="relative h-full w-full">
+      <div className="w-full lg:w-1/2 min-h-[400px] sm:min-h-[500px] lg:h-[750px] p-4 sm:p-6 lg:p-12 order-1 lg:order-2 bg-village/20">
+        <div className="relative h-full w-full min-h-[350px]">
           {/* Main Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="absolute top-0 left-0 w-[65%] h-[70%] rounded-[50px] overflow-hidden shadow-2xl z-20 border-8 border-white"
+            className="absolute top-0 left-0 w-[70%] lg:w-[65%] h-[65%] lg:h-[70%] rounded-[30px] sm:rounded-[50px] overflow-hidden shadow-2xl z-20 border-4 sm:border-8 border-white"
           >
-            <img src="https://images.unsplash.com/photo-1543353071-873f17a7a088?q=80&w=1000&auto=format&fit=crop" alt="Bihari Thali" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
+            <img src="/thekua.png" alt="Bihari Thekua" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
           </motion.div>
 
           {/* Secondary Image - Bottom Right */}
@@ -68,9 +68,9 @@ const Hero = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            className="absolute bottom-4 right-0 w-[60%] h-[50%] rounded-[50px] overflow-hidden shadow-xl z-10 border-8 border-white"
+            className="absolute bottom-2 sm:bottom-4 right-0 w-[65%] lg:w-[60%] h-[55%] lg:h-[50%] rounded-[30px] sm:rounded-[50px] overflow-hidden shadow-xl z-10 border-4 sm:border-8 border-white"
           >
-            <img src="https://images.unsplash.com/photo-1505253758473-96b7015fcd40?q=80&w=600&auto=format&fit=crop" alt="Sweets" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
+            <img src="/nimki.png" alt="Bihari Nimki" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
           </motion.div>
 
           {/* Small Decorative Image - Top Right */}
@@ -78,9 +78,9 @@ const Hero = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="absolute top-10 right-4 w-[35%] h-[30%] rounded-[40px] overflow-hidden shadow-lg z-30 border-4 border-white"
+            className="absolute top-4 sm:top-10 right-2 sm:right-4 w-[40%] lg:w-[35%] h-[35%] lg:h-[30%] rounded-[25px] sm:rounded-[40px] overflow-hidden shadow-lg z-30 border-2 sm:border-4 border-white"
           >
-            <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=600&auto=format&fit=crop" alt="Tradition" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
+            <img src="/gujiya.png" alt="Bihari Gujiya" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
           </motion.div>
 
           {/* Badge Decor */}
@@ -88,9 +88,9 @@ const Hero = () => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: 'spring', delay: 0.7 }}
-            className="absolute bottom-[35%] left-[5%] z-40 bg-secondary text-primary w-24 h-24 rounded-full flex items-center justify-center text-center p-2 shadow-xl border-4 border-white rotate-12"
+            className="absolute bottom-[30%] sm:bottom-[35%] left-[0%] sm:left-[5%] z-40 bg-secondary text-primary w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center text-center p-2 shadow-xl border-2 sm:border-4 border-white rotate-12"
           >
-            <span className="text-xs font-black uppercase leading-tight">Handmade with Love</span>
+            <span className="text-[10px] sm:text-xs font-black uppercase leading-tight">Handmade with Love</span>
           </motion.div>
         </div>
       </div>

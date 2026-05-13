@@ -24,8 +24,14 @@ const CartScreen = () => {
   };
 
   return (
-    <div className="space-y-8">
-      <h1 className="text-3xl md:text-4xl font-bold font-hindi">Your Cart</h1>
+    <div className="max-w-6xl mx-auto space-y-12 pb-20">
+      <div className="text-center space-y-4">
+        <h1 className="text-4xl md:text-6xl font-bold font-hindi text-primary">Your Cart</h1>
+        <div className="flex justify-center">
+          <span className="w-24 h-1 bg-primary rounded-full"></span>
+        </div>
+        <p className="text-gray-500 italic">Review your selected Bihari treasures</p>
+      </div>
 
       {cartItems.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 space-y-6 bg-white rounded-3xl border border-dashed border-gray-300">

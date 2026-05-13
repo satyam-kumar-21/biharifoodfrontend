@@ -4,7 +4,7 @@ export const blogData = [
     title: 'The Art of Making Perfect Thekua',
     author: 'Sunita Devi',
     date: 'May 10, 2026',
-    image: 'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?q=80&w=1000&auto=format&fit=crop',
+    image: '/thekua.png',
     brief: 'Discover the traditional secrets behind Bihars most famous prasad. Learn how to get that perfect crunch.',
     content: `
       <p>Thekua is more than just a sweet snack for the people of Bihar; it is a symbol of faith, tradition, and the deep-rooted culture of the region. Traditionally prepared as an offering to the Sun God during the Chhath Puja festival, this hard-crust cookie has now found fans all over the world.</p>
@@ -29,7 +29,7 @@ export const blogData = [
     title: 'Why Bihari Sattu is the Ultimate Superfood',
     author: 'Dr. Ramesh Kumar',
     date: 'May 05, 2026',
-    image: 'https://images.unsplash.com/photo-1615485500704-8e990f9900f7?q=80&w=1000&auto=format&fit=crop',
+    image: '/nimki.png',
     brief: 'High in protein, low in glycemic index, and incredibly cooling. Find out why Sattu is gaining global recognition.',
     content: `
       <p>In the villages of Bihar, Sattu has been the "poor man's protein" for centuries. Today, nutritionists worldwide are hailing it as a superfood that rivals expensive protein powders.</p>
@@ -52,7 +52,7 @@ export const blogData = [
     title: 'The Sweet Legacy of Silao Ka Khaja',
     author: 'Amit Singh',
     date: 'April 28, 2026',
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzAv5qhsz6xneXYUpx9CXea37EbFS80cwZ_ixj93VrAg&s=10',
+    image: '/gujiya.png',
     brief: 'With over 50 crispy layers, this GI-tagged sweet from Silao has a history that dates back to the Mauryan Empire.',
     content: `
       <p>If you visit the ruins of Nalanda, you cannot leave without tasting the Silao Ka Khaja. This multi-layered, crispy sweet is a marvel of traditional confectionery.</p>

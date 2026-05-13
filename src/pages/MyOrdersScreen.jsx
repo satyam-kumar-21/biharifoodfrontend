@@ -8,18 +8,16 @@ const MyOrdersScreen = () => {
   const { data: orders, isLoading, error } = useGetMyOrdersQuery();
 
   return (
-    <div className="space-y-8 pb-20">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="space-y-1">
-          <Link to="/profile" className="inline-flex items-center gap-2 text-primary font-bold hover:underline mb-2">
-            <ArrowLeft size={16} /> Back to Profile
-          </Link>
-          <h1 className="text-3xl md:text-4xl font-bold font-hindi">My Orders</h1>
-          <p className="text-gray-500">Track and manage your order history</p>
-        </div>
-        <Link to="/menu" className="village-button-secondary inline-flex items-center gap-2">
-          <ShoppingBag size={20} /> Continue Shopping
+    <div className="max-w-6xl mx-auto space-y-12 pb-20">
+      <div className="text-center space-y-4">
+        <Link to="/profile" className="inline-flex items-center gap-2 text-primary font-bold hover:underline mb-2">
+          <ArrowLeft size={16} /> Back to Profile
         </Link>
+        <h1 className="text-4xl md:text-6xl font-bold font-hindi text-primary">My Orders</h1>
+        <div className="flex justify-center">
+          <span className="w-24 h-1 bg-primary rounded-full"></span>
+        </div>
+        <p className="text-gray-500 italic">Track your authentic Bihari treats</p>
       </div>
 
       <div className="bg-white p-6 md:p-10 rounded-[40px] shadow-sm border border-gray-100 min-h-[600px]">

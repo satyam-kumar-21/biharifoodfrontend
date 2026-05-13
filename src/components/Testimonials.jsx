@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { User } from 'lucide-react';
 
 const Testimonials = () => {
   const reviews = [
@@ -7,21 +8,18 @@ const Testimonials = () => {
       location: "Bangalore",
       review: "Being away from Bihar, I really missed authentic Thekua. Swad Bihar Ka brought that exact taste to me. It felt like my grandmother made it!",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop"
     },
     {
       name: "Rohan Varma",
       location: "Delhi",
       review: "The Litti-Chokha ingredients and Sattu are top-notch. Fresh, aromatic, and perfectly packed. Highly recommended for any food lover.",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop"
     },
     {
       name: "Priya Singh",
       location: "Mumbai",
       review: "Incredible quality! The Khaja was so crispy and fresh even after shipping. Finally found a reliable source for Bihari sweets.",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&auto=format&fit=crop"
     }
   ];
 
@@ -50,11 +48,9 @@ const Testimonials = () => {
               <p className="text-gray-600 leading-relaxed italic">"{item.review}"</p>
             </div>
             <div className="flex items-center gap-4 border-t border-village pt-6">
-              <img 
-                src={item.image} 
-                alt={item.name} 
-                className="w-12 h-12 rounded-full object-cover ring-2 ring-village shadow-md" 
-              />
+              <div className="w-12 h-12 rounded-full bg-village flex items-center justify-center text-primary shadow-md">
+                <User size={24} />
+              </div>
               <div>
                 <h4 className="font-bold text-gray-800">{item.name}</h4>
                 <p className="text-xs text-gray-400">{item.location}</p>

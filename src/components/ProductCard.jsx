@@ -1,50 +1,75 @@
 import { Link } from 'react-router-dom';
 import Rating from './Rating';
+import { ShoppingCart, Eye } from 'lucide-react';
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
-      <Link to={`/product/${product._id}`}>
-        <div className="relative h-64 overflow-hidden">
-          <img
-            src={product.images[0]?.url}
-            alt={product.name}
-            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-          />
-          {product.discount > 0 && (
-            <div className="absolute top-4 left-4 bg-accent text-white px-3 py-1 rounded-full text-sm font-bold">
-              {product.discount}% OFF
-            </div>
-          )}
+    <div className="bg-white rounded-[32px] shadow-sm border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 group flex flex-col h-full relative">
+      {/* Category Badge */}
+      <div className="absolute top-4 right-4 z-10">
+        <span className="bg-white/90 backdrop-blur-md text-primary text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-sm border border-gray-100">
+          {product.category}
+        </span>
+      </div>
+
+      {/* Image Section */}
+      <Link to={`/product/${product._id}`} className="relative h-72 overflow-hidden block">
+        <img
+          src={product.images[0]?.url}
+          alt={product.name}
+          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+        />
+        
+        {/* Overlay Actions */}
+        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+          <div className="bg-white p-3 rounded-full text-primary shadow-xl transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+            <Eye size={20} />
+          </div>
         </div>
+
+        {product.discount > 0 && (
+          <div className="absolute top-4 left-4 bg-accent text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">
+            {product.discount}% OFF
+          </div>
+        )}
       </Link>
 
-      <div className="p-5 space-y-3">
-        <Link to={`/product/${product._id}`}>
-          <h3 className="text-xl font-bold font-hindi group-hover:text-primary transition-colors flex items-baseline gap-2">
-            <span>{product.name}</span>
-            {product.unit && (
-              <span className="text-xs text-gray-400 font-normal">({product.unit})</span>
-            )}
-          </h3>
-        </Link>
-        
-        <div className="flex items-center justify-between">
-          <Rating value={product.rating} text={`${product.numReviews} reviews`} />
+      {/* Content Section */}
+      <div className="p-6 space-y-4 flex flex-col flex-grow">
+        <div className="space-y-1">
+          <Link to={`/product/${product._id}`}>
+            <h3 className="text-xl font-bold font-hindi group-hover:text-primary transition-colors leading-tight">
+              {product.name}
+            </h3>
+          </Link>
+          <div className="flex items-center gap-2">
+            <Rating value={product.rating} color="#FFD700" />
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">({product.numReviews})</span>
+          </div>
         </div>
+        
+        <p className="text-gray-500 text-sm line-clamp-2 italic">
+          "Authentic village taste, made with traditional recipes."
+        </p>
 
-        <div className="flex items-center justify-between pt-2">
+        <div className="pt-4 flex items-center justify-between mt-auto">
           <div className="flex flex-col">
-            <span className="text-2xl font-bold text-primary">₹{product.price}</span>
-            {product.discount > 0 && (
-              <span className="text-sm text-gray-400 line-through">₹{(product.price / (1 - product.discount/100)).toFixed(0)}</span>
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-black text-primary">₹{product.price}</span>
+              {product.discount > 0 && (
+                <span className="text-sm text-gray-400 line-through">₹{(product.price / (1 - product.discount/100)).toFixed(0)}</span>
+              )}
+            </div>
+            {product.unit && (
+              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Per {product.unit}</span>
             )}
           </div>
+          
           <Link 
             to={`/product/${product._id}`}
-            className="bg-secondary text-primary font-bold px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition-colors"
+            className="bg-secondary text-primary font-black uppercase tracking-widest p-3 rounded-2xl hover:bg-primary hover:text-white transition-all shadow-sm hover:shadow-xl"
           >
-            View
+            <ShoppingCart size={20} />
           </Link>
         </div>
       </div>

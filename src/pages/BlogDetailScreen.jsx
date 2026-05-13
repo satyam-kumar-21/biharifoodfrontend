@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { blogData } from '../data/blogData';
 import { ArrowLeft, Calendar, User, Share2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Meta from '../components/Meta';
 
 const BlogDetailScreen = () => {
   const { id } = useParams();
@@ -18,6 +19,14 @@ const BlogDetailScreen = () => {
 
   return (
     <div className="max-w-4xl mx-auto space-y-12 pb-20">
+      <Meta 
+        title={`${blog.title} - Swaad Bihar Ka`} 
+        description={blog.brief || `Read about ${blog.title} on Swaad Bihar Ka. Explore the rich culinary heritage of Bihar.`}
+        keywords={`${blog.title}, Bihari food, Bihar culture, authentic recipes, Swaad Bihar Ka, Bihar sweets, Thekua, Gujiya`}
+        url={`https://swaadbiharka.com/blog/${blog.id}`}
+        image={blog.image}
+        type="article"
+      />
       <Link to="/blogs" className="inline-flex items-center gap-2 text-primary font-bold hover:underline">
         <ArrowLeft size={20} /> Back to Blogs
       </Link>

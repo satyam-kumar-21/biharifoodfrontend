@@ -2,10 +2,16 @@ import { Link } from 'react-router-dom';
 import { blogData } from '../data/blogData';
 import { motion } from 'framer-motion';
 import { Calendar, User, ArrowRight } from 'lucide-react';
+import Meta from '../components/Meta';
 
 const BlogScreen = () => {
   return (
     <div className="space-y-12 pb-20">
+      <Meta 
+        title="Bihari Food Blog - Swaad Bihar Ka" 
+        description="Read about the rich culinary heritage of Bihar. From recipes to history, explore the world of authentic Bihari food through our blog."
+        keywords="Bihari food blog, Thekua recipe, Litti Chokha history, Sattu benefits, Bihari food culture, traditional Indian recipes"
+      />
       {/* Header */}
       <div className="text-center space-y-4 max-w-2xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-bold font-hindi text-primary">Our Stories & Traditions</h1>

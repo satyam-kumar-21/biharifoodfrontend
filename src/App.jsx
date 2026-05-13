@@ -13,7 +13,7 @@ const App = () => {
       <Toaster position="top-center" reverseOrder={false} />
       <ScrollToTop />
       {!isAdminPath && <Header />}
-      <main className={isAdminPath ? 'min-h-screen' : 'min-h-[80vh] py-8'}>
+      <main className={`${isAdminPath ? 'min-h-screen' : 'min-h-[80vh]'} ${['/', '/about-us', '/contact'].includes(location.pathname) ? 'pb-8' : 'py-8'}`}>
         <div className={isAdminPath ? '' : 'container mx-auto px-4'}>
           <Outlet />
         </div>

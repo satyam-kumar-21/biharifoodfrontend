@@ -26,7 +26,7 @@ const ContactScreen = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto py-12 space-y-12">
+    <div className="max-w-6xl mx-auto py-8 space-y-12">
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold font-hindi text-primary">Contact Us</h1>
         <p className="text-gray-500 max-w-2xl mx-auto">

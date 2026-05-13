@@ -4,6 +4,7 @@ import ProductCard from '../components/ProductCard';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { motion, AnimatePresence } from 'framer-motion';
+import Meta from '../components/Meta';
 
 const MenuScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -15,7 +16,14 @@ const MenuScreen = () => {
   const categories = ['All', 'Snacks', 'Sweets'];
 
   return (
-    <div className="space-y-12 py-8 min-h-screen">
+    <div className="space-y-12 pt-12 pb-8 min-h-screen">
+      <Meta 
+        title="Our Menu - Traditional Bihari Snacks & Sweets | Swaad Bihar Ka" 
+        description="Browse our delicious collection of Bihari delicacies. From sweet Thekua and Khaja to savory Nimki and Sattu items, explore the best of Bihar's authentic flavors."
+        keywords="Bihari snacks menu, order Thekua online, Bihari sweets list, Khaja price, Nimki snacks, authentic Bihari food delivery, Bihar sweets shop online"
+        url="https://swaadbiharka.com/menu"
+        image="/thekua.png"
+      />
       {/* Header */}
       <div className="text-center space-y-6">
         <motion.h1 
@@ -23,7 +31,7 @@ const MenuScreen = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-4xl md:text-6xl font-bold font-hindi text-primary"
         >
-          Our Delicious Menu
+          Our Delicious Menu <span className="block md:inline text-2xl md:text-5xl opacity-80">(हमारा स्वादिष्ट मेनू)</span>
         </motion.h1>
         <p className="text-gray-600 max-w-2xl mx-auto text-lg">
           Explore the authentic flavors of Bihar. From sweet Thekua to savory snacks, we bring the best of Bihari tradition to your plate.

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { Heart, Truck, Users } from 'lucide-react';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
 import ProductCard from '../components/ProductCard';
 import Loader from '../components/Loader';
@@ -5,14 +7,16 @@ import Message from '../components/Message';
 import Testimonials from '../components/Testimonials';
 import FAQ from '../components/FAQ';
 import Hero from '../components/Hero';
-import { Link } from 'react-router-dom';
+import Meta from '../components/Meta';
 
 const HomeScreen = () => {
   const { data, isLoading, error } = useGetProductsQuery({});
 
   return (
-    <div className="space-y-24 pb-20">
-      <Hero />
+    <>
+      <Meta />
+      <div className="space-y-24 pb-20">
+        <Hero />
 
       {/* Featured Products */}
       <section className="space-y-8 px-4">
@@ -40,39 +44,37 @@ const HomeScreen = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="bg-white rounded-[60px] p-12 md:p-20 shadow-sm border border-gray-100 mx-4">
+      <section className="bg-white rounded-[60px] p-12 md:p-24 shadow-sm border border-gray-100 mx-4">
+        <div className="text-center mb-16 space-y-4">
+          <h2 className="text-3xl md:text-5xl font-bold font-hindi text-primary">The Village Promise</h2>
+          <p className="text-gray-500 max-w-2xl mx-auto italic">Why thousands of families across India trust Swaad Bihar Ka for their traditional delicacies.</p>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
-          <div className="space-y-6">
-            <div className="bg-village w-20 h-20 rounded-3xl flex items-center justify-center mx-auto text-primary rotate-3">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
+          <div className="space-y-6 group">
+            <div className="bg-village w-24 h-24 rounded-[32px] flex items-center justify-center mx-auto text-primary rotate-3 group-hover:rotate-6 transition-transform shadow-sm">
+              <Heart size={48} />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-3">
               <h3 className="text-2xl font-bold font-hindi text-gray-800">100% Pure</h3>
-              <p className="text-gray-500 leading-relaxed">Made with pure ingredients, without any artificial additives or adulteration.</p>
+              <p className="text-gray-500 leading-relaxed text-sm">Made with stone-ground flour and organic jaggery. No preservatives, ever.</p>
             </div>
           </div>
-          <div className="space-y-6">
-            <div className="bg-village w-20 h-20 rounded-3xl flex items-center justify-center mx-auto text-primary -rotate-3">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+          <div className="space-y-6 group">
+            <div className="bg-village w-24 h-24 rounded-[32px] flex items-center justify-center mx-auto text-primary -rotate-3 group-hover:-rotate-6 transition-transform shadow-sm">
+              <Truck size={48} />
             </div>
-            <div className="space-y-2">
-              <h3 className="text-2xl font-bold font-hindi text-gray-800">Fresh Delivery</h3>
-              <p className="text-gray-500 leading-relaxed">Every item is prepared fresh on order and shipped directly from our kitchen.</p>
+            <div className="space-y-3">
+              <h3 className="text-2xl font-bold font-hindi text-gray-800">Freshly Made</h3>
+              <p className="text-gray-500 leading-relaxed text-sm">Every batch is prepared only after you order, ensuring the crunch remains intact.</p>
             </div>
           </div>
-          <div className="space-y-6">
-            <div className="bg-village w-20 h-20 rounded-3xl flex items-center justify-center mx-auto text-primary rotate-6">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-              </svg>
+          <div className="space-y-6 group">
+            <div className="bg-village w-24 h-24 rounded-[32px] flex items-center justify-center mx-auto text-primary rotate-6 group-hover:rotate-12 transition-transform shadow-sm">
+              <Users size={48} />
             </div>
-            <div className="space-y-2">
-              <h3 className="text-2xl font-bold font-hindi text-gray-800">Village Taste</h3>
-              <p className="text-gray-500 leading-relaxed">Authentic recipes passed down through generations for that real Bihar flavor.</p>
+            <div className="space-y-3">
+              <h3 className="text-2xl font-bold font-hindi text-gray-800">Women Led</h3>
+              <p className="text-gray-500 leading-relaxed text-sm">Supporting over 50+ local women artisans in Bihar, preserving heritage.</p>
             </div>
           </div>
         </div>
@@ -85,7 +87,39 @@ const HomeScreen = () => {
       <div className="px-4">
         <FAQ />
       </div>
-    </div>
+
+      {/* Newsletter Section */}
+      <section className="bg-primary rounded-[60px] p-12 md:p-24 text-center text-white space-y-10 overflow-hidden relative mx-4 mb-20 shadow-2xl">
+        <div className="relative z-10 space-y-6 max-w-4xl mx-auto">
+          <div className="inline-block px-4 py-2 bg-white/10 rounded-full text-xs font-black uppercase tracking-[0.3em] mb-4">
+            Join the Village Club
+          </div>
+          <h2 className="text-4xl md:text-7xl font-bold font-hindi leading-tight">
+            Get the Taste of Home <br /> <span className="text-secondary">Delivered to You</span>
+          </h2>
+          <p className="text-gray-200 text-lg md:text-xl max-w-2xl mx-auto font-light">
+            Subscribe to get exclusive discounts, new product launches, and stories from the heart of Bihar.
+          </p>
+          
+          <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto pt-8">
+            <input 
+              type="email" 
+              placeholder="Enter your email address" 
+              className="flex-grow p-5 rounded-3xl bg-white/10 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:bg-white/20 transition-all font-bold"
+            />
+            <button className="bg-secondary text-primary px-10 py-5 rounded-3xl font-black uppercase tracking-widest hover:bg-white transition-all shadow-xl">
+              Subscribe
+            </button>
+          </form>
+          <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">No spam. Only authentic sweetness.</p>
+        </div>
+        
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48 blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full -ml-48 -mb-48 blur-3xl"></div>
+      </section>
+      </div>
+    </>
   );
 };
 

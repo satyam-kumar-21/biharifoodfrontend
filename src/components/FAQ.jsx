@@ -29,9 +29,11 @@ const FAQ = () => {
   };
 
   return (
-    <section className="bg-village/30 rounded-[60px] p-10 md:p-20 space-y-12">
+    <section className="bg-village/30 rounded-[40px] md:rounded-[60px] p-6 md:p-20 space-y-8 md:space-y-12">
       <div className="text-center space-y-4">
-        <h2 className="text-3xl md:text-5xl font-bold font-hindi text-primary">Common Questions</h2>
+        <h2 className="text-3xl md:text-5xl font-bold font-hindi text-primary">
+          Common Questions <span className="block md:inline text-xl md:text-5xl opacity-80">(सामान्य प्रश्न)</span>
+        </h2>
         <p className="text-gray-600">Everything you need to know about our products and delivery.</p>
       </div>
 
