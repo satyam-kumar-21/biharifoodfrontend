@@ -14,12 +14,12 @@ const Footer = () => {
         {/* Brand Section */}
         <div className="space-y-6">
           {settings?.logo ? (
-            <img src={settings.logo} alt="Logo" className="h-12 w-auto object-contain brightness-0 invert" />
+            <img src={settings.logo} alt="Logo" className="h-12 w-auto object-contain" />
           ) : (
-            <img 
-              src="/kitchenbiharkalogo.png" 
-              alt="Kitchen Bihar Ka Logo" 
-              className="h-14 w-auto object-contain brightness-0 invert" 
+            <img
+              src="/kitchenbiharkalogo2.png"
+              alt="Kitchen Bihar Ka Logo"
+              className="h-14 w-auto object-contain"
             />
           )}
           <p className="text-gray-200 leading-relaxed">
@@ -40,7 +40,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        
+
         {/* Quick Links */}
         <div>
           <h4 className="text-xl font-bold mb-6 font-hindi">Quick Links</h4>

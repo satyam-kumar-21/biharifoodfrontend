@@ -48,7 +48,7 @@ const Header = () => {
               <img src={settings.logo} alt="Logo" className="h-12 md:h-16 w-auto object-contain" />
             ) : (
               <img
-                src="/kitchenbiharkalogo.png"
+                src="/kitchenbiharkalogo2.png"
                 alt="Kitchen Bihar Ka Logo"
                 className="h-12 md:h-20 w-auto object-contain hover:scale-105 transition-transform"
               />

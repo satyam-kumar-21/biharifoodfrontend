@@ -10,7 +10,7 @@ const Meta = ({ title, description, keywords, url, image, type }) => {
       <meta name="googlebot" content="index, follow" />
       <meta name="author" content="Kitchen Bihar Ka" />
       <meta name="theme-color" content="#8B4513" />
-      
+
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={url} />
@@ -37,7 +37,7 @@ Meta.defaultProps = {
   description: 'Bringing the authentic, traditional, and homemade taste of Bihar to your doorstep. Buy Thekua, Khaja, Nimki, Gujiya, and more online. Free delivery over ₹500.',
   keywords: 'Bihari food online, authentic Bihari sweets, Thekua online India, buy Gujiya online, Khaja from Silao, Litti Chokha ingredients, Sattu online, Bihari snacks home delivery, traditional Indian sweets Bihar, healthy snacks Bihar, village food online, Kitchen Bihar Ka',
   url: 'https://kitchenbiharka.com/',
-  image: '/kitchenbiharkalogo.png',
+  image: '/kitchenbiharkalogo2.png',
   type: 'website'
 };
 

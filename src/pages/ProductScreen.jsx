@@ -65,12 +65,12 @@ const ProductScreen = () => {
         <Message variant='danger'>{error?.data?.message || error.error}</Message>
       ) : (
         <>
-          <Meta 
-            title={`${product.name} - Kitchen Bihar Ka`} 
+          <Meta
+            title={`${product.name} - Kitchen Bihar Ka`}
             description={product.shortDescription ? product.shortDescription.replace(/<[^>]*>?/gm, '') : `Buy authentic ${product.name} online. Hand-crafted in Bihar with traditional recipes.`}
             keywords={`${product.name}, buy ${product.name} online, Bihari ${product.category}, authentic Bihari food, Kitchen Bihar Ka, Bihar sweets`}
             url={`https://kitchenbiharka.com/product/${product._id}`}
-            image={product.images && product.images.length > 0 ? product.images[0].url : '/kitchenbiharkalogo.png'}
+            image={product.images && product.images.length > 0 ? product.images[0].url : '/kitchenbiharkalogo2.png'}
             type="product"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -79,23 +79,22 @@ const ProductScreen = () => {
               {/* Thumbnails */}
               <div className="flex md:flex-col gap-4 overflow-x-auto md:overflow-y-auto max-h-[500px] scrollbar-hide">
                 {product.images.map((img, idx) => (
-                  <div 
-                    key={idx} 
+                  <div
+                    key={idx}
                     onClick={() => setMainImage(img.url)}
-                    className={`min-w-[80px] w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden border-2 cursor-pointer transition-all flex-shrink-0 ${
-                      mainImage === img.url ? 'border-primary shadow-md scale-105' : 'border-village hover:border-gray-300'
-                    }`}
+                    className={`min-w-[80px] w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden border-2 cursor-pointer transition-all flex-shrink-0 ${mainImage === img.url ? 'border-primary shadow-md scale-105' : 'border-village hover:border-gray-300'
+                      }`}
                   >
                     <img src={img.url} alt="" className="w-full h-full object-cover" />
                   </div>
                 ))}
               </div>
-              
+
               {/* Main Image */}
               <div className="flex-1 aspect-square rounded-3xl overflow-hidden shadow-2xl bg-white border border-gray-100 p-2">
-                <img 
-                  src={mainImage} 
-                  alt={product.name} 
+                <img
+                  src={mainImage}
+                  alt={product.name}
                   className="w-full h-full object-contain rounded-2xl"
                 />
               </div>
@@ -109,7 +108,7 @@ const ProductScreen = () => {
                   <span className="w-8 h-[2px] bg-primary"></span>
                 </div>
                 <h1 className="text-4xl md:text-5xl font-bold font-hindi leading-tight">
-                  {product.name} 
+                  {product.name}
                   {product.unit && (
                     <span className="text-xl md:text-2xl text-gray-400 font-normal ml-3 whitespace-nowrap">
                       ({product.unit})
@@ -129,16 +128,16 @@ const ProductScreen = () => {
                 <span className="text-5xl font-black text-primary tracking-tighter">₹{product.price}</span>
                 {product.discount > 0 && (
                   <div className="flex flex-col">
-                    <span className="text-xl text-gray-400 line-through">₹{(product.price / (1 - product.discount/100)).toFixed(0)}</span>
+                    <span className="text-xl text-gray-400 line-through">₹{(product.price / (1 - product.discount / 100)).toFixed(0)}</span>
                     <span className="text-sm text-green-600 font-bold">{product.discount}% OFF</span>
                   </div>
                 )}
               </div>
 
               {/* Short Description */}
-              <div 
+              <div
                 className="text-gray-600 leading-relaxed border-l-4 border-primary/20 pl-4 py-1 break-words whitespace-normal"
-                dangerouslySetInnerHTML={{ __html: product.shortDescription }} 
+                dangerouslySetInnerHTML={{ __html: product.shortDescription }}
               />
 
               {/* Badges */}
@@ -169,14 +168,14 @@ const ProductScreen = () => {
                   <div className="flex items-center gap-6">
                     <span className="font-black text-gray-700">Quantity:</span>
                     <div className="flex items-center bg-village rounded-2xl overflow-hidden border border-gray-100">
-                      <button 
+                      <button
                         onClick={() => setQty(Math.max(1, qty - 1))}
                         className="p-4 hover:bg-gray-200 transition"
                       >
                         <Minus size={18} />
                       </button>
                       <span className="w-12 text-center font-black text-lg">{qty}</span>
-                      <button 
+                      <button
                         onClick={() => setQty(Math.min(product.countInStock, qty + 1))}
                         className="p-4 hover:bg-gray-200 transition"
                       >
@@ -186,7 +185,7 @@ const ProductScreen = () => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <button 
+                    <button
                       onClick={addToCartHandler}
                       className="flex-[2] village-button-primary py-5 flex items-center justify-center gap-3 text-lg"
                     >
@@ -210,11 +209,10 @@ const ProductScreen = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex-1 min-w-fit px-4 sm:px-10 py-4 sm:py-6 text-[10px] sm:text-sm font-black uppercase tracking-widest transition-all whitespace-nowrap ${
-                    activeTab === tab.id 
-                      ? 'text-primary border-b-4 border-primary bg-primary/5' 
+                  className={`flex-1 min-w-fit px-4 sm:px-10 py-4 sm:py-6 text-[10px] sm:text-sm font-black uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === tab.id
+                      ? 'text-primary border-b-4 border-primary bg-primary/5'
                       : 'text-gray-400 hover:text-gray-600'
-                  }`}
+                    }`}
                 >
                   {tab.id === 'additional' ? (
                     <>
@@ -229,9 +227,9 @@ const ProductScreen = () => {
             <div className="p-10 md:p-16">
               {activeTab === 'description' && (
                 <div className="prose prose-primary max-w-none">
-                  <div 
+                  <div
                     className="text-gray-600 leading-relaxed space-y-4 rich-text-content break-words whitespace-normal"
-                    dangerouslySetInnerHTML={{ __html: product.description }} 
+                    dangerouslySetInnerHTML={{ __html: product.description }}
                   />
                 </div>
               )}
@@ -317,9 +315,9 @@ const ProductScreen = () => {
                             onChange={(e) => setComment(e.target.value)}
                           ></textarea>
                         </div>
-                        <button 
+                        <button
                           disabled={loadingProductReview}
-                          type="submit" 
+                          type="submit"
                           className="village-button-primary w-full py-5 text-lg"
                         >
                           {loadingProductReview ? 'Submitting...' : 'Post Review'}
