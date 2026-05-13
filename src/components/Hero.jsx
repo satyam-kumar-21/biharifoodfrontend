@@ -15,27 +15,27 @@ const Hero = () => {
           >
             Authentic Bihari Heritage
           </motion.div>
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-4xl lg:text-6xl font-black text-gray-900 font-hindi leading-tight"
           >
-            बिहार का <span className="text-primary">असली स्वाद</span>, <br /> 
+            बिहार का <span className="text-primary">असली स्वाद</span>, <br />
             अब आपके घर तक।
           </motion.h1>
         </div>
-        
-        <motion.p 
+
+        <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
           className="text-xl text-gray-500 font-light leading-relaxed max-w-xl mx-auto lg:mx-0"
         >
-          ठेकुआ, खाजा, तिलकुट और बहुत कुछ... <br /> 
+          ठेकुआ, खाजा, तिलकुट और बहुत कुछ... <br />
           शुद्ध देसी घी और परंपरा के साथ सीधे गांव से आपके द्वार।
         </motion.p>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -55,7 +55,7 @@ const Hero = () => {
       <div className="w-full lg:w-1/2 min-h-[500px] lg:h-[750px] p-6 lg:p-12 order-1 lg:order-2 bg-village/20">
         <div className="relative h-full w-full">
           {/* Main Image */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             className="absolute top-0 left-0 w-[65%] h-[70%] rounded-[50px] overflow-hidden shadow-2xl z-20 border-8 border-white"
@@ -64,7 +64,7 @@ const Hero = () => {
           </motion.div>
 
           {/* Secondary Image - Bottom Right */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
@@ -74,7 +74,7 @@ const Hero = () => {
           </motion.div>
 
           {/* Small Decorative Image - Top Right */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}

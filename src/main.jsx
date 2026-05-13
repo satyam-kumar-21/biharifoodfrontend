@@ -44,6 +44,8 @@ import UserEditScreen from './pages/admin/UserEditScreen.jsx';
 import AdminProfileScreen from './pages/admin/AdminProfileScreen.jsx';
 import CategoryListScreen from './pages/admin/CategoryListScreen.jsx';
 import SettingsScreen from './pages/admin/SettingsScreen.jsx';
+import ContactListScreen from './pages/admin/ContactListScreen.jsx';
+import ReviewListScreen from './pages/admin/ReviewListScreen.jsx';
 
 // Route Components
 import PrivateRoute from './components/PrivateRoute.jsx';
@@ -91,6 +93,8 @@ const router = createBrowserRouter(
           <Route path='/admin/profile' element={<AdminProfileScreen />} />
           <Route path='/admin/categorylist' element={<CategoryListScreen />} />
           <Route path='/admin/settings' element={<SettingsScreen />} />
+          <Route path='/admin/contactlist' element={<ContactListScreen />} />
+          <Route path='/admin/reviewlist' element={<ReviewListScreen />} />
         </Route>
       </Route>
 

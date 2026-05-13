@@ -9,7 +9,9 @@ import {
   ChevronRight,
   Menu,
   X,
-  User as UserIcon
+  User as UserIcon,
+  MessageSquare,
+  Mail
 } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -44,7 +46,9 @@ const AdminLayout = () => {
     { name: 'Dashboard', icon: <LayoutDashboard size={20} />, path: '/admin/dashboard' },
     { name: 'Products', icon: <ShoppingBag size={20} />, path: '/admin/productlist' },
     { name: 'Categories', icon: <Grid size={20} />, path: '/admin/categorylist' },
+    { name: 'Reviews', icon: <MessageSquare size={20} />, path: '/admin/reviewlist' },
     { name: 'Orders', icon: <ClipboardList size={20} />, path: '/admin/orderlist' },
+    { name: 'Contacts', icon: <Mail size={20} />, path: '/admin/contactlist' },
     { name: 'Users', icon: <Users size={20} />, path: '/admin/userlist' },
   ];
 

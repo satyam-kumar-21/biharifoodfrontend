@@ -1,10 +1,34 @@
+import { useState } from 'react';
 import { Phone, Mail, MapPin, Send } from 'lucide-react';
+import { useCreateContactMutation } from '../slices/contactApiSlice';
+import { toast } from 'react-hot-toast';
 
 const ContactScreen = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+
+  const [createContact, { isLoading }] = useCreateContactMutation();
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await createContact({ name, email, subject, message }).unwrap();
+      toast.success('Message sent successfully!');
+      setName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
+
   return (
     <div className="max-w-6xl mx-auto py-12 space-y-12">
       <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold font-hindi">Contact Us</h1>
+        <h1 className="text-4xl font-bold font-hindi text-primary">Contact Us</h1>
         <p className="text-gray-500 max-w-2xl mx-auto">
           Your suggestions and questions are important to us. You can reach out to us through the form below or directly using the contact details.
         </p>
@@ -56,41 +80,57 @@ const ContactScreen = () => {
 
         {/* Contact Form */}
         <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100">
-          <form className="space-y-6">
+          <form onSubmit={submitHandler} className="space-y-6">
             <div className="space-y-2">
               <label className="font-bold font-hindi">Your Name</label>
               <input 
                 type="text" 
-                className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none"
+                className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary transition"
                 placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
               />
             </div>
             <div className="space-y-2">
               <label className="font-bold font-hindi">Email Address</label>
               <input 
                 type="email" 
-                className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none"
+                className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary transition"
                 placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div className="space-y-2">
               <label className="font-bold font-hindi">Subject</label>
               <input 
                 type="text" 
-                className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none"
+                className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary transition"
                 placeholder="Enter subject"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                required
               />
             </div>
             <div className="space-y-2">
               <label className="font-bold font-hindi">Message</label>
               <textarea 
                 rows="5" 
-                className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none"
+                className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary transition"
                 placeholder="Write your message here..."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                required
               ></textarea>
             </div>
-            <button className="village-button-primary w-full flex items-center justify-center gap-2">
-              <Send size={20} /> Send Message
+            <button 
+              type="submit" 
+              disabled={isLoading}
+              className="village-button-primary w-full flex items-center justify-center gap-2 disabled:opacity-50"
+            >
+              {isLoading ? 'Sending...' : <><Send size={20} /> Send Message</>}
             </button>
           </form>
         </div>
@@ -100,3 +140,4 @@ const ContactScreen = () => {
 };
 
 export default ContactScreen;
+
