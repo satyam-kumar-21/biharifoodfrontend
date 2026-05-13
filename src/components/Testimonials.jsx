@@ -6,7 +6,7 @@ const Testimonials = () => {
     {
       name: "Anjali Sharma",
       location: "Bangalore",
-      review: "Being away from Bihar, I really missed authentic Thekua. Swad Bihar Ka brought that exact taste to me. It felt like my grandmother made it!",
+      review: "Being away from Bihar, I really missed authentic Thekua. Kitchen Bihar Ka brought that exact taste to me. It felt like my grandmother made it!",
       rating: 5,
     },
     {

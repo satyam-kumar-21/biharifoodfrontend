@@ -18,10 +18,10 @@ const MenuScreen = () => {
   return (
     <div className="space-y-12 pt-12 pb-8 min-h-screen">
       <Meta 
-        title="Our Menu - Traditional Bihari Snacks & Sweets | Swaad Bihar Ka" 
+        title="Our Menu - Traditional Bihari Snacks & Sweets | Kitchen Bihar Ka" 
         description="Browse our delicious collection of Bihari delicacies. From sweet Thekua and Khaja to savory Nimki and Sattu items, explore the best of Bihar's authentic flavors."
         keywords="Bihari snacks menu, order Thekua online, Bihari sweets list, Khaja price, Nimki snacks, authentic Bihari food delivery, Bihar sweets shop online"
-        url="https://swaadbiharka.com/menu"
+        url="https://kitchenbiharka.com/menu"
         image="/thekua.png"
       />
       {/* Header */}

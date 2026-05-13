@@ -48,8 +48,8 @@ const Header = () => {
               <img src={settings.logo} alt="Logo" className="h-12 md:h-16 w-auto object-contain" />
             ) : (
               <img
-                src="/swadbiharkalogo.png"
-                alt="Swad Bihar Ka Logo"
+                src="/kitchenbiharkalogo.png"
+                alt="Kitchen Bihar Ka Logo"
                 className="h-12 md:h-20 w-auto object-contain hover:scale-105 transition-transform"
               />
             )}
@@ -60,8 +60,8 @@ const Header = () => {
             <Link to="/" className="text-lg font-bold hover:text-primary transition">Home</Link>
             <Link to="/menu" className="text-lg font-bold hover:text-primary transition">Menu</Link>
             <Link to="/blogs" className="text-lg font-bold hover:text-primary transition">Blogs</Link>
-            <Link to="/about-us" className="text-lg font-bold hover:text-primary transition">About Us</Link>
-            <Link to="/contact" className="text-lg font-bold hover:text-primary transition">Contact Us</Link>
+            <Link to="/about-us" className="text-lg font-bold hover:text-primary transition">About</Link>
+            <Link to="/contact" className="text-lg font-bold hover:text-primary transition">Contact</Link>
           </div>
 
           {/* Action Buttons */}
@@ -185,14 +185,14 @@ const Header = () => {
                 className="text-2xl font-hindi font-bold"
                 onClick={() => setIsMenuOpen(false)}
               >
-                About Us
+                About
               </Link>
               <Link
                 to="/contact"
                 className="text-2xl font-hindi font-bold"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contact Us
+                Contact
               </Link>
               {userInfo && (
                 <>

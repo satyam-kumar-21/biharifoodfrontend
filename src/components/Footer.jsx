@@ -17,8 +17,8 @@ const Footer = () => {
             <img src={settings.logo} alt="Logo" className="h-12 w-auto object-contain brightness-0 invert" />
           ) : (
             <img 
-              src="/swadbiharkalogo.png" 
-              alt="Swad Bihar Ka Logo" 
+              src="/kitchenbiharkalogo.png" 
+              alt="Kitchen Bihar Ka Logo" 
               className="h-14 w-auto object-contain brightness-0 invert" 
             />
           )}
@@ -47,8 +47,8 @@ const Footer = () => {
           <ul className="space-y-4 text-gray-200">
             <li><Link to="/" className="hover:text-secondary transition">Home</Link></li>
             <li><Link to="/menu" className="hover:text-secondary transition">Menu</Link></li>
-            <li><Link to="/about-us" className="hover:text-secondary transition">About Us</Link></li>
-            <li><Link to="/contact" className="hover:text-secondary transition">Contact Us</Link></li>
+            <li><Link to="/about-us" className="hover:text-secondary transition">About</Link></li>
+            <li><Link to="/contact" className="hover:text-secondary transition">Contact</Link></li>
             <li><Link to="/faq" className="hover:text-secondary transition">FAQ</Link></li>
           </ul>
         </div>
@@ -78,13 +78,13 @@ const Footer = () => {
           </div>
           <div className="flex items-center gap-3">
             <Mail className="text-secondary shrink-0" />
-            <p>{settings?.email || 'contact@swadbiharka.com'}</p>
+            <p>{settings?.email || 'contact@kitchenbiharka.com'}</p>
           </div>
         </div>
       </div>
 
       <div className="border-t border-primary-light mt-16 pt-8 text-center text-gray-300">
-        <p>© {currentYear} Swaad Bihar Ka. All rights reserved.</p>
+        <p>© {currentYear} Kitchen Bihar Ka. All rights reserved.</p>
       </div>
     </footer>
   );

@@ -66,11 +66,11 @@ const ProductScreen = () => {
       ) : (
         <>
           <Meta 
-            title={`${product.name} - Swaad Bihar Ka`} 
+            title={`${product.name} - Kitchen Bihar Ka`} 
             description={product.shortDescription ? product.shortDescription.replace(/<[^>]*>?/gm, '') : `Buy authentic ${product.name} online. Hand-crafted in Bihar with traditional recipes.`}
-            keywords={`${product.name}, buy ${product.name} online, Bihari ${product.category}, authentic Bihari food, Swaad Bihar Ka, Bihar sweets`}
-            url={`https://swaadbiharka.com/product/${product._id}`}
-            image={product.images && product.images.length > 0 ? product.images[0].url : '/swadbiharkalogo.png'}
+            keywords={`${product.name}, buy ${product.name} online, Bihari ${product.category}, authentic Bihari food, Kitchen Bihar Ka, Bihar sweets`}
+            url={`https://kitchenbiharka.com/product/${product._id}`}
+            image={product.images && product.images.length > 0 ? product.images[0].url : '/kitchenbiharkalogo.png'}
             type="product"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">

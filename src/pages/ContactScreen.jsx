@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Phone, Mail, MapPin, Send } from 'lucide-react';
 import { useCreateContactMutation } from '../slices/contactApiSlice';
+import { useGetSettingsQuery } from '../slices/settingsApiSlice';
 import { toast } from 'react-hot-toast';
 
 const ContactScreen = () => {
+  const { data: settings } = useGetSettingsQuery();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
@@ -28,7 +30,7 @@ const ContactScreen = () => {
   return (
     <div className="max-w-6xl mx-auto py-8 space-y-12">
       <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold font-hindi text-primary">Contact Us</h1>
+        <h1 className="text-4xl font-bold font-hindi text-primary">Contact</h1>
         <p className="text-gray-500 max-w-2xl mx-auto">
           Your suggestions and questions are important to us. You can reach out to us through the form below or directly using the contact details.
         </p>
@@ -44,7 +46,7 @@ const ContactScreen = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold font-hindi">Our Address</h3>
-                <p className="text-gray-600">Patna City, Bihar, India - 800008</p>
+                <p className="text-gray-600">{settings?.address || 'Patna City, Bihar, India - 800008'}</p>
               </div>
             </div>
 
@@ -54,8 +56,7 @@ const ContactScreen = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold font-hindi">Phone Number</h3>
-                <p className="text-gray-600">+91 98765 43210</p>
-                <p className="text-gray-600">+91 12345 67890</p>
+                <p className="text-gray-600">{settings?.phone || '+91 98765 43210'}</p>
               </div>
             </div>
 
@@ -65,8 +66,7 @@ const ContactScreen = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold font-hindi">Email</h3>
-                <p className="text-gray-600">info@swaadbiharka.com</p>
-                <p className="text-gray-600">support@swaadbiharka.com</p>
+                <p className="text-gray-600">{settings?.email || 'info@kitchenbiharka.com'}</p>
               </div>
             </div>
           </div>
@@ -74,7 +74,14 @@ const ContactScreen = () => {
           <div className="bg-primary p-8 rounded-3xl text-white">
             <h3 className="text-xl font-bold font-hindi mb-4 text-secondary">Need Help?</h3>
             <p className="mb-6 opacity-90">We are available from 9 AM to 6 PM (Monday - Saturday).</p>
-            <button className="village-button-secondary w-full">Chat on WhatsApp</button>
+            <a 
+              href={`https://wa.me/${settings?.phone?.replace(/\D/g, '') || '919876543210'}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="village-button-secondary w-full text-center block"
+            >
+              Chat on WhatsApp
+            </a>
           </div>
         </div>
 

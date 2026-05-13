@@ -52,6 +52,8 @@ import ReviewListScreen from './pages/admin/ReviewListScreen.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
 import AdminRoute from './components/AdminRoute.jsx';
 import AdminLayout from './components/AdminLayout.jsx';
+import ReturnPolicyScreen from './pages/ReturnPolicyScreen.jsx';
+import TermsScreen from './pages/TermsScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -67,6 +69,8 @@ const router = createBrowserRouter(
       <Route path='/menu' element={<MenuScreen />} />
       <Route path='/privacy' element={<PrivacyScreen />} />
       <Route path='/shipping-policy' element={<ShippingPolicyScreen />} />
+      <Route path='/returns' element={<ReturnPolicyScreen />} />
+      <Route path='/terms' element={<TermsScreen />} />
       <Route path='/track-order' element={<TrackOrderScreen />} />
       <Route path='/blogs' element={<BlogScreen />} />
       <Route path='/blog/:id' element={<BlogDetailScreen />} />

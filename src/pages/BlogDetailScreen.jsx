@@ -20,10 +20,10 @@ const BlogDetailScreen = () => {
   return (
     <div className="max-w-4xl mx-auto space-y-12 pb-20">
       <Meta 
-        title={`${blog.title} - Swaad Bihar Ka`} 
-        description={blog.brief || `Read about ${blog.title} on Swaad Bihar Ka. Explore the rich culinary heritage of Bihar.`}
-        keywords={`${blog.title}, Bihari food, Bihar culture, authentic recipes, Swaad Bihar Ka, Bihar sweets, Thekua, Gujiya`}
-        url={`https://swaadbiharka.com/blog/${blog.id}`}
+        title={`${blog.title} - Kitchen Bihar Ka`} 
+        description={blog.brief || `Read about ${blog.title} on Kitchen Bihar Ka. Explore the rich culinary heritage of Bihar.`}
+        keywords={`${blog.title}, Bihari food, Bihar culture, authentic recipes, Kitchen Bihar Ka, Bihar sweets, Thekua, Gujiya`}
+        url={`https://kitchenbiharka.com/blog/${blog.id}`}
         image={blog.image}
         type="article"
       />

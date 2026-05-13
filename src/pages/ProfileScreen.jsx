@@ -51,7 +51,7 @@ const ProfileScreen = () => {
 
   return (
     <div className="max-w-6xl mx-auto space-y-12 pb-8">
-      <Meta title="My Account - Swaad Bihar Ka" />
+      <Meta title={`${userInfo.name}'s Profile - Kitchen Bihar Ka`} />
       
       <div className="text-center space-y-4">
         <h1 className="text-4xl md:text-6xl font-bold font-hindi text-primary">My Account</h1>

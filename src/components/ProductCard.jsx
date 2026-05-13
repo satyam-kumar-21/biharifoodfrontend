@@ -3,6 +3,23 @@ import Rating from './Rating';
 import { ShoppingCart, Eye } from 'lucide-react';
 
 const ProductCard = ({ product }) => {
+  const getFirstSentence = (html) => {
+    if (!html) return "Authentic village taste, made with traditional recipes.";
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const text = (doc.body.textContent || "").trim();
+    
+    // Match everything up to the first Hindi Purna Viram (।) or English period (.)
+    // and include any immediately following closing quotes/brackets
+    const match = text.match(/.*?[।.][”"']?/);
+    
+    if (match) {
+      return match[0];
+    }
+    
+    // Fallback if no full stop is found
+    return text || "Authentic village taste, made with traditional recipes.";
+  };
+
   return (
     <div className="bg-white rounded-[32px] shadow-sm border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 group flex flex-col h-full relative">
       {/* Category Badge */}
@@ -35,11 +52,16 @@ const ProductCard = ({ product }) => {
       </Link>
 
       {/* Content Section */}
-      <div className="p-6 space-y-4 flex flex-col flex-grow">
+      <div className="p-5 flex flex-col flex-grow bg-white">
         <div className="space-y-1">
           <Link to={`/product/${product._id}`}>
-            <h3 className="text-xl font-bold font-hindi group-hover:text-primary transition-colors leading-tight">
-              {product.name}
+            <h3 className="text-[1.2rem] font-black font-hindi group-hover:text-primary transition-colors leading-tight flex items-baseline gap-2">
+              <span className="truncate">{product.name}</span>
+              {product.unit && (
+                <span className="text-xs text-gray-400 font-bold whitespace-nowrap">
+                  ({product.unit})
+                </span>
+              )}
             </h3>
           </Link>
           <div className="flex items-center gap-2">
@@ -48,28 +70,29 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
         
-        <p className="text-gray-500 text-sm line-clamp-2 italic">
-          "Authentic village taste, made with traditional recipes."
-        </p>
+        <div className="mt-3 flex-grow">
+          <p className="text-gray-600 text-xs line-clamp-2 leading-relaxed font-medium opacity-80">
+            {getFirstSentence(product.shortDescription)}
+          </p>
+        </div>
 
-        <div className="pt-4 flex items-center justify-between mt-auto">
+        <div className="pt-3 mt-4 border-t border-village/50 flex items-center justify-between">
           <div className="flex flex-col">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl font-black text-primary">₹{product.price}</span>
+            <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.1em] leading-none mb-1">Price</span>
+            <div className="flex items-baseline gap-1">
+              <span className="text-sm font-bold text-primary">₹</span>
+              <span className="text-2xl font-black text-primary tracking-tighter">{product.price}</span>
               {product.discount > 0 && (
-                <span className="text-sm text-gray-400 line-through">₹{(product.price / (1 - product.discount/100)).toFixed(0)}</span>
+                <span className="text-[10px] text-gray-400 line-through ml-1">₹{(product.price / (1 - product.discount/100)).toFixed(0)}</span>
               )}
             </div>
-            {product.unit && (
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Per {product.unit}</span>
-            )}
           </div>
           
           <Link 
             to={`/product/${product._id}`}
-            className="bg-secondary text-primary font-black uppercase tracking-widest p-3 rounded-2xl hover:bg-primary hover:text-white transition-all shadow-sm hover:shadow-xl"
+            className="bg-secondary text-primary p-2.5 rounded-xl hover:bg-primary hover:text-white transition-all shadow-sm hover:shadow-lg transform active:scale-95"
           >
-            <ShoppingCart size={20} />
+            <ShoppingCart size={18} />
           </Link>
         </div>
       </div>
