@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 
@@ -17,8 +17,10 @@ const Footer = () => {
             <img src={settings.logo} alt="Logo" className="h-12 w-auto object-contain" />
           ) : (
             <img
-              src="/biharwalatastelogo.png"
+              src="/biharwalatastelogo.webp"
               alt="Bihar wala taste Logo"
+              width="140"
+              height="70"
               className="h-14 w-auto object-contain"
             />
           )}

@@ -34,6 +34,9 @@ const ProductCard = ({ product }) => {
         <img
           src={product.images[0]?.url}
           alt={product.name}
+          width="400"
+          height="300"
+          loading="lazy"
           className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
         />
         

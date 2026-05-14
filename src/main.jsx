@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
@@ -13,47 +13,47 @@ import App from './App.jsx'
 import './index.css'
 
 // User Screens
-import HomeScreen from './pages/HomeScreen.jsx';
-import ProductScreen from './pages/ProductScreen.jsx';
-import CartScreen from './pages/CartScreen.jsx';
-import LoginScreen from './pages/LoginScreen.jsx';
-import RegisterScreen from './pages/RegisterScreen.jsx';
-import ShippingScreen from './pages/ShippingScreen.jsx';
-import PaymentScreen from './pages/PaymentScreen.jsx';
-import PlaceOrderScreen from './pages/PlaceOrderScreen.jsx';
-import OrderScreen from './pages/OrderScreen.jsx';
-import ProfileScreen from './pages/ProfileScreen.jsx';
-import MyOrdersScreen from './pages/MyOrdersScreen.jsx';
-import AboutUsScreen from './pages/AboutUsScreen.jsx';
-import ContactScreen from './pages/ContactScreen.jsx';
-import FAQScreen from './pages/FAQScreen.jsx';
-import PrivacyScreen from './pages/PrivacyScreen.jsx';
-import ShippingPolicyScreen from './pages/ShippingPolicyScreen.jsx';
-import NotFoundScreen from './pages/NotFoundScreen.jsx';
-import MenuScreen from './pages/MenuScreen.jsx';
-import TrackOrderScreen from './pages/TrackOrderScreen.jsx';
-import BlogScreen from './pages/BlogScreen.jsx';
-import BlogDetailScreen from './pages/BlogDetailScreen.jsx';
+const HomeScreen = lazy(() => import('./pages/HomeScreen.jsx'));
+const ProductScreen = lazy(() => import('./pages/ProductScreen.jsx'));
+const CartScreen = lazy(() => import('./pages/CartScreen.jsx'));
+const LoginScreen = lazy(() => import('./pages/LoginScreen.jsx'));
+const RegisterScreen = lazy(() => import('./pages/RegisterScreen.jsx'));
+const ShippingScreen = lazy(() => import('./pages/ShippingScreen.jsx'));
+const PaymentScreen = lazy(() => import('./pages/PaymentScreen.jsx'));
+const PlaceOrderScreen = lazy(() => import('./pages/PlaceOrderScreen.jsx'));
+const OrderScreen = lazy(() => import('./pages/OrderScreen.jsx'));
+const ProfileScreen = lazy(() => import('./pages/ProfileScreen.jsx'));
+const MyOrdersScreen = lazy(() => import('./pages/MyOrdersScreen.jsx'));
+const AboutUsScreen = lazy(() => import('./pages/AboutUsScreen.jsx'));
+const ContactScreen = lazy(() => import('./pages/ContactScreen.jsx'));
+const FAQScreen = lazy(() => import('./pages/FAQScreen.jsx'));
+const PrivacyScreen = lazy(() => import('./pages/PrivacyScreen.jsx'));
+const ShippingPolicyScreen = lazy(() => import('./pages/ShippingPolicyScreen.jsx'));
+const NotFoundScreen = lazy(() => import('./pages/NotFoundScreen.jsx'));
+const MenuScreen = lazy(() => import('./pages/MenuScreen.jsx'));
+const TrackOrderScreen = lazy(() => import('./pages/TrackOrderScreen.jsx'));
+const BlogScreen = lazy(() => import('./pages/BlogScreen.jsx'));
+const BlogDetailScreen = lazy(() => import('./pages/BlogDetailScreen.jsx'));
+const ReturnPolicyScreen = lazy(() => import('./pages/ReturnPolicyScreen.jsx'));
+const TermsScreen = lazy(() => import('./pages/TermsScreen.jsx'));
 
 // Admin Screens
-import OrderListScreen from './pages/admin/OrderListScreen.jsx';
-import ProductListScreen from './pages/admin/ProductListScreen.jsx';
-import ProductEditScreen from './pages/admin/ProductEditScreen.jsx';
-import AdminDashboardScreen from './pages/admin/AdminDashboardScreen.jsx';
-import UserListScreen from './pages/admin/UserListScreen.jsx';
-import UserEditScreen from './pages/admin/UserEditScreen.jsx';
-import AdminProfileScreen from './pages/admin/AdminProfileScreen.jsx';
-import CategoryListScreen from './pages/admin/CategoryListScreen.jsx';
-import SettingsScreen from './pages/admin/SettingsScreen.jsx';
-import ContactListScreen from './pages/admin/ContactListScreen.jsx';
-import ReviewListScreen from './pages/admin/ReviewListScreen.jsx';
+const OrderListScreen = lazy(() => import('./pages/admin/OrderListScreen.jsx'));
+const ProductListScreen = lazy(() => import('./pages/admin/ProductListScreen.jsx'));
+const ProductEditScreen = lazy(() => import('./pages/admin/ProductEditScreen.jsx'));
+const AdminDashboardScreen = lazy(() => import('./pages/admin/AdminDashboardScreen.jsx'));
+const UserListScreen = lazy(() => import('./pages/admin/UserListScreen.jsx'));
+const UserEditScreen = lazy(() => import('./pages/admin/UserEditScreen.jsx'));
+const AdminProfileScreen = lazy(() => import('./pages/admin/AdminProfileScreen.jsx'));
+const CategoryListScreen = lazy(() => import('./pages/admin/CategoryListScreen.jsx'));
+const SettingsScreen = lazy(() => import('./pages/admin/SettingsScreen.jsx'));
+const ContactListScreen = lazy(() => import('./pages/admin/ContactListScreen.jsx'));
+const ReviewListScreen = lazy(() => import('./pages/admin/ReviewListScreen.jsx'));
 
 // Route Components
 import PrivateRoute from './components/PrivateRoute.jsx';
 import AdminRoute from './components/AdminRoute.jsx';
 import AdminLayout from './components/AdminLayout.jsx';
-import ReturnPolicyScreen from './pages/ReturnPolicyScreen.jsx';
-import TermsScreen from './pages/TermsScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

@@ -65,8 +65,10 @@ const Header = () => {
               <img src={settings.logo} alt="Logo" className="h-12 md:h-16 w-auto object-contain" />
             ) : (
               <img
-                src="/biharwalatastelogo.png"
+                src="/biharwalatastelogo.webp"
                 alt="Bihar wala taste Logo"
+                width="160"
+                height="80"
                 className="h-12 md:h-20 w-auto object-contain hover:scale-105 transition-transform"
               />
             )}

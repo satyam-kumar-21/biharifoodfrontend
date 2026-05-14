@@ -60,7 +60,14 @@ const Hero = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             className="absolute top-0 left-0 w-[70%] lg:w-[65%] h-[65%] lg:h-[70%] rounded-[30px] sm:rounded-[50px] overflow-hidden shadow-2xl z-20 border-4 sm:border-8 border-white"
           >
-            <img src="/thekua.png" alt="Bihari Thekua" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
+            <img 
+              src="/thekua.webp" 
+              alt="Bihari Thekua" 
+              width="800"
+              height="800"
+              fetchpriority="high"
+              className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" 
+            />
           </motion.div>
 
           {/* Secondary Image - Bottom Right */}
@@ -70,7 +77,13 @@ const Hero = () => {
             transition={{ delay: 0.3 }}
             className="absolute bottom-2 sm:bottom-4 right-0 w-[65%] lg:w-[60%] h-[55%] lg:h-[50%] rounded-[30px] sm:rounded-[50px] overflow-hidden shadow-xl z-10 border-4 sm:border-8 border-white"
           >
-            <img src="/nimki.png" alt="Bihari Nimki" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
+            <img 
+              src="/nimki.webp" 
+              alt="Bihari Nimki" 
+              width="600"
+              height="600"
+              className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" 
+            />
           </motion.div>
 
           {/* Small Decorative Image - Top Right */}
@@ -80,7 +93,13 @@ const Hero = () => {
             transition={{ delay: 0.5 }}
             className="absolute top-4 sm:top-10 right-2 sm:right-4 w-[40%] lg:w-[35%] h-[35%] lg:h-[30%] rounded-[25px] sm:rounded-[40px] overflow-hidden shadow-lg z-30 border-2 sm:border-4 border-white"
           >
-            <img src="/gujiya.png" alt="Bihari Gujiya" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
+            <img 
+              src="/gujiya.webp" 
+              alt="Bihari Gujiya" 
+              width="400"
+              height="400"
+              className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" 
+            />
           </motion.div>
 
           {/* Badge Decor */}
