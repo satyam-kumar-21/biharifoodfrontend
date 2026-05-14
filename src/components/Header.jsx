@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
 import { resetCart } from '../slices/cartSlice';
-import { ShoppingCart, User, Menu, X, ChevronDown } from 'lucide-react';
+import { ShoppingCart, User, Menu, X, ChevronDown, MessageCircle } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -33,11 +33,28 @@ const Header = () => {
     }
   };
 
+  const whatsappPhone = settings?.phone?.replace(/\D/g, '') || '919876543210';
+  const whatsappMsg = encodeURIComponent('Hi! I want to place an order from Bihar wala taste. Please help me.');
+  const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${whatsappMsg}`;
+
   return (
     <>
-      {/* Announcement Bar - Scrolls away */}
-      <div className="bg-primary text-white py-2 text-center text-[10px] md:text-xs font-black uppercase tracking-[0.2em] relative z-40">
-        ✨ Free Shipping on orders above ₹999 | COD Available ✨
+      {/* Announcement Bar */}
+      <div className="bg-primary text-white relative z-40">
+        <div className="container mx-auto px-4 py-1.5 flex flex-col sm:flex-row items-center justify-between gap-1">
+          <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.15em] text-center sm:text-left">
+            ✨ Free Shipping on orders above ₹999 | COD Available ✨
+          </span>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 bg-green-500 hover:bg-green-400 transition-colors text-white text-[10px] md:text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full whitespace-nowrap"
+          >
+            <MessageCircle size={12} className="shrink-0" />
+            Order on WhatsApp
+          </a>
+        </div>
       </div>
 
       <header className="sticky top-0 z-50 bg-white shadow-md">
@@ -48,8 +65,8 @@ const Header = () => {
               <img src={settings.logo} alt="Logo" className="h-12 md:h-16 w-auto object-contain" />
             ) : (
               <img
-                src="/kitchenbiharkalogo2.png"
-                alt="Kitchen Bihar Ka Logo"
+                src="/biharwalatastelogo.png"
+                alt="Bihar wala taste Logo"
                 className="h-12 md:h-20 w-auto object-contain hover:scale-105 transition-transform"
               />
             )}
@@ -231,3 +248,4 @@ const Header = () => {
 };
 
 export default Header;
+

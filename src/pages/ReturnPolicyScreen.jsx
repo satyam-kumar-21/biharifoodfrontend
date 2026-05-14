@@ -1,4 +1,4 @@
-import PolicyScreen from '../components/PolicyScreen';
+﻿import PolicyScreen from '../components/PolicyScreen';
 import { useGetSettingsQuery } from '../slices/settingsApiSlice';
 
 const ReturnPolicyScreen = () => {
@@ -6,7 +6,7 @@ const ReturnPolicyScreen = () => {
 
   const content = (
     <div className="space-y-8">
-      <p className="text-lg text-gray-600">At Kitchen Bihar Ka, we take pride in the quality of our products. As we deal in food items, our return and refund policy is designed with customer hygiene and safety in mind.</p>
+      <p className="text-lg text-gray-600">At Bihar wala taste, we take pride in the quality of our products. As we deal in food items, our return and refund policy is designed with customer hygiene and safety in mind.</p>
       
       <section className="space-y-4">
         <h3 className="text-2xl font-bold text-primary">1. Return Policy</h3>
@@ -47,7 +47,7 @@ const ReturnPolicyScreen = () => {
         <h3 className="text-2xl font-bold text-primary">Need Help?</h3>
         <p>For any questions related to refunds or returns, please contact us:</p>
         <div className="space-y-2 font-bold text-gray-700">
-          <p>Email: {settings?.email || 'contact@kitchenbiharka.com'}</p>
+          <p>Email: {settings?.email || 'contact@BiharWalaTaste.com'}</p>
           <p>Phone: {settings?.phone || '+91 98765 43210'}</p>
         </div>
       </section>
@@ -58,3 +58,4 @@ const ReturnPolicyScreen = () => {
 };
 
 export default ReturnPolicyScreen;
+

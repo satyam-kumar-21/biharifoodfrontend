@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { blogData } from '../data/blogData';
 import { motion } from 'framer-motion';
 import { Calendar, User, ArrowRight } from 'lucide-react';
@@ -8,7 +8,7 @@ const BlogScreen = () => {
   return (
     <div className="space-y-12 pb-20">
       <Meta 
-        title="Bihari Food Blog - Kitchen Bihar Ka" 
+        title="Bihari Food Blog - Bihar wala taste" 
         description="Read about the rich culinary heritage of Bihar. From recipes to history, explore the world of authentic Bihari food through our blog."
         keywords="Bihari food blog, Thekua recipe, Litti Chokha history, Sattu benefits, Bihari food culture, traditional Indian recipes"
       />
@@ -74,3 +74,4 @@ const BlogScreen = () => {
 };
 
 export default BlogScreen;
+

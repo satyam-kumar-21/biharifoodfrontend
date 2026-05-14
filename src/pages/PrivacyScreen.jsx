@@ -1,4 +1,4 @@
-import PolicyScreen from '../components/PolicyScreen';
+﻿import PolicyScreen from '../components/PolicyScreen';
 import { useGetSettingsQuery } from '../slices/settingsApiSlice';
 
 const PrivacyScreen = () => {
@@ -6,7 +6,7 @@ const PrivacyScreen = () => {
 
   const content = (
     <div className="space-y-8">
-      <p className="text-lg text-gray-600">At Kitchen Bihar Ka, we value your privacy. This policy explains how we collect, use, and protect your personal information when you visit our website.</p>
+      <p className="text-lg text-gray-600">At Bihar wala taste, we value your privacy. This policy explains how we collect, use, and protect your personal information when you visit our website.</p>
       
       <section className="space-y-4">
         <h3 className="text-2xl font-bold text-primary">1. Information Collection</h3>
@@ -49,7 +49,7 @@ const PrivacyScreen = () => {
         <h3 className="text-2xl font-bold text-primary">Contact Us</h3>
         <p>If you have any questions regarding this privacy policy, you may contact us using the information below:</p>
         <div className="space-y-2 font-bold text-gray-700">
-          <p>Email: {settings?.email || 'contact@kitchenbiharka.com'}</p>
+          <p>Email: {settings?.email || 'contact@BiharWalaTaste.com'}</p>
           <p>Phone: {settings?.phone || '+91 98765 43210'}</p>
           <p>Address: {settings?.address || 'Bihar, India'}</p>
         </div>
@@ -61,3 +61,4 @@ const PrivacyScreen = () => {
 };
 
 export default PrivacyScreen;
+

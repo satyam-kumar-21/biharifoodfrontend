@@ -1,4 +1,4 @@
-export const blogData = [
+﻿export const blogData = [
   {
     id: '1',
     title: 'The Art of Making Perfect Thekua',
@@ -19,7 +19,7 @@ export const blogData = [
       </ul>
 
       <h3>The Traditional Method</h3>
-      <p>The secret to a perfect Thekua is the 'Moyan' - the amount of ghee mixed with the flour before adding the jaggery syrup. The dough should be stiff, not soft. At Kitchen Bihar Ka, we still use traditional wooden molds (Sancha) to give each Thekua its iconic leaf pattern.</p>
+      <p>The secret to a perfect Thekua is the 'Moyan' - the amount of ghee mixed with the flour before adding the jaggery syrup. The dough should be stiff, not soft. At Bihar wala taste, we still use traditional wooden molds (Sancha) to give each Thekua its iconic leaf pattern.</p>
       
       <p>Stay tuned for more recipes from the heart of Bihar!</p>
     `
@@ -66,3 +66,4 @@ export const blogData = [
     `
   }
 ];
+

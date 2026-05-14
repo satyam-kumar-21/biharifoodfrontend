@@ -1,4 +1,4 @@
-import PolicyScreen from '../components/PolicyScreen';
+﻿import PolicyScreen from '../components/PolicyScreen';
 import { useGetSettingsQuery } from '../slices/settingsApiSlice';
 
 const TermsScreen = () => {
@@ -6,7 +6,7 @@ const TermsScreen = () => {
 
   const content = (
     <div className="space-y-8">
-      <p className="text-lg text-gray-600">By using the Kitchen Bihar Ka website, you agree to the following terms and conditions. Please read them carefully.</p>
+      <p className="text-lg text-gray-600">By using the Bihar wala taste website, you agree to the following terms and conditions. Please read them carefully.</p>
       
       <section className="space-y-4">
         <h3 className="text-2xl font-bold text-primary">1. Terms of Use</h3>
@@ -30,7 +30,7 @@ const TermsScreen = () => {
 
       <section className="space-y-4">
         <h3 className="text-2xl font-bold text-primary">5. Intellectual Property</h3>
-        <p>All logos, images, graphics, and text available on the website are the property of "Kitchen Bihar Ka" and are protected by copyright laws.</p>
+        <p>All logos, images, graphics, and text available on the website are the property of "Bihar wala taste" and are protected by copyright laws.</p>
       </section>
 
       <section className="space-y-4">
@@ -47,7 +47,7 @@ const TermsScreen = () => {
         <h3 className="text-2xl font-bold text-primary">Contact Information</h3>
         <p>For any clarification regarding these terms and conditions, please contact us:</p>
         <div className="space-y-2 font-bold text-gray-700">
-          <p>Email: {settings?.email || 'contact@kitchenbiharka.com'}</p>
+          <p>Email: {settings?.email || 'contact@BiharWalaTaste.com'}</p>
           <p>Phone: {settings?.phone || '+91 98765 43210'}</p>
           <p>Address: {settings?.address || 'Bihar, India'}</p>
         </div>
@@ -59,3 +59,4 @@ const TermsScreen = () => {
 };
 
 export default TermsScreen;
+

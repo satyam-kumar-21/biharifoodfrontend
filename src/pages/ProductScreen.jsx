@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
@@ -66,11 +66,11 @@ const ProductScreen = () => {
       ) : (
         <>
           <Meta
-            title={`${product.name} - Kitchen Bihar Ka`}
+            title={`${product.name} - Bihar wala taste`}
             description={product.shortDescription ? product.shortDescription.replace(/<[^>]*>?/gm, '') : `Buy authentic ${product.name} online. Hand-crafted in Bihar with traditional recipes.`}
-            keywords={`${product.name}, buy ${product.name} online, Bihari ${product.category}, authentic Bihari food, Kitchen Bihar Ka, Bihar sweets`}
-            url={`https://kitchenbiharka.com/product/${product._id}`}
-            image={product.images && product.images.length > 0 ? product.images[0].url : '/kitchenbiharkalogo2.png'}
+            keywords={`${product.name}, buy ${product.name} online, Bihari ${product.category}, authentic Bihari food, Bihar wala taste, Bihar sweets`}
+            url={`https://BiharWalaTaste.com/product/${product._id}`}
+            image={product.images && product.images.length > 0 ? product.images[0].url : '/biharwalatastelogo.png'}
             type="product"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -341,3 +341,4 @@ const ProductScreen = () => {
 };
 
 export default ProductScreen;
+

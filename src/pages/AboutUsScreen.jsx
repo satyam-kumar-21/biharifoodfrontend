@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+﻿import { motion } from 'framer-motion';
 import { Heart, Globe, Users, ShieldCheck } from 'lucide-react';
 import Meta from '../components/Meta';
 
@@ -6,9 +6,9 @@ const AboutUsScreen = () => {
   return (
     <>
       <Meta 
-        title="Our Story - Kitchen Bihar Ka" 
+        title="Our Story - Bihar wala taste" 
         description="Learn about our mission to bring the authentic taste of Bihar's heritage to your doorstep. We support local women artisans and preserve traditional recipes."
-        keywords="about Kitchen Bihar Ka, Bihari food culture, traditional Bihari recipes, support local artisans Bihar, women empowerment Bihar, authentic Bihari taste"
+        keywords="about Bihar wala taste, Bihari food culture, traditional Bihari recipes, support local artisans Bihar, women empowerment Bihar, authentic Bihari taste"
       />
       <div className="space-y-24 pb-20">
         {/* Hero Section */}
@@ -46,7 +46,7 @@ const AboutUsScreen = () => {
             </h2>
             <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
               <p>
-                Kitchen Bihar Ka was born out of a simple longing—the longing for the authentic, unadulterated flavors of home. We realized that while Bihari cuisine is rich in variety and nutrition, it's often hard to find the genuine taste outside the village borders.
+                Bihar wala taste was born out of a simple longing—the longing for the authentic, unadulterated flavors of home. We realized that while Bihari cuisine is rich in variety and nutrition, it's often hard to find the genuine taste outside the village borders.
               </p>
               <p>
                 Founded in 2024, our mission is to preserve the traditional recipes of our grandmothers and provide sustainable livelihoods to local artisans and women's self-help groups across Bihar.
@@ -182,3 +182,4 @@ const AboutUsScreen = () => {
 };
 
 export default AboutUsScreen;
+

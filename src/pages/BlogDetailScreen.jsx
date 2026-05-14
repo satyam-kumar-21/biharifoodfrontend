@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+﻿import { useParams, Link } from 'react-router-dom';
 import { blogData } from '../data/blogData';
 import { ArrowLeft, Calendar, User, Share2 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -20,10 +20,10 @@ const BlogDetailScreen = () => {
   return (
     <div className="max-w-4xl mx-auto space-y-12 pb-20">
       <Meta 
-        title={`${blog.title} - Kitchen Bihar Ka`} 
-        description={blog.brief || `Read about ${blog.title} on Kitchen Bihar Ka. Explore the rich culinary heritage of Bihar.`}
-        keywords={`${blog.title}, Bihari food, Bihar culture, authentic recipes, Kitchen Bihar Ka, Bihar sweets, Thekua, Gujiya`}
-        url={`https://kitchenbiharka.com/blog/${blog.id}`}
+        title={`${blog.title} - Bihar wala taste`} 
+        description={blog.brief || `Read about ${blog.title} on Bihar wala taste. Explore the rich culinary heritage of Bihar.`}
+        keywords={`${blog.title}, Bihari food, Bihar culture, authentic recipes, Bihar wala taste, Bihar sweets, Thekua, Gujiya`}
+        url={`https://BiharWalaTaste.com/blog/${blog.id}`}
         image={blog.image}
         type="article"
       />
@@ -99,3 +99,4 @@ const BlogDetailScreen = () => {
 };
 
 export default BlogDetailScreen;
+

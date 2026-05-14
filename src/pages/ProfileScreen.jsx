@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { useProfileMutation } from '../slices/usersApiSlice';
@@ -51,7 +51,7 @@ const ProfileScreen = () => {
 
   return (
     <div className="max-w-6xl mx-auto space-y-12 pb-8">
-      <Meta title={`${userInfo.name}'s Profile - Kitchen Bihar Ka`} />
+      <Meta title={`${userInfo.name}'s Profile - Bihar wala taste`} />
       
       <div className="text-center space-y-4">
         <h1 className="text-4xl md:text-6xl font-bold font-hindi text-primary">My Account</h1>
@@ -237,3 +237,4 @@ const ProfileScreen = () => {
 };
 
 export default ProfileScreen;
+

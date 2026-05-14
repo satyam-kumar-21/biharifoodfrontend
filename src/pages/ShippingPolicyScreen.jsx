@@ -1,4 +1,4 @@
-import PolicyScreen from '../components/PolicyScreen';
+﻿import PolicyScreen from '../components/PolicyScreen';
 import { useGetSettingsQuery } from '../slices/settingsApiSlice';
 
 const ShippingPolicyScreen = () => {
@@ -6,7 +6,7 @@ const ShippingPolicyScreen = () => {
 
   const content = (
     <div className="space-y-8">
-      <p className="text-lg text-gray-600">At Kitchen Bihar Ka, we are committed to delivering your favorite Bihari flavors safely and on time to your doorstep.</p>
+      <p className="text-lg text-gray-600">At Bihar wala taste, we are committed to delivering your favorite Bihari flavors safely and on time to your doorstep.</p>
       
       <section className="space-y-4">
         <h3 className="text-2xl font-bold text-primary">1. Processing Time</h3>
@@ -43,7 +43,7 @@ const ShippingPolicyScreen = () => {
         <h3 className="text-2xl font-bold text-primary">Shipping Assistance</h3>
         <p>If you have any questions regarding the shipping of your order, please contact us:</p>
         <div className="space-y-2 font-bold text-gray-700">
-          <p>Email: {settings?.email || 'contact@kitchenbiharka.com'}</p>
+          <p>Email: {settings?.email || 'contact@BiharWalaTaste.com'}</p>
           <p>Phone: {settings?.phone || '+91 98765 43210'}</p>
         </div>
       </section>
@@ -54,3 +54,4 @@ const ShippingPolicyScreen = () => {
 };
 
 export default ShippingPolicyScreen;
+

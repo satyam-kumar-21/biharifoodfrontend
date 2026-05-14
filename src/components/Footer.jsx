@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 
@@ -17,8 +17,8 @@ const Footer = () => {
             <img src={settings.logo} alt="Logo" className="h-12 w-auto object-contain" />
           ) : (
             <img
-              src="/kitchenbiharkalogo2.png"
-              alt="Kitchen Bihar Ka Logo"
+              src="/biharwalatastelogo.png"
+              alt="Bihar wala taste Logo"
               className="h-14 w-auto object-contain"
             />
           )}
@@ -78,16 +78,17 @@ const Footer = () => {
           </div>
           <div className="flex items-center gap-3">
             <Mail className="text-secondary shrink-0" />
-            <p>{settings?.email || 'contact@kitchenbiharka.com'}</p>
+            <p>{settings?.email || 'contact@BiharWalaTaste.com'}</p>
           </div>
         </div>
       </div>
 
       <div className="border-t border-primary-light mt-16 pt-8 text-center text-gray-300">
-        <p>© {currentYear} Kitchen Bihar Ka. All rights reserved.</p>
+        <p>© {currentYear} Bihar wala taste. All rights reserved.</p>
       </div>
     </footer>
   );
 };
 
 export default Footer;
+

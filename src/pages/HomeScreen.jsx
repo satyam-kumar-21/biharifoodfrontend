@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { Heart, Truck, Users } from 'lucide-react';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
 import ProductCard from '../components/ProductCard';
@@ -47,7 +47,7 @@ const HomeScreen = () => {
       <section className="bg-white rounded-[60px] p-12 md:p-24 shadow-sm border border-gray-100 mx-4">
         <div className="text-center mb-16 space-y-4">
           <h2 className="text-3xl md:text-5xl font-bold font-hindi text-primary">The Village Promise</h2>
-          <p className="text-gray-500 max-w-2xl mx-auto italic">Why thousands of families across India trust Kitchen Bihar Ka for their traditional delicacies.</p>
+          <p className="text-gray-500 max-w-2xl mx-auto italic">Why thousands of families across India trust Bihar wala taste for their traditional delicacies.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
           <div className="space-y-6 group">
@@ -124,3 +124,4 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
+
