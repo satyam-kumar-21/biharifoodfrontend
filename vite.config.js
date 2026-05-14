@@ -23,7 +23,21 @@ export default defineConfig(({ mode }) => {
           blogs: resolve(__dirname, 'blogs.html'),
           faq: resolve(__dirname, 'faq.html'),
         },
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              if (id.includes('react') || id.includes('redux') || id.includes('axios')) {
+                return 'vendor';
+              }
+              if (id.includes('framer-motion') || id.includes('lucide-react')) {
+                return 'ui';
+              }
+              return 'vendor';
+            }
+          }
+        }
       },
+      chunkSizeWarningLimit: 1000,
     },
   }
 })
