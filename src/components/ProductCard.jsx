@@ -5,19 +5,14 @@ import { ShoppingCart, Eye } from 'lucide-react';
 const ProductCard = ({ product }) => {
   const getFirstSentence = (html) => {
     if (!html) return "Authentic village taste, made with traditional recipes.";
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    const text = (doc.body.textContent || "").trim();
+    
+    // Strip HTML tags using regex (faster than DOMParser in a loop)
+    const text = html.replace(/<[^>]*>/g, '').trim();
     
     // Match everything up to the first Hindi Purna Viram (।) or English period (.)
-    // and include any immediately following closing quotes/brackets
     const match = text.match(/.*?[।.][”"']?/);
     
-    if (match) {
-      return match[0];
-    }
-    
-    // Fallback if no full stop is found
-    return text || "Authentic village taste, made with traditional recipes.";
+    return match ? match[0] : (text.slice(0, 100) + (text.length > 100 ? "..." : ""));
   };
 
   return (

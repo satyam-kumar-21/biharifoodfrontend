@@ -26,11 +26,17 @@ export default defineConfig(({ mode }) => {
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {
+              if (id.includes('react-quill-new')) {
+                return 'editor';
+              }
+              if (id.includes('framer-motion')) {
+                return 'motion';
+              }
+              if (id.includes('lucide-react')) {
+                return 'icons';
+              }
               if (id.includes('react') || id.includes('redux') || id.includes('axios')) {
                 return 'vendor';
-              }
-              if (id.includes('framer-motion') || id.includes('lucide-react')) {
-                return 'ui';
               }
               return 'vendor';
             }

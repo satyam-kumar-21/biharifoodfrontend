@@ -173,10 +173,10 @@ const Header = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="absolute top-full left-0 w-full bg-white z-40 flex flex-col p-6 gap-6 md:hidden overflow-hidden border-t border-gray-100 shadow-xl"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="absolute top-full left-0 w-full bg-white z-40 flex flex-col p-6 gap-6 md:hidden border-t border-gray-100 shadow-xl"
             >
               <Link
                 to="/"

@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
 import ProductCard from '../components/ProductCard';
 import Loader from '../components/Loader';
@@ -78,14 +78,12 @@ const MenuScreen = () => {
               </motion.div>
             ) : (
               <motion.div 
-                layout
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
               >
                 <AnimatePresence mode='popLayout'>
                   {data.products.map((product) => (
                     <motion.div
                       key={product._id}
-                      layout
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.9 }}

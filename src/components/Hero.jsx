@@ -66,6 +66,7 @@ const Hero = () => {
               width="800"
               height="800"
               fetchpriority="high"
+              decoding="async"
               className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" 
             />
           </motion.div>
@@ -82,6 +83,8 @@ const Hero = () => {
               alt="Bihari Nimki" 
               width="600"
               height="600"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" 
             />
           </motion.div>
@@ -98,6 +101,8 @@ const Hero = () => {
               alt="Bihari Gujiya" 
               width="400"
               height="400"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" 
             />
           </motion.div>

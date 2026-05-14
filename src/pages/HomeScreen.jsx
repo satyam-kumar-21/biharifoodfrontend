@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Heart, Truck, Users } from 'lucide-react';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
 import ProductCard from '../components/ProductCard';
@@ -41,6 +41,52 @@ const HomeScreen = () => {
             ))}
           </div>
         )}
+      </section>
+
+      {/* Heritage Section */}
+      <section className="relative overflow-hidden bg-village-dark/5 py-24 mx-4 rounded-[60px]">
+        <div className="container mx-auto px-8 lg:px-20">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <div className="w-full lg:w-1/2 space-y-8">
+              <div className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-black uppercase tracking-[0.2em]">
+                Heritage & Tradition
+              </div>
+              <h2 className="text-4xl md:text-6xl font-bold font-hindi text-primary leading-tight">
+                A Taste of Bihar's <br /> <span className="text-accent">Rich History</span>
+              </h2>
+              <div className="space-y-6 text-gray-700 leading-relaxed text-lg italic font-medium opacity-90">
+                <p>
+                  Bihar is not just a place; it's a legacy of flavors that have survived centuries. From the ancient kitchens of Magadh to the vibrant streets of modern Patna, the <strong>best Bihari food</strong> has always been about purity and patience.
+                </p>
+                <p>
+                  Our <strong>traditional Bihari snacks</strong> like the crunchy <strong>Thekua</strong>, savory <strong>Nimki</strong>, and the winter-special <strong>Tilkut</strong> are more than just food—they are stories of our grandmother's love. We preserve this <strong>history of Bihar</strong> by using stone-ground flour and organic jaggery, just as it was done in the villages.
+                </p>
+                <p>
+                  Whether it's the legendary <strong>Deoghar Peda</strong> or the crispy <strong>Khaja from Silao</strong>, we bring you the authentic taste that defines the true essence of Bihar.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-4 pt-4">
+                <Link to="/about-us" className="village-button-primary">Learn Our Story</Link>
+                <Link to="/menu" className="village-button-secondary">Explore Menu</Link>
+              </div>
+            </div>
+            <div className="w-full lg:w-1/2 relative group">
+              <div className="absolute inset-0 bg-primary/10 rounded-[40px] rotate-3 group-hover:rotate-1 transition-transform"></div>
+              <img 
+                src="/bihar_heritage_food_collage_1778801813577.png" 
+                alt="Bihari Food Heritage" 
+                className="relative rounded-[40px] shadow-2xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 w-full h-[500px] object-cover"
+              />
+              {/* Floating badges */}
+              <div className="absolute -top-6 -right-6 bg-white p-6 rounded-full shadow-xl border border-village hidden md:block animate-bounce">
+                <span className="text-2xl">🍯</span>
+              </div>
+              <div className="absolute -bottom-6 -left-6 bg-white px-6 py-3 rounded-2xl shadow-xl border border-village hidden md:block">
+                <p className="text-primary font-black text-sm uppercase tracking-widest">100% Authentic</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Why Choose Us */}
