@@ -161,10 +161,10 @@ const Header = () => {
 
             {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden p-2 text-gray-700"
+              className="md:hidden p-1.5 text-gray-700"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </nav>

@@ -42,7 +42,7 @@ const ScrollToTop = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.5, y: 20 }}
             onClick={scrollToTop}
-            className="p-4 bg-primary text-white rounded-full shadow-2xl hover:bg-primary-dark transition-all duration-300 group ring-4 ring-village/50"
+            className="p-4 bg-primary text-white rounded-full shadow-2xl hover:bg-primary-dark transition-all duration-300 group ring-2 ring-village/50"
             aria-label="Scroll to top"
           >
             <ChevronUp 

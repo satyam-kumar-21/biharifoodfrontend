@@ -73,9 +73,9 @@ const HomeScreen = () => {
             <div className="w-full lg:w-1/2 relative group">
               <div className="absolute inset-0 bg-primary/10 rounded-[40px] rotate-3 group-hover:rotate-1 transition-transform"></div>
               <img 
-                src="/bihar_heritage_food_collage_1778801813577.png" 
+                src="/heritage-collage.png" 
                 alt="Bihari Food Heritage" 
-                className="relative rounded-[40px] shadow-2xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 w-full h-[500px] object-cover"
+                className="relative rounded-[40px] shadow-2xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 w-full h-[300px] md:h-[500px] object-cover"
               />
               {/* Floating badges */}
               <div className="absolute -top-6 -right-6 bg-white p-6 rounded-full shadow-xl border border-village hidden md:block animate-bounce">

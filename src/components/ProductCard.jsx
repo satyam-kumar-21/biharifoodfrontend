@@ -7,7 +7,7 @@ const ProductCard = ({ product }) => {
     if (!html) return "Authentic village taste, made with traditional recipes.";
     
     // Strip HTML tags using regex (faster than DOMParser in a loop)
-    const text = html.replace(/<[^>]*>/g, '').trim();
+    const text = html.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"').trim();
     
     // Match everything up to the first Hindi Purna Viram (।) or English period (.)
     const match = text.match(/.*?[।.][”"']?/);
