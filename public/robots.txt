@@ -1,0 +1,20 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow indexing of private and admin routes
+Disallow: /admin/
+Disallow: /profile
+Disallow: /order/
+Disallow: /shipping
+Disallow: /payment
+Disallow: /placeorder
+Disallow: /cart
+Disallow: /login
+Disallow: /register
+
+# Host
+Host: https://biharwalataste.com
+
+# Sitemaps
+Sitemap: https://biharwalataste.com/sitemap.xml

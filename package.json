@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node create-subdirs.cjs",
+    "sitemap": "node generate-sitemap.cjs",
+    "build": "vite build && node generate-sitemap.cjs && node create-subdirs.cjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
