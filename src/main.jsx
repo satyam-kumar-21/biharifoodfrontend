@@ -18,6 +18,7 @@ const ProductScreen = lazy(() => import('./pages/ProductScreen.jsx'));
 const CartScreen = lazy(() => import('./pages/CartScreen.jsx'));
 const LoginScreen = lazy(() => import('./pages/LoginScreen.jsx'));
 const RegisterScreen = lazy(() => import('./pages/RegisterScreen.jsx'));
+const ForgotPasswordScreen = lazy(() => import('./pages/ForgotPasswordScreen.jsx'));
 const ShippingScreen = lazy(() => import('./pages/ShippingScreen.jsx'));
 const PaymentScreen = lazy(() => import('./pages/PaymentScreen.jsx'));
 const PlaceOrderScreen = lazy(() => import('./pages/PlaceOrderScreen.jsx'));
@@ -63,6 +64,7 @@ const router = createBrowserRouter(
       <Route path='/cart' element={<CartScreen />} />
       <Route path='/login' element={<LoginScreen />} />
       <Route path='/register' element={<RegisterScreen />} />
+      <Route path='/forgot-password' element={<ForgotPasswordScreen />} />
       <Route path='/about-us' element={<AboutUsScreen />} />
       <Route path='/contact' element={<ContactScreen />} />
       <Route path='/faq' element={<FAQScreen />} />

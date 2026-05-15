@@ -27,6 +27,7 @@ const SettingsScreen = () => {
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [authMode, setAuthMode] = useState('mobile_otp');
 
   useEffect(() => {
     if (settings) {
@@ -36,6 +37,7 @@ const SettingsScreen = () => {
       setAddress(settings.address || '');
       setEmail(settings.email || '');
       setPhone(settings.phone || '');
+      setAuthMode(settings.authMode || 'mobile_otp');
     }
   }, [settings]);
 
@@ -60,7 +62,8 @@ const SettingsScreen = () => {
         logo, 
         address, 
         email, 
-        phone 
+        phone,
+        authMode
       }).unwrap();
       toast.success('Settings updated successfully');
       refetch();
@@ -167,7 +170,55 @@ const SettingsScreen = () => {
               </div>
             </div>
 
-            {/* Payment Methods Section */}
+            {/* Authentication Mode Section */}
+            <div className="p-8 md:p-12 space-y-8">
+              <h2 className="text-xl font-black uppercase tracking-widest text-gray-400 flex items-center gap-2">
+                <SettingsIcon size={20} /> Authentication Method
+              </h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div 
+                  className={`p-6 rounded-3xl border-2 transition-all cursor-pointer flex flex-col gap-4 ${authMode === 'mobile_otp' ? 'border-primary bg-primary/5' : 'border-gray-100 bg-gray-50'}`}
+                  onClick={() => setAuthMode('mobile_otp')}
+                >
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${authMode === 'mobile_otp' ? 'bg-primary text-white shadow-lg' : 'bg-white text-gray-400'}`}>
+                    <Phone size={24} />
+                  </div>
+                  <div>
+                    <p className="font-bold text-lg">Mobile OTP</p>
+                    <p className="text-xs text-gray-500">Fastest login via MSG91 SMS</p>
+                  </div>
+                </div>
+
+                <div 
+                  className={`p-6 rounded-3xl border-2 transition-all cursor-pointer flex flex-col gap-4 ${authMode === 'mobile_password' ? 'border-primary bg-primary/5' : 'border-gray-100 bg-gray-50'}`}
+                  onClick={() => setAuthMode('mobile_password')}
+                >
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${authMode === 'mobile_password' ? 'bg-primary text-white shadow-lg' : 'bg-white text-gray-400'}`}>
+                    <Store size={24} />
+                  </div>
+                  <div>
+                    <p className="font-bold text-lg">Mobile + Password</p>
+                    <p className="text-xs text-gray-500">Standard mobile registration</p>
+                  </div>
+                </div>
+
+                <div 
+                  className={`p-6 rounded-3xl border-2 transition-all cursor-pointer flex flex-col gap-4 ${authMode === 'email_password_otp' ? 'border-primary bg-primary/5' : 'border-gray-100 bg-gray-50'}`}
+                  onClick={() => setAuthMode('email_password_otp')}
+                >
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${authMode === 'email_password_otp' ? 'bg-primary text-white shadow-lg' : 'bg-white text-gray-400'}`}>
+                    <Mail size={24} />
+                  </div>
+                  <div>
+                    <p className="font-bold text-lg">Email + Password</p>
+                    <p className="text-xs text-gray-500">OTP via Brevo for signup only</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+             {/* Payment Methods Section */}
             <div className="p-8 md:p-12 space-y-8">
               <h2 className="text-xl font-black uppercase tracking-widest text-gray-400 flex items-center gap-2">
                 <CreditCard size={20} /> Payment Gateways

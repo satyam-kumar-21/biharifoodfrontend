@@ -7,7 +7,6 @@ export const settingsApiSlice = apiSlice.injectEndpoints({
         url: '/api/settings',
       }),
       providesTags: ['Settings'],
-      keepUnusedDataFor: 5,
     }),
     updateSettings: builder.mutation({
       query: (data) => ({
