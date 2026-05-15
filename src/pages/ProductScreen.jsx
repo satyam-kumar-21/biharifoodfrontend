@@ -10,6 +10,7 @@ import Message from '../components/Message';
 import Meta from '../components/Meta';
 import { ShoppingCart, Plus, Minus, ShieldCheck, Truck, MessageCircle } from 'lucide-react';
 import { useGetSettingsQuery } from '../slices/settingsApiSlice';
+import { getOptimizedImage } from '../utils/imageUtils';
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
@@ -96,7 +97,7 @@ const ProductScreen = () => {
                     className={`min-w-[80px] w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden border-2 cursor-pointer transition-all flex-shrink-0 ${mainImage === img.url ? 'border-primary shadow-md scale-105' : 'border-village hover:border-gray-300'
                       }`}
                   >
-                    <img src={img.url} alt="" className="w-full h-full object-cover" />
+                    <img src={getOptimizedImage(img.url, 200)} alt="" className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>
@@ -104,7 +105,7 @@ const ProductScreen = () => {
               {/* Main Image */}
               <div className="flex-1 aspect-square rounded-3xl overflow-hidden shadow-2xl bg-white border border-gray-100 p-2">
                 <img
-                  src={mainImage}
+                  src={getOptimizedImage(mainImage, 800)}
                   alt={product.name}
                   className="w-full h-full object-contain rounded-2xl"
                 />

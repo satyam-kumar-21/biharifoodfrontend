@@ -6,6 +6,7 @@ import { resetCart } from '../slices/cartSlice';
 import { ShoppingCart, User, Menu, X, ChevronDown, MessageCircle } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { getOptimizedImage } from '../utils/imageUtils';
 
 import { useGetSettingsQuery } from '../slices/settingsApiSlice';
 
@@ -62,7 +63,13 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             {settings?.logo ? (
-              <img src={settings.logo} alt="Logo" className="h-12 md:h-16 w-auto object-contain" />
+              <img 
+                src={getOptimizedImage(settings.logo, 320)} 
+                alt="Logo" 
+                width="160"
+                height="80"
+                className="h-12 md:h-16 w-auto object-contain" 
+              />
             ) : (
               <img
                 src="/biharwalatastelogo.webp"

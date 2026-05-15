@@ -5,6 +5,7 @@ import { useGetSettingsQuery } from '../slices/settingsApiSlice';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../slices/cartSlice';
 import { toast } from 'react-hot-toast';
+import { getOptimizedImage } from '../utils/imageUtils';
 
 const ProductCard = ({ product }) => {
   const getFirstSentence = (html) => {
@@ -44,7 +45,7 @@ const ProductCard = ({ product }) => {
       {/* Image Section */}
       <Link to={`/product/${product._id}`} className="relative h-72 overflow-hidden block">
         <img
-          src={product.images[0]?.url}
+          src={getOptimizedImage(product.images[0]?.url, 400)}
           alt={product.name}
           width="400"
           height="300"
