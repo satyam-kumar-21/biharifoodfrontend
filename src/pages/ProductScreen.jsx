@@ -63,7 +63,9 @@ const ProductScreen = () => {
   };
 
   const whatsappPhone = settings?.phone?.replace(/\D/g, '') || '919876543210';
-  const whatsappMsg = encodeURIComponent(`Hi! I want to order "${product.name}" (Price: ₹${product.price}, Qty: ${qty}). Please help me.`);
+  const whatsappMsg = product
+    ? encodeURIComponent(`Hi! I want to order "${product.name}" (Price: ₹${product.price}, Qty: ${qty}). Please help me.`)
+    : '';
   const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${whatsappMsg}`;
 
   return (
