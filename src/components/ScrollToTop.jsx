@@ -9,7 +9,9 @@ const ScrollToTop = () => {
 
   // Scroll to top on route change
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (window.scrollY > 0) {
+      window.scrollTo(0, 0);
+    }
   }, [pathname]);
 
   // Handle visibility of the scroll button with throttling

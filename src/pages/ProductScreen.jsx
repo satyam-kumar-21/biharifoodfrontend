@@ -79,7 +79,7 @@ const ProductScreen = () => {
             title={`${product.name} - Bihar wala taste`}
             description={product.shortDescription ? product.shortDescription.replace(/<[^>]*>?/gm, '') : `Buy authentic ${product.name} online. Hand-crafted in Bihar with traditional recipes.`}
             keywords={`${product.name}, buy ${product.name} online, Bihari ${product.category}, authentic Bihari food, Bihar wala taste, Bihar sweets`}
-            url={`https://biharwalataste.com/product/${product._id}`}
+            url={`https://www.biharwalataste.com/product/${product._id}`}
             image={product.images && product.images.length > 0 ? product.images[0].url : '/biharwalatastelogo.png'}
             type="product"
           />

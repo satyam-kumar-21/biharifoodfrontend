@@ -81,8 +81,8 @@ const Hero = () => {
             <img 
               src="/nimki.webp" 
               alt="Bihari Nimki" 
-              width="400"
-              height="400"
+              width="320"
+              height="320"
               loading="lazy"
               decoding="async"
               className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" 
