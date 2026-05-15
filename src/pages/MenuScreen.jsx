@@ -21,8 +21,8 @@ const MenuScreen = () => {
         title="Our Menu - Traditional Bihari Snacks & Sweets | Bihar wala taste" 
         description="Browse our delicious collection of Bihari delicacies. From sweet Thekua and Khaja to savory Nimki and Sattu items, explore the best of Bihar's authentic flavors."
         keywords="Bihari snacks menu, order Thekua online, Bihari sweets list, Khaja price, Nimki snacks, authentic Bihari food delivery, Bihar sweets shop online"
-        url="https://BiharWalaTaste.com/menu"
-        image="/thekua.png"
+        url="https://biharwalataste.com/menu"
+        image="/thekua.webp"
       />
       {/* Header */}
       <div className="text-center space-y-6">

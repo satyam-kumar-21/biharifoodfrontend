@@ -70,23 +70,53 @@ const HomeScreen = () => {
                 <Link to="/menu" className="village-button-secondary">Explore Menu</Link>
               </div>
             </div>
-            <div className="w-full lg:w-1/2 relative group">
-              <div className="absolute inset-0 bg-primary/10 rounded-[40px] rotate-3 group-hover:rotate-1 transition-transform"></div>
-              <img 
-                src="/heritage-collage.png" 
-                alt="Bihari Food Heritage" 
-                loading="lazy"
-                decoding="async"
-                width="800"
-                height="500"
-                className="relative rounded-[40px] shadow-2xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover"
-              />
-              {/* Floating badges */}
-              <div className="absolute -top-6 -right-6 bg-white p-6 rounded-full shadow-xl border border-village hidden md:block animate-bounce">
-                <span className="text-2xl">🍯</span>
+            <div className="w-full lg:w-1/2 relative">
+              <div className="grid grid-cols-2 gap-4 h-[350px] sm:h-[450px] md:h-[550px]">
+                <div className="relative rounded-[32px] overflow-hidden shadow-xl rotate-1 hover:rotate-0 transition-transform duration-500 border-4 border-white">
+                  <img 
+                    src="/thekua.webp" 
+                    alt="Authentic Thekua" 
+                    loading="lazy"
+                    decoding="async"
+                    width="300"
+                    height="300"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="relative rounded-[32px] overflow-hidden shadow-xl -rotate-2 hover:rotate-0 transition-transform duration-500 border-4 border-white mt-8">
+                  <img 
+                    src="/nimki.webp" 
+                    alt="Savory Nimki" 
+                    loading="lazy"
+                    decoding="async"
+                    width="300"
+                    height="300"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="relative rounded-[32px] overflow-hidden shadow-xl -rotate-1 hover:rotate-0 transition-transform duration-500 border-4 border-white -mt-8">
+                  <img 
+                    src="/gujiya.webp" 
+                    alt="Sweet Gujiya" 
+                    loading="lazy"
+                    decoding="async"
+                    width="300"
+                    height="300"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="relative rounded-[32px] overflow-hidden shadow-xl rotate-3 hover:rotate-0 transition-transform duration-500 border-4 border-white">
+                  <div className="absolute inset-0 bg-primary/80 flex items-center justify-center p-6 text-center">
+                    <p className="text-white font-hindi text-xl md:text-2xl font-bold leading-tight">
+                      बिहार की <br /> परंपरा
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-white px-6 py-3 rounded-2xl shadow-xl border border-village hidden md:block">
-                <p className="text-primary font-black text-sm uppercase tracking-widest">100% Authentic</p>
+              
+              {/* Floating badges */}
+              <div className="absolute -top-4 -right-4 bg-white p-4 rounded-full shadow-2xl border border-village hidden md:block animate-pulse z-10">
+                <span className="text-xl">🍯</span>
               </div>
             </div>
           </div>

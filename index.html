@@ -18,11 +18,11 @@
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://BiharWalaTaste.com/" />
+  <meta property="og:url" content="https://biharwalataste.com/" />
   <meta property="og:title" content="Bihar wala taste - Authentic Bihari Food, Thekua & Gujiya Online" />
   <meta property="og:description"
     content="Buy authentic, traditional, and homemade Bihari food online. Hand-crafted Thekua, Gujiya, Khaja, and more delivered to your doorstep." />
-  <meta property="og:image" content="/biharwalatastelogo.png" />
+  <meta property="og:image" content="/biharwalatastelogo.webp" />
   <meta property="og:site_name" content="Bihar wala taste" />
   <meta property="og:locale" content="en_IN" />
 
@@ -34,7 +34,7 @@
     content="Buy authentic, traditional, and homemade Bihari food online. Hand-crafted Thekua, Gujiya, Khaja, and more delivered to your doorstep." />
   <meta property="twitter:image" content="/biharwalatastelogo.png" />
 
-  <link rel="canonical" href="https://BiharWalaTaste.com/" />
+  <link rel="canonical" href="https://biharwalataste.com/" />
   
   <!-- DNS Prefetch & Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,6 +47,11 @@
   <link rel="preload" as="image" href="/thekua.webp" type="image/webp" fetchpriority="high">
   <link rel="preload" as="image" href="/biharwalatastelogo.webp" type="image/webp">
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap">
+  <link rel="preload" as="style" href="/src/index.css">
+  
+  <!-- Preload Critical Data (Parallel Fetch) -->
+  <link rel="preload" href="/api/settings" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="/api/products" as="fetch" crossorigin="anonymous">
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 </head>

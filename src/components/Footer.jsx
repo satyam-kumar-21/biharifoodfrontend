@@ -80,7 +80,7 @@ const Footer = () => {
           </div>
           <div className="flex items-center gap-3">
             <Mail className="text-secondary shrink-0" />
-            <p>{settings?.email || 'contact@BiharWalaTaste.com'}</p>
+            <p>{settings?.email || 'info@biharwalataste.com'}</p>
           </div>
         </div>
       </div>

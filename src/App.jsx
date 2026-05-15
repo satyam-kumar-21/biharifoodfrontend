@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { LazyMotion, domAnimation } from 'framer-motion';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -11,7 +12,7 @@ const App = () => {
   const isAdminPath = location.pathname.startsWith('/admin');
 
   return (
-    <>
+    <LazyMotion features={domAnimation}>
       <Toaster position="top-center" reverseOrder={false} />
       <ScrollToTop />
       {!isAdminPath && <Header />}
@@ -23,7 +24,7 @@ const App = () => {
         </div>
       </main>
       {!isAdminPath && <Footer />}
-    </>
+    </LazyMotion>
   );
 };
 

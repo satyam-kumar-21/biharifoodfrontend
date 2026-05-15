@@ -16,10 +16,10 @@ const Hero = () => {
             Authentic Bihari Heritage
           </motion.div>
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl sm:text-4xl lg:text-6xl font-black text-gray-900 font-hindi leading-tight"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl sm:text-4xl lg:text-6xl font-black text-gray-900 font-hindi leading-tight will-change-[opacity]"
           >
             बिहार का <span className="text-primary">असली स्वाद</span>, <br />
             अब आपके घर तक।
@@ -63,8 +63,8 @@ const Hero = () => {
             <img 
               src="/thekua.webp" 
               alt="Bihari Thekua" 
-              width="600"
-              height="600"
+              width="500"
+              height="500"
               fetchpriority="high"
               decoding="async"
               className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" 

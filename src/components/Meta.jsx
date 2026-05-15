@@ -37,7 +37,7 @@ Meta.defaultProps = {
   description: 'Experience the best of Bihar with our authentic, traditional, and homemade delicacies. From the rich history of Bihar, we bring you hand-crafted Thekua, Nimki, Tilkut, Peda, and more. Authentic village taste delivered fresh.',
   keywords: 'Bihari food online, best Bihari food, authentic Bihari sweets, Thekua online India, buy Gujiya online, Nimki snacks, Gaya Tilkut online, Deoghar Peda, Khaja from Silao, history of Bihar food, traditional Bihari snacks, Sattu online, Bihari snacks home delivery, Bihar wala taste',
   url: 'https://biharwalataste.com/',
-  image: '/biharwalatastelogo.png',
+  image: '/biharwalatastelogo.webp',
   type: 'website'
 };
 
