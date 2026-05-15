@@ -36,6 +36,9 @@
 
   <link rel="canonical" href="https://www.biharwalataste.com" />
   
+  <!-- Content Security Policy to block unwanted third-party scripts like Karte.io that block the critical path -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https:; img-src 'self' https: data:; font-src 'self' https: data:; frame-src 'none'; object-src 'none';">
+
   <!-- DNS Prefetch & Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,24 +50,24 @@
   <!-- Critical CSS (Inlined for FCP) -->
   <style>
     :root { --primary: #8B4513; --village: #FFF9E6; --background: #FFFFFF; }
-    body { background-color: var(--background); margin: 0; font-family: 'Inter', sans-serif; }
+    body { background-color: var(--background); margin: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
     .hero-bg { background-color: var(--village); }
     #root { min-height: 100vh; }
     /* Hide initial flash of unstyled content */
-    .initial-load { opacity: 0; animation: fadeIn 0.5s ease-in forwards; }
+    .initial-load { opacity: 0; animation: fadeIn 0.4s ease-in forwards; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   </style>
 
   <!-- Preload Critical Assets -->
   <link rel="preload" as="image" href="/thekua.webp" type="image/webp" fetchpriority="high">
   <link rel="preload" as="image" href="/biharwalatastelogo.webp" type="image/webp">
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap">
   
   <!-- Preload Critical Data (Parallel Fetch) -->
   <link rel="preload" href="/api/settings" as="fetch" crossorigin="anonymous">
   <link rel="preload" href="/api/products" as="fetch" crossorigin="anonymous">
   
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 </head>
 
 <body>
