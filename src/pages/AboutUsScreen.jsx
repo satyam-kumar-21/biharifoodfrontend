@@ -1,21 +1,22 @@
 import { motion } from 'framer-motion';
 import { Heart, Globe, Users, ShieldCheck } from 'lucide-react';
 import Meta from '../components/Meta';
+import { Link } from 'react-router-dom';
 
 const AboutUsScreen = () => {
   return (
     <>
-      <Meta 
-        title="Our Story - Bihar wala taste" 
+      <Meta
+        title="Our Story - Bihar wala taste"
         description="Learn about our mission to bring the authentic taste of Bihar's heritage to your doorstep. We support local women artisans and preserve traditional recipes."
         keywords="about Bihar wala taste, Bihari food culture, traditional Bihari recipes, support local artisans Bihar, women empowerment Bihar, authentic Bihari taste"
       />
       <div className="space-y-24 pb-20">
         {/* Hero Section */}
         <section className="relative h-[250px] sm:h-[350px] md:h-[500px] rounded-[32px] md:rounded-[60px] overflow-hidden">
-          <img 
-            src="/thekua.webp" 
-            alt="Traditional Bihari Culture" 
+          <img
+            src="/thekua.webp"
+            alt="Traditional Bihari Culture"
             width="1200"
             height="500"
             fetchpriority="high"
@@ -24,7 +25,7 @@ const AboutUsScreen = () => {
           />
           <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-center">
             <div className="max-w-3xl px-6 space-y-4">
-              <motion.h1 
+              <motion.h1
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="text-3xl sm:text-4xl md:text-7xl font-bold text-white font-hindi"
@@ -59,7 +60,7 @@ const AboutUsScreen = () => {
                 Every batch of Thekua, every jar of pickle, and every pack of Khaja is crafted with patience and love, using the finest ingredients sourced directly from local farmers.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-8 pt-6 border-t border-village">
               <div className="space-y-2">
                 <h3 className="text-3xl md:text-4xl font-bold text-primary">50+</h3>
@@ -71,12 +72,12 @@ const AboutUsScreen = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="relative order-1 lg:order-2">
             <div className="aspect-[4/5] md:aspect-square rounded-[32px] md:rounded-[60px] overflow-hidden shadow-2xl">
-              <img 
-                src="/gujiya.webp" 
-                alt="Local Artisan" 
+              <img
+                src="/gujiya.webp"
+                alt="Local Artisan"
                 loading="lazy"
                 decoding="async"
                 width="600"
