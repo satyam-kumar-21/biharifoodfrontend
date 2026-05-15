@@ -1,5 +1,8 @@
-import { Suspense } from 'react';
+import { useEffect, Suspense } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useGetSettingsQuery } from './slices/settingsApiSlice';
+import { setCartSettings } from './slices/cartSlice';
 import { Toaster } from 'react-hot-toast';
 import { LazyMotion } from 'framer-motion';
 import Header from './components/Header';
@@ -11,7 +14,19 @@ const loadFeatures = () => import('./motion-features.js').then(res => res.defaul
 
 const App = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const isAdminPath = location.pathname.startsWith('/admin');
+
+  const { data: settings } = useGetSettingsQuery();
+
+  useEffect(() => {
+    if (settings) {
+      dispatch(setCartSettings({
+        freeShippingThreshold: settings.freeShippingThreshold || 500,
+        shippingPrice: 40 // Default fallback
+      }));
+    }
+  }, [settings, dispatch]);
 
   return (
     <LazyMotion features={loadFeatures}>

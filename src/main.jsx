@@ -56,6 +56,8 @@ import PrivateRoute from './components/PrivateRoute.jsx';
 import AdminRoute from './components/AdminRoute.jsx';
 import AdminLayout from './components/AdminLayout.jsx';
 
+const OrderSuccessScreen = lazy(() => import('./pages/OrderSuccessScreen.jsx'));
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
@@ -83,6 +85,7 @@ const router = createBrowserRouter(
         <Route path='/payment' element={<PaymentScreen />} />
         <Route path='/placeorder' element={<PlaceOrderScreen />} />
         <Route path='/order/:id' element={<OrderScreen />} />
+        <Route path='/order-success/:id' element={<OrderSuccessScreen />} />
         <Route path='/profile' element={<ProfileScreen />} />
         <Route path='/myorders' element={<MyOrdersScreen />} />
       </Route>

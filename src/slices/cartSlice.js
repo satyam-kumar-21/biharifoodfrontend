@@ -2,7 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = localStorage.getItem('cart')
   ? JSON.parse(localStorage.getItem('cart'))
-  : { cartItems: [], shippingAddress: {}, paymentMethod: 'Razorpay' };
+  : { 
+      cartItems: [], 
+      shippingAddress: {}, 
+      paymentMethod: 'Razorpay',
+      freeShippingThreshold: 500,
+      shippingPriceValue: 0
+    };
 
 const addDecimals = (num) => {
   return (Math.round(num * 100) / 100).toFixed(2);
@@ -14,8 +20,16 @@ const updateCart = (state) => {
     state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   );
 
-  // Calculate shipping price (Free if over 500, else 40)
-  state.shippingPrice = addDecimals(state.itemsPrice > 500 ? 0 : 40);
+  // Calculate shipping price
+  const threshold = Number(state.freeShippingThreshold || 500);
+  
+  // If items price is over threshold, shipping is free
+  if (Number(state.itemsPrice) >= threshold) {
+    state.shippingPrice = addDecimals(0);
+  } else {
+    // Otherwise use the shipping price from state (calculated via Shiprocket or fallback)
+    state.shippingPrice = addDecimals(Number(state.shippingPriceValue || 40));
+  }
 
   // Calculate tax price (5% GST)
   state.taxPrice = addDecimals(Number((0.05 * state.itemsPrice).toFixed(2)));
@@ -66,6 +80,11 @@ const cartSlice = createSlice({
       state.cartItems = [];
       return updateCart(state);
     },
+    setCartSettings: (state, action) => {
+      state.freeShippingThreshold = action.payload.freeShippingThreshold;
+      state.shippingPriceValue = action.payload.shippingPrice;
+      return updateCart(state);
+    },
     resetCart: (state) => (state = initialState),
   },
 });
@@ -77,6 +96,7 @@ export const {
   savePaymentMethod,
   clearCartItems,
   resetCart,
+  setCartSettings,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

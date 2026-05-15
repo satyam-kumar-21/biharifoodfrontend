@@ -150,13 +150,28 @@ const OrderScreen = () => {
             <h2 className="text-2xl font-bold font-hindi flex items-center gap-3">
               <Truck className="text-primary" /> Shipping Details
             </h2>
-            <div className="space-y-2">
-              <p className="text-lg font-bold">{order.user.name}</p>
-              <p className="text-gray-600">{order.user.email}</p>
-              <p className="text-gray-600">
-                {order.shippingAddress.address}, {order.shippingAddress.city} {order.shippingAddress.postalCode}, {order.shippingAddress.country}
-              </p>
-              <p className="text-gray-600">Phone: {order.shippingAddress.phone}</p>
+            <div className="space-y-3">
+              <p className="text-xl font-bold text-gray-800">{order.user.name}</p>
+              <div className="space-y-1">
+                <p className="flex items-center gap-2 text-gray-600">
+                    <span className="font-black text-[10px] uppercase tracking-widest text-gray-400 w-20">Address:</span>
+                    <span className="font-medium">{order.shippingAddress.address}, {order.shippingAddress.city} {order.shippingAddress.postalCode}</span>
+                </p>
+                {order.shippingAddress.landmark && (
+                    <p className="flex items-center gap-2 text-gray-600">
+                        <span className="font-black text-[10px] uppercase tracking-widest text-gray-400 w-20">Landmark:</span>
+                        <span className="font-bold text-primary">{order.shippingAddress.landmark}</span>
+                    </p>
+                )}
+                <p className="flex items-center gap-2 text-gray-600">
+                    <span className="font-black text-[10px] uppercase tracking-widest text-gray-400 w-20">Mobile:</span>
+                    <span className="font-medium">+91 {order.shippingAddress.phone}</span>
+                </p>
+                <p className="flex items-center gap-2 text-gray-600">
+                    <span className="font-black text-[10px] uppercase tracking-widest text-gray-400 w-20">Email:</span>
+                    <span className="font-medium">{order.user.email}</span>
+                </p>
+              </div>
             </div>
             {order.isDelivered ? (
               <Message variant='success'>Delivered on: {order.deliveredAt.substring(0, 10)}</Message>

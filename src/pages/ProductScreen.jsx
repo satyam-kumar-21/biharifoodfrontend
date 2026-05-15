@@ -204,13 +204,13 @@ const ProductScreen = () => {
                     <div className="flex flex-col sm:flex-row gap-4">
                       <button
                         onClick={addToCartHandler}
-                        className="flex-1 px-8 py-5 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-3 text-lg"
+                        className="flex-1 px-6 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-2 text-base md:text-lg"
                       >
-                        <ShoppingCart size={24} /> Add to Cart
+                        <ShoppingCart size={20} /> Add to Cart
                       </button>
                       <button
                         onClick={buyNowHandler}
-                        className="flex-1 village-button-primary py-5 text-lg"
+                        className="flex-1 px-6 py-3 rounded-full border-2 border-transparent bg-primary text-white font-bold hover:bg-primary/90 transition-all flex items-center justify-center gap-2 text-base md:text-lg shadow-lg"
                       >
                         Buy Now
                       </button>
@@ -219,9 +219,9 @@ const ProductScreen = () => {
                       href={whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full px-8 py-5 rounded-full border-2 border-green-500 text-green-600 font-bold hover:bg-green-500 hover:text-white transition-all flex items-center justify-center gap-3 text-lg shadow-sm"
+                      className="w-full px-6 py-3 rounded-full border-2 border-green-500 text-green-600 font-bold hover:bg-green-500 hover:text-white transition-all flex items-center justify-center gap-2 text-base md:text-lg shadow-sm"
                     >
-                      <MessageCircle size={24} /> Order on WhatsApp
+                      <MessageCircle size={20} /> Order on WhatsApp
                     </a>
                   </div>
                 </div>

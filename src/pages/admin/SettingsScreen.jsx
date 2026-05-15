@@ -28,6 +28,7 @@ const SettingsScreen = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [authMode, setAuthMode] = useState('mobile_otp');
+  const [freeShippingThreshold, setFreeShippingThreshold] = useState(500);
 
   useEffect(() => {
     if (settings) {
@@ -38,6 +39,7 @@ const SettingsScreen = () => {
       setEmail(settings.email || '');
       setPhone(settings.phone || '');
       setAuthMode(settings.authMode || 'mobile_otp');
+      setFreeShippingThreshold(settings.freeShippingThreshold || 500);
     }
   }, [settings]);
 
@@ -63,7 +65,8 @@ const SettingsScreen = () => {
         address, 
         email, 
         phone,
-        authMode
+        authMode,
+        freeShippingThreshold
       }).unwrap();
       toast.success('Settings updated successfully');
       refetch();
@@ -257,6 +260,28 @@ const SettingsScreen = () => {
                   <div className={`w-12 h-6 rounded-full relative transition-all ${isOnlinePaymentEnabled ? 'bg-primary' : 'bg-gray-300'}`}>
                     <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${isOnlinePaymentEnabled ? 'right-1' : 'left-1'}`}></div>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Shipping Configuration Section */}
+            <div className="p-8 md:p-12 space-y-8">
+              <h2 className="text-xl font-black uppercase tracking-widest text-gray-400 flex items-center gap-2">
+                <Truck size={20} /> Shipping Configuration
+              </h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-2 flex items-center gap-1">
+                    Free Shipping Threshold (₹)
+                  </label>
+                  <input 
+                    type="number" 
+                    value={freeShippingThreshold}
+                    onChange={(e) => setFreeShippingThreshold(e.target.value)}
+                    className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-primary transition font-bold"
+                  />
+                  <p className="text-[10px] text-gray-400 px-2 italic">Orders above this amount will have zero shipping charges.</p>
                 </div>
               </div>
             </div>

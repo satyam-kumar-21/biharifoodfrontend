@@ -42,7 +42,7 @@ const PlaceOrderScreen = () => {
         totalPrice: cart.totalPrice,
       }).unwrap();
       dispatch(clearCartItems());
-      navigate(`/order/${res._id}`);
+      navigate(`/order-success/${res._id}`);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
@@ -55,16 +55,27 @@ const PlaceOrderScreen = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div className="lg:col-span-2 space-y-8">
           {/* Shipping Info */}
-          <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 space-y-4">
-            <h2 className="text-2xl font-bold font-hindi">Shipping</h2>
-            <p className="text-lg">
-              <span className="font-bold text-gray-500">Address: </span>
-              {cart.shippingAddress.address}, {cart.shippingAddress.city} {cart.shippingAddress.postalCode}, {cart.shippingAddress.country}
-            </p>
-            <p className="text-lg">
-              <span className="font-bold text-gray-500">Mobile: </span>
-              {cart.shippingAddress.phone}
-            </p>
+          <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 space-y-4 transition-all hover:shadow-md">
+            <h2 className="text-2xl font-bold font-hindi flex items-center gap-2">
+                <span className="w-8 h-1 bg-primary rounded-full"></span>
+                Shipping Details
+            </h2>
+            <div className="space-y-3 text-lg">
+                <p className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                    <span className="font-black text-gray-400 uppercase text-xs tracking-widest min-w-[100px]">Address:</span>
+                    <span className="text-gray-700 font-medium">{cart.shippingAddress.address}, {cart.shippingAddress.city} {cart.shippingAddress.postalCode}</span>
+                </p>
+                {cart.shippingAddress.landmark && (
+                    <p className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                        <span className="font-black text-gray-400 uppercase text-xs tracking-widest min-w-[100px]">Landmark:</span>
+                        <span className="text-primary font-bold">{cart.shippingAddress.landmark}</span>
+                    </p>
+                )}
+                <p className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                    <span className="font-black text-gray-400 uppercase text-xs tracking-widest min-w-[100px]">Mobile:</span>
+                    <span className="text-gray-700 font-medium">+91 {cart.shippingAddress.phone}</span>
+                </p>
+            </div>
           </div>
 
           {/* Payment Info */}
