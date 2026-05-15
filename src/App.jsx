@@ -15,6 +15,7 @@ const App = () => {
 
   return (
     <LazyMotion features={loadFeatures}>
+      <div className="initial-load">
       <Toaster position="top-center" reverseOrder={false} />
       <ScrollToTop />
       {!isAdminPath && <Header />}
@@ -26,6 +27,7 @@ const App = () => {
         </div>
       </main>
       {!isAdminPath && <Footer />}
+      </div>
     </LazyMotion>
   );
 };
