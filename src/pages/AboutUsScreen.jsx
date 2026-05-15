@@ -1,4 +1,4 @@
-﻿import { motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Heart, Globe, Users, ShieldCheck } from 'lucide-react';
 import Meta from '../components/Meta';
 
@@ -12,22 +12,26 @@ const AboutUsScreen = () => {
       />
       <div className="space-y-24 pb-20">
         {/* Hero Section */}
-        <section className="relative h-[350px] md:h-[500px] rounded-[40px] md:rounded-[60px] overflow-hidden">
+        <section className="relative h-[250px] sm:h-[350px] md:h-[500px] rounded-[32px] md:rounded-[60px] overflow-hidden">
           <img 
-            src="/thekua.png" 
+            src="/thekua.webp" 
             alt="Traditional Bihari Culture" 
+            width="1200"
+            height="500"
+            fetchpriority="high"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-center">
             <div className="max-w-3xl px-6 space-y-4">
               <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-4xl md:text-7xl font-bold text-white font-hindi"
+                className="text-3xl sm:text-4xl md:text-7xl font-bold text-white font-hindi"
               >
-                Our Story <span className="block md:inline text-2xl md:text-6xl opacity-80">(हमारी कहानी)</span>
+                Our Story <span className="block md:inline text-xl md:text-6xl opacity-80">(हमारी कहानी)</span>
               </motion.h1>
-              <p className="text-lg md:text-xl text-gray-200 font-light italic">
+              <p className="text-base md:text-xl text-gray-200 font-light italic">
                 "Bringing the authentic taste of Bihar's heritage to every doorstep in India."
               </p>
             </div>
@@ -58,27 +62,31 @@ const AboutUsScreen = () => {
             
             <div className="grid grid-cols-2 gap-8 pt-6 border-t border-village">
               <div className="space-y-2">
-                <h4 className="text-3xl md:text-4xl font-bold text-primary">50+</h4>
-                <p className="text-gray-500 font-medium">Traditional Products</p>
+                <h3 className="text-3xl md:text-4xl font-bold text-primary">50+</h3>
+                <p className="text-gray-600 font-medium">Traditional Products</p>
               </div>
               <div className="space-y-2">
-                <h4 className="text-3xl md:text-4xl font-bold text-primary">1000+</h4>
-                <p className="text-gray-500 font-medium">Happy Families</p>
+                <h3 className="text-3xl md:text-4xl font-bold text-primary">1000+</h3>
+                <p className="text-gray-600 font-medium">Happy Families</p>
               </div>
             </div>
           </div>
           
           <div className="relative order-1 lg:order-2">
-            <div className="aspect-[4/5] md:aspect-square rounded-[40px] md:rounded-[60px] overflow-hidden shadow-2xl">
+            <div className="aspect-[4/5] md:aspect-square rounded-[32px] md:rounded-[60px] overflow-hidden shadow-2xl">
               <img 
-                src="/gujiya.png" 
+                src="/gujiya.webp" 
                 alt="Local Artisan" 
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="600"
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 md:-bottom-10 md:-left-10 bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-village hidden sm:block max-w-[250px] md:max-w-xs">
-              <Heart className="text-primary mb-4" size={32} />
-              <p className="text-gray-600 italic text-sm md:text-base">"We ensure that every bite connects you directly to the soul of Bihar."</p>
+            <div className="absolute -bottom-6 -left-6 md:-bottom-10 md:-left-10 bg-white p-4 md:p-8 rounded-2xl md:rounded-3xl shadow-xl border border-village hidden sm:block max-w-[200px] md:max-w-xs">
+              <Heart className="text-primary mb-2 md:mb-4" size={24} />
+              <p className="text-gray-600 italic text-xs md:text-base">"We ensure that every bite connects you directly to the soul of Bihar."</p>
             </div>
           </div>
         </section>
@@ -113,7 +121,7 @@ const AboutUsScreen = () => {
               <div key={idx} className="relative p-10 bg-white rounded-[40px] shadow-sm border border-village/20 hover:shadow-xl transition-all">
                 <span className="absolute top-6 right-8 text-6xl font-black text-village/40 font-sans italic">{item.step}</span>
                 <h3 className="text-2xl font-bold font-hindi text-primary mb-4">{item.title}</h3>
-                <p className="text-gray-500 leading-relaxed">{item.desc}</p>
+                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -156,7 +164,7 @@ const AboutUsScreen = () => {
                   {value.icon}
                 </div>
                 <h3 className="text-xl font-bold font-hindi mb-3">{value.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{value.desc}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{value.desc}</p>
               </div>
             ))}
           </div>
@@ -169,9 +177,9 @@ const AboutUsScreen = () => {
             <p className="text-gray-200 text-lg max-w-2xl mx-auto">
               Join us in our journey to celebrate the flavors of Bihar. Order now and experience the taste of home.
             </p>
-            <button className="bg-secondary text-primary px-10 py-4 rounded-full font-black uppercase tracking-widest hover:bg-white transition-colors">
+            <Link to="/menu" className="bg-secondary text-primary px-10 py-4 rounded-full font-black uppercase tracking-widest hover:bg-white transition-colors inline-block">
               Start Shopping
-            </button>
+            </Link>
           </div>
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -ml-32 -mb-32"></div>

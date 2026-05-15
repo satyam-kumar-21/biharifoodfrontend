@@ -5,12 +5,28 @@
 
 @layer base {
   body {
-    @apply bg-background text-gray-900 font-sans;
+    @apply bg-background text-gray-900 font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-hindi;
+    @apply font-hindi tracking-tight;
   }
+}
+
+/* Performance: content-visibility for sections below the fold */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 100vw 500px;
+}
+
+/* Fix for mobile horizontal overflow */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
 }
 
 .madhubani-border {
@@ -19,7 +35,8 @@
 }
 
 .village-button {
-  @apply px-6 py-3 rounded-full font-bold text-lg shadow-lg transform transition active:scale-95;
+  @apply px-6 py-3 rounded-full font-bold text-base md:text-lg shadow-lg transform transition active:scale-95;
+  will-change: transform;
 }
 
 .village-button-primary {
@@ -46,4 +63,12 @@
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Optimize Framer Motion animations for mobile */
+@media (max-width: 768px) {
+  .motion-reduce {
+    transform: none !important;
+    transition: none !important;
+  }
 }

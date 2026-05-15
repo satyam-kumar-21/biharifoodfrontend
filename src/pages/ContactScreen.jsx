@@ -32,7 +32,7 @@ const ContactScreen = () => {
       <div className="max-w-6xl mx-auto py-8 space-y-12">
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold font-hindi text-primary">Contact</h1>
-          <p className="text-gray-500 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto">
             Your suggestions and questions are important to us. You can reach out to us through the form below or directly using the contact details.
           </p>
         </div>
@@ -47,27 +47,27 @@ const ContactScreen = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold font-hindi">Our Address</h3>
-                  <p className="text-gray-600">{settings?.address || 'Patna City, Bihar, India - 800008'}</p>
+                  <p className="text-gray-700">{settings?.address || 'Patna City, Bihar, India - 800008'}</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-6">
-                <div className="p-4 bg-green-100 rounded-2xl text-green-600">
+                <div className="p-4 bg-green-100 rounded-2xl text-green-700">
                   <Phone size={28} />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold font-hindi">Phone Number</h3>
-                  <p className="text-gray-600">{settings?.phone || '+91 98765 43210'}</p>
+                  <p className="text-gray-700">{settings?.phone || '+91 98765 43210'}</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-6">
-                <div className="p-4 bg-blue-100 rounded-2xl text-blue-600">
+                <div className="p-4 bg-blue-100 rounded-2xl text-blue-700">
                   <Mail size={28} />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold font-hindi">Email</h3>
-                  <p className="text-gray-600">{settings?.email || 'info@biharwalataste.com'}</p>
+                  <p className="text-gray-700">{settings?.email || 'info@biharwalataste.com'}</p>
                 </div>
               </div>
             </div>
@@ -90,8 +90,9 @@ const ContactScreen = () => {
           <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100">
             <form onSubmit={submitHandler} className="space-y-6">
               <div className="space-y-2">
-                <label className="font-bold font-hindi">Your Name</label>
+                <label htmlFor="contact-name" className="font-bold font-hindi">Your Name</label>
                 <input
+                  id="contact-name"
                   type="text"
                   className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary transition"
                   placeholder="Enter your name"
@@ -101,8 +102,9 @@ const ContactScreen = () => {
                 />
               </div>
               <div className="space-y-2">
-                <label className="font-bold font-hindi">Email Address</label>
+                <label htmlFor="contact-email" className="font-bold font-hindi">Email Address</label>
                 <input
+                  id="contact-email"
                   type="email"
                   className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary transition"
                   placeholder="Enter email"
@@ -112,8 +114,9 @@ const ContactScreen = () => {
                 />
               </div>
               <div className="space-y-2">
-                <label className="font-bold font-hindi">Subject</label>
+                <label htmlFor="contact-subject" className="font-bold font-hindi">Subject</label>
                 <input
+                  id="contact-subject"
                   type="text"
                   className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary transition"
                   placeholder="Enter subject"
@@ -123,8 +126,9 @@ const ContactScreen = () => {
                 />
               </div>
               <div className="space-y-2">
-                <label className="font-bold font-hindi">Message</label>
+                <label htmlFor="contact-message" className="font-bold font-hindi">Message</label>
                 <textarea
+                  id="contact-message"
                   rows="5"
                   className="w-full p-4 bg-village border border-gray-200 rounded-xl focus:outline-none focus:border-primary transition"
                   placeholder="Write your message here..."

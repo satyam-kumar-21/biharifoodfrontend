@@ -59,6 +59,7 @@ const MenuScreen = () => {
 
       {/* Products Grid */}
       <div className="relative">
+        <h2 className="sr-only">Product List</h2>
         {isLoading ? (
           <div className="flex justify-center py-20">
             <Loader />

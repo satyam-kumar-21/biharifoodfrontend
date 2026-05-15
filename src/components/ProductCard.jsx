@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
 import Rating from './Rating';
-import { ShoppingCart, Eye } from 'lucide-react';
+import { MessageCircle, Eye, ShoppingCart } from 'lucide-react';
+import { useGetSettingsQuery } from '../slices/settingsApiSlice';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../slices/cartSlice';
+import { toast } from 'react-hot-toast';
 
 const ProductCard = ({ product }) => {
   const getFirstSentence = (html) => {
@@ -14,6 +18,19 @@ const ProductCard = ({ product }) => {
     
     return match ? match[0] : (text.slice(0, 100) + (text.length > 100 ? "..." : ""));
   };
+
+  const { data: settings } = useGetSettingsQuery();
+  const dispatch = useDispatch();
+
+  const addToCartHandler = (e) => {
+    e.preventDefault();
+    dispatch(addToCart({ ...product, qty: 1 }));
+    toast.success('Added to cart!');
+  };
+
+  const whatsappPhone = settings?.phone?.replace(/\D/g, '') || '919876543210';
+  const whatsappMsg = encodeURIComponent(`Hi! I want to order "${product.name}" (Price: ₹${product.price}). Please help me.`);
+  const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${whatsappMsg}`;
 
   return (
     <div className="bg-white rounded-[32px] shadow-sm border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 group flex flex-col h-full relative">
@@ -36,8 +53,8 @@ const ProductCard = ({ product }) => {
         />
         
         {/* Overlay Actions */}
-        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-          <div className="bg-white p-3 rounded-full text-primary shadow-xl transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+        <div className="absolute inset-0 bg-black/10 sm:bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+          <div className="bg-white p-3 rounded-full text-primary shadow-xl transform translate-y-4 sm:translate-y-10 group-hover:translate-y-0 transition-transform duration-300">
             <Eye size={20} />
           </div>
         </div>
@@ -56,7 +73,7 @@ const ProductCard = ({ product }) => {
             <h3 className="text-[1.2rem] font-black font-hindi group-hover:text-primary transition-colors leading-tight flex items-baseline gap-2">
               <span className="truncate">{product.name}</span>
               {product.unit && (
-                <span className="text-xs text-gray-400 font-bold whitespace-nowrap">
+                <span className="text-xs text-gray-500 font-bold whitespace-nowrap">
                   ({product.unit})
                 </span>
               )}
@@ -74,7 +91,7 @@ const ProductCard = ({ product }) => {
           </p>
         </div>
 
-        <div className="pt-3 mt-4 border-t border-village/50 flex items-center justify-between">
+        <div className="pt-3 mt-4 border-t border-village/50 flex items-center justify-between gap-2">
           <div className="flex flex-col">
             <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.1em] leading-none mb-1">Price</span>
             <div className="flex items-baseline gap-1">
@@ -86,12 +103,24 @@ const ProductCard = ({ product }) => {
             </div>
           </div>
           
-          <Link 
-            to={`/product/${product._id}`}
-            className="bg-secondary text-primary p-2.5 rounded-xl hover:bg-primary hover:text-white transition-all shadow-sm hover:shadow-lg transform active:scale-95"
-          >
-            <ShoppingCart size={18} />
-          </Link>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={addToCartHandler}
+              aria-label={`Add ${product.name} to cart`}
+              className="bg-secondary text-primary p-2.5 rounded-xl hover:bg-primary hover:text-white transition-all shadow-sm hover:shadow-lg transform active:scale-95"
+            >
+              <ShoppingCart size={18} />
+            </button>
+            <a 
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Order ${product.name} on WhatsApp`}
+              className="bg-green-500 text-white p-2.5 rounded-xl hover:bg-green-600 transition-all shadow-sm hover:shadow-lg transform active:scale-95"
+            >
+              <MessageCircle size={18} />
+            </a>
+          </div>
         </div>
       </div>
     </div>

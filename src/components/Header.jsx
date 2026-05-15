@@ -85,7 +85,7 @@ const Header = () => {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-4">
-            <Link to="/cart" className="relative p-2 text-gray-700 hover:text-primary transition">
+            <Link to="/cart" aria-label="View Shopping Cart" className="relative p-2.5 text-gray-700 hover:text-primary transition">
               <ShoppingCart size={24} />
               {cartItems.length > 0 && (
                 <span className="absolute -top-1 -right-1 bg-secondary text-primary text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
@@ -98,7 +98,8 @@ const Header = () => {
               <div className="relative">
                 <button
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
-                  className="flex items-center gap-1 p-2 text-gray-700 hover:text-primary transition"
+                  aria-label="User Profile Menu"
+                  className="flex items-center gap-1 p-2.5 text-gray-700 hover:text-primary transition"
                 >
                   <User size={24} />
                   <span className="hidden md:inline max-w-[150px] truncate font-bold text-primary">Hi, {userInfo.name.split(' ')[0]}</span>
@@ -161,8 +162,9 @@ const Header = () => {
 
             {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden p-1.5 text-gray-700"
+              className="md:hidden p-2.5 text-gray-700"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -173,59 +175,41 @@ const Header = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="absolute top-full left-0 w-full bg-white z-40 flex flex-col p-6 gap-6 md:hidden border-t border-gray-100 shadow-xl"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute top-full left-0 w-full bg-white z-40 flex flex-col p-6 gap-4 md:hidden border-t border-gray-100 shadow-xl overflow-hidden"
             >
-              <Link
-                to="/"
-                className="text-2xl font-hindi font-bold"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link
-                to="/menu"
-                className="text-2xl font-hindi font-bold"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Menu
-              </Link>
-              <Link
-                to="/blogs"
-                className="text-2xl font-hindi font-bold"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Blog
-              </Link>
-              <Link
-                to="/about-us"
-                className="text-2xl font-hindi font-bold"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </Link>
-              <Link
-                to="/contact"
-                className="text-2xl font-hindi font-bold"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
-              </Link>
+              {[
+                { to: '/', label: 'Home' },
+                { to: '/menu', label: 'Menu' },
+                { to: '/blogs', label: 'Blog' },
+                { to: '/about-us', label: 'About' },
+                { to: '/contact', label: 'Contact' },
+              ].map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="text-xl font-hindi font-bold py-2 border-b border-gray-50 last:border-0"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
               {userInfo && (
                 <>
-                  <div className="border-t border-gray-100 my-2"></div>
+                  <div className="border-t border-gray-100 my-1"></div>
                   <Link
                     to="/profile"
-                    className="text-2xl font-hindi font-bold"
+                    className="text-xl font-hindi font-bold py-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Profile
                   </Link>
                   <Link
                     to="/myorders"
-                    className="text-2xl font-hindi font-bold"
+                    className="text-xl font-hindi font-bold py-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     My Orders
@@ -235,7 +219,7 @@ const Header = () => {
               {userInfo?.isAdmin && (
                 <Link
                   to="/admin/dashboard"
-                  className="text-2xl font-hindi font-bold text-primary"
+                  className="text-xl font-hindi font-bold text-primary py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Admin Dashboard

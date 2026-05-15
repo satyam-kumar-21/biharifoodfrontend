@@ -25,9 +25,9 @@ const HomeScreen = () => {
             <h2 className="text-3xl md:text-5xl font-bold font-hindi text-primary">Popular Products</h2>
             <p className="text-gray-600 italic">Our customer's favorite delicacies</p>
           </div>
-          <button className="village-button-secondary py-2 px-6 text-sm">
-            <Link to="/menu" className="text-lg font-bold hover:text-primary transition">View All →</Link>
-          </button>
+          <Link to="/menu" className="village-button-secondary py-2 px-6 text-lg font-bold hover:text-primary transition inline-block">
+            View All →
+          </Link>
         </div>
 
         {isLoading ? (
@@ -75,7 +75,11 @@ const HomeScreen = () => {
               <img 
                 src="/heritage-collage.png" 
                 alt="Bihari Food Heritage" 
-                className="relative rounded-[40px] shadow-2xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 w-full h-[300px] md:h-[500px] object-cover"
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="500"
+                className="relative rounded-[40px] shadow-2xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover"
               />
               {/* Floating badges */}
               <div className="absolute -top-6 -right-6 bg-white p-6 rounded-full shadow-xl border border-village hidden md:block animate-bounce">
@@ -102,7 +106,7 @@ const HomeScreen = () => {
             </div>
             <div className="space-y-3">
               <h3 className="text-2xl font-bold font-hindi text-gray-800">100% Pure</h3>
-              <p className="text-gray-500 leading-relaxed text-sm">Made with stone-ground flour and organic jaggery. No preservatives, ever.</p>
+              <p className="text-gray-600 leading-relaxed text-sm">Made with stone-ground flour and organic jaggery. No preservatives, ever.</p>
             </div>
           </div>
           <div className="space-y-6 group">
@@ -135,25 +139,26 @@ const HomeScreen = () => {
       </div>
 
       {/* Newsletter Section */}
-      <section className="bg-primary rounded-[60px] p-12 md:p-24 text-center text-white space-y-10 overflow-hidden relative mx-4 mb-20 shadow-2xl">
+      <section className="bg-primary rounded-[40px] md:rounded-[60px] p-8 md:p-24 text-center text-white space-y-10 overflow-hidden relative mx-4 mb-20 shadow-2xl">
         <div className="relative z-10 space-y-6 max-w-4xl mx-auto">
           <div className="inline-block px-4 py-2 bg-white/10 rounded-full text-xs font-black uppercase tracking-[0.3em] mb-4">
             Join the Village Club
           </div>
-          <h2 className="text-4xl md:text-7xl font-bold font-hindi leading-tight">
+          <h2 className="text-3xl md:text-7xl font-bold font-hindi leading-tight">
             Get the Taste of Home <br /> <span className="text-secondary">Delivered to You</span>
           </h2>
-          <p className="text-gray-200 text-lg md:text-xl max-w-2xl mx-auto font-light">
+          <p className="text-gray-200 text-base md:text-xl max-w-2xl mx-auto font-light">
             Subscribe to get exclusive discounts, new product launches, and stories from the heart of Bihar.
           </p>
           
-          <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto pt-8">
+          <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto pt-4 md:pt-8">
             <input 
               type="email" 
               placeholder="Enter your email address" 
-              className="flex-grow p-5 rounded-3xl bg-white/10 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:bg-white/20 transition-all font-bold"
+              aria-label="Email address for newsletter"
+              className="flex-grow p-4 md:p-5 rounded-2xl md:rounded-3xl bg-white/10 border border-white/20 text-white placeholder:text-gray-300 focus:outline-none focus:bg-white/20 transition-all font-bold"
             />
-            <button className="bg-secondary text-primary px-10 py-5 rounded-3xl font-black uppercase tracking-widest hover:bg-white transition-all shadow-xl">
+            <button className="bg-secondary text-primary px-8 md:px-10 py-4 md:py-5 rounded-2xl md:rounded-3xl font-black uppercase tracking-widest hover:bg-white transition-all shadow-xl">
               Subscribe
             </button>
           </form>

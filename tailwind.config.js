@@ -8,7 +8,7 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#8B4513', // SaddleBrown (Warm Indian sweets color)
+          DEFAULT: '#7A3D11', // Darker SaddleBrown for better contrast with Gold
           light: '#A0522D',
           dark: '#5D2E0C',
         },
@@ -23,6 +23,11 @@ export default {
           dark: '#CD5C5C',
         },
         background: '#FDF5E6', // OldLace (Creamy background)
+        gray: {
+          400: '#737373', // Darker gray for contrast
+          500: '#525252',
+          600: '#404040',
+        }
       },
       fontFamily: {
         hindi: ['"Noto Sans Devanagari"', 'sans-serif'],

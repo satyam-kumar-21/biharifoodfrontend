@@ -28,16 +28,16 @@ const Footer = () => {
             An effort to bring the traditional taste and culture of Bihar to your doorstep. Pure, authentic, and traditional.
           </p>
           <div className="flex gap-4">
-            <a href="#" className="bg-primary-dark p-2 rounded-full hover:bg-secondary hover:text-primary transition">
+            <a href="#" aria-label="Follow us on Facebook" className="bg-primary-dark p-2.5 rounded-full hover:bg-secondary hover:text-primary transition">
               <FaFacebook size={20} />
             </a>
-            <a href="#" className="bg-primary-dark p-2 rounded-full hover:bg-secondary hover:text-primary transition">
+            <a href="#" aria-label="Follow us on Instagram" className="bg-primary-dark p-2.5 rounded-full hover:bg-secondary hover:text-primary transition">
               <FaInstagram size={20} />
             </a>
-            <a href="#" className="bg-primary-dark p-2 rounded-full hover:bg-secondary hover:text-primary transition">
+            <a href="#" aria-label="Follow us on Twitter" className="bg-primary-dark p-2.5 rounded-full hover:bg-secondary hover:text-primary transition">
               <FaTwitter size={20} />
             </a>
-            <a href="#" className="bg-primary-dark p-2 rounded-full hover:bg-secondary hover:text-primary transition">
+            <a href="#" aria-label="Follow us on YouTube" className="bg-primary-dark p-2.5 rounded-full hover:bg-secondary hover:text-primary transition">
               <FaYoutube size={20} />
             </a>
           </div>
@@ -85,7 +85,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="border-t border-primary-light mt-16 pt-8 text-center text-gray-300">
+      <div className="border-t border-primary-light mt-16 pt-8 text-center text-gray-200">
         <p>© {currentYear} Bihar wala taste. All rights reserved.</p>
       </div>
     </footer>

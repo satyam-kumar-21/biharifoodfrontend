@@ -47,6 +47,8 @@ const FAQ = () => {
             >
               <button 
                 onClick={() => toggleAccordion(idx)}
+                aria-expanded={isOpen}
+                aria-controls={`faq-content-${idx}`}
                 className="w-full text-left p-6 md:p-8 flex justify-between items-center group"
               >
                 <span className={`text-lg font-bold font-hindi transition-colors ${isOpen ? 'text-primary' : 'text-gray-800'}`}>
@@ -60,13 +62,14 @@ const FAQ = () => {
               <AnimatePresence>
                 {isOpen && (
                   <motion.div
+                    id={`faq-content-${idx}`}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                   >
                     <div className="px-6 md:px-8 pb-8">
-                      <div className="pt-4 border-t border-village text-gray-600 leading-relaxed text-lg">
+                      <div className="pt-4 border-t border-village text-gray-700 leading-relaxed text-lg">
                         {item.a}
                       </div>
                     </div>

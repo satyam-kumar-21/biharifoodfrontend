@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
@@ -8,7 +8,8 @@ import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Meta from '../components/Meta';
-import { ShoppingCart, Plus, Minus, ShieldCheck, Truck } from 'lucide-react';
+import { ShoppingCart, Plus, Minus, ShieldCheck, Truck, MessageCircle } from 'lucide-react';
+import { useGetSettingsQuery } from '../slices/settingsApiSlice';
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
@@ -22,6 +23,7 @@ const ProductScreen = () => {
   const [mainImage, setMainImage] = useState('');
 
   const { data: product, isLoading, refetch, error } = useGetProductDetailsQuery(productId);
+  const { data: settings } = useGetSettingsQuery();
   const [createReview, { isLoading: loadingProductReview }] = useCreateReviewMutation();
 
   const { userInfo } = useSelector((state) => state.auth) || {};
@@ -35,6 +37,10 @@ const ProductScreen = () => {
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty }));
     toast.success('Added to cart!');
+  };
+
+  const buyNowHandler = () => {
+    dispatch(addToCart({ ...product, qty }));
     navigate('/cart');
   };
 
@@ -54,6 +60,10 @@ const ProductScreen = () => {
       toast.error(err?.data?.message || err.error);
     }
   };
+
+  const whatsappPhone = settings?.phone?.replace(/\D/g, '') || '919876543210';
+  const whatsappMsg = encodeURIComponent(`Hi! I want to order "${product.name}" (Price: ₹${product.price}, Qty: ${qty}). Please help me.`);
+  const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${whatsappMsg}`;
 
   return (
     <div className="space-y-8 pb-20">
@@ -79,14 +89,15 @@ const ProductScreen = () => {
               {/* Thumbnails */}
               <div className="flex md:flex-col gap-4 overflow-x-auto md:overflow-y-auto max-h-[500px] scrollbar-hide">
                 {product.images.map((img, idx) => (
-                  <div
+                  <button
                     key={idx}
                     onClick={() => setMainImage(img.url)}
+                    aria-label={`View image ${idx + 1}`}
                     className={`min-w-[80px] w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden border-2 cursor-pointer transition-all flex-shrink-0 ${mainImage === img.url ? 'border-primary shadow-md scale-105' : 'border-village hover:border-gray-300'
                       }`}
                   >
                     <img src={img.url} alt="" className="w-full h-full object-cover" />
-                  </div>
+                  </button>
                 ))}
               </div>
 
@@ -110,7 +121,7 @@ const ProductScreen = () => {
                 <h1 className="text-4xl md:text-5xl font-bold font-hindi leading-tight">
                   {product.name}
                   {product.unit && (
-                    <span className="text-xl md:text-2xl text-gray-400 font-normal ml-3 whitespace-nowrap">
+                    <span className="text-xl md:text-2xl text-gray-500 font-normal ml-3 whitespace-nowrap">
                       ({product.unit})
                     </span>
                   )}
@@ -147,8 +158,8 @@ const ProductScreen = () => {
                     <ShieldCheck size={20} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-xs">100% Homemade</h4>
-                    <p className="text-[10px] text-gray-400">Traditional Methods</p>
+                    <h3 className="font-bold text-xs">100% Homemade</h3>
+                    <p className="text-[10px] text-gray-500">Traditional Methods</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -156,8 +167,8 @@ const ProductScreen = () => {
                     <Truck size={20} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-xs">Free Delivery</h4>
-                    <p className="text-[10px] text-gray-400">Orders above ₹500</p>
+                    <h3 className="font-bold text-xs">Free Delivery</h3>
+                    <p className="text-[10px] text-gray-500">Orders above ₹500</p>
                   </div>
                 </div>
               </div>
@@ -170,6 +181,7 @@ const ProductScreen = () => {
                     <div className="flex items-center bg-village rounded-2xl overflow-hidden border border-gray-100">
                       <button
                         onClick={() => setQty(Math.max(1, qty - 1))}
+                        aria-label="Decrease quantity"
                         className="p-4 hover:bg-gray-200 transition"
                       >
                         <Minus size={18} />
@@ -177,6 +189,7 @@ const ProductScreen = () => {
                       <span className="w-12 text-center font-black text-lg">{qty}</span>
                       <button
                         onClick={() => setQty(Math.min(product.countInStock, qty + 1))}
+                        aria-label="Increase quantity"
                         className="p-4 hover:bg-gray-200 transition"
                       >
                         <Plus size={18} />
@@ -184,14 +197,29 @@ const ProductScreen = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <button
-                      onClick={addToCartHandler}
-                      className="flex-[2] village-button-primary py-5 flex items-center justify-center gap-3 text-lg"
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <button
+                        onClick={addToCartHandler}
+                        className="flex-1 px-8 py-5 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-3 text-lg"
+                      >
+                        <ShoppingCart size={24} /> Add to Cart
+                      </button>
+                      <button
+                        onClick={buyNowHandler}
+                        className="flex-1 village-button-primary py-5 text-lg"
+                      >
+                        Buy Now
+                      </button>
+                    </div>
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full px-8 py-5 rounded-full border-2 border-green-500 text-green-600 font-bold hover:bg-green-500 hover:text-white transition-all flex items-center justify-center gap-3 text-lg shadow-sm"
                     >
-                      <ShoppingCart size={24} /> Add to Cart
-                    </button>
-                    <button className="flex-1 village-button-secondary py-5">Buy Now</button>
+                      <MessageCircle size={24} /> Order on WhatsApp
+                    </a>
                   </div>
                 </div>
               )}
@@ -209,9 +237,11 @@ const ProductScreen = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
+                  role="tab"
+                  aria-selected={activeTab === tab.id}
                   className={`flex-1 min-w-fit px-4 sm:px-10 py-4 sm:py-6 text-[10px] sm:text-sm font-black uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === tab.id
                       ? 'text-primary border-b-4 border-primary bg-primary/5'
-                      : 'text-gray-400 hover:text-gray-600'
+                      : 'text-gray-500 hover:text-gray-700'
                     }`}
                 >
                   {tab.id === 'additional' ? (

@@ -2,8 +2,11 @@ import { Star, StarHalf } from 'lucide-react';
 
 const Rating = ({ value, text, color = '#FFD700' }) => {
   return (
-    <div className='flex items-center gap-1'>
-      <span className="flex">
+    <div 
+      className='flex items-center gap-1'
+      aria-label={`${value} out of 5 stars`}
+    >
+      <span className="flex" aria-hidden="true">
         {[1, 2, 3, 4, 5].map((index) => (
           <span key={index}>
             {value >= index ? (
@@ -16,7 +19,7 @@ const Rating = ({ value, text, color = '#FFD700' }) => {
           </span>
         ))}
       </span>
-      <span className='text-sm text-gray-500 ml-1'>{text && text}</span>
+      <span className='text-sm text-gray-600 ml-1'>{text && text}</span>
     </div>
   );
 };
