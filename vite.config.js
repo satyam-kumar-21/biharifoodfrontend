@@ -24,13 +24,7 @@ export default defineConfig(({ mode }) => {
           faq: resolve(__dirname, 'faq.html'),
         },
         output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              if (id.includes('react') || id.includes('redux') || id.includes('axios')) {
-                return 'vendor';
-              }
-            }
-          }
+          // Allow Vite to handle chunking automatically for better route-based splitting
         }
       },
       chunkSizeWarningLimit: 1000,

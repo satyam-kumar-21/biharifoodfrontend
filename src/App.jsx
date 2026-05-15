@@ -1,18 +1,20 @@
 import { Suspense } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { LazyMotion, domAnimation } from 'framer-motion';
+import { LazyMotion } from 'framer-motion';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import Loader from './components/Loader';
+
+const loadFeatures = () => import('./motion-features.js').then(res => res.default);
 
 const App = () => {
   const location = useLocation();
   const isAdminPath = location.pathname.startsWith('/admin');
 
   return (
-    <LazyMotion features={domAnimation}>
+    <LazyMotion features={loadFeatures}>
       <Toaster position="top-center" reverseOrder={false} />
       <ScrollToTop />
       {!isAdminPath && <Header />}

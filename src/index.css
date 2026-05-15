@@ -16,10 +16,19 @@
   }
 }
 
-/* Performance: content-visibility for sections below the fold */
+/* Performance: aggressive containment for stable sections */
 section {
   content-visibility: auto;
   contain-intrinsic-size: 100vw 500px;
+  contain: content;
+}
+
+header, footer {
+  contain: layout style;
+}
+
+.will-change-transform {
+  will-change: transform;
 }
 
 /* Fix for mobile horizontal overflow */
