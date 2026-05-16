@@ -7,9 +7,10 @@ const AboutUsScreen = () => {
   return (
     <>
       <Meta
-        title="Our Story - Bihar wala taste"
-        description="Learn about our mission to bring the authentic taste of Bihar's heritage to your doorstep. We support local women artisans and preserve traditional recipes."
-        keywords="about Bihar wala taste, Bihari food culture, traditional Bihari recipes, support local artisans Bihar, women empowerment Bihar, authentic Bihari taste"
+        title="About Bihar - Our Story & Tradition | Bihar wala taste"
+        description="The story of Bihar wala taste is the story of Bihar's rich culinary heritage. We bring you authentic Bihar food, supporting local women artisans to preserve traditional recipes of Bihar."
+        keywords="Bihar, about Bihar wala taste, Bihari food culture, traditional Bihar recipes, support local artisans Bihar, women empowerment Bihar, authentic Bihar taste, history of Bihar food"
+        url="https://biharwalataste.com/about-us"
       />
       <div className="space-y-24 pb-20">
         {/* Hero Section */}

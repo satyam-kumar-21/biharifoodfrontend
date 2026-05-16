@@ -5,7 +5,7 @@ const Meta = ({ title, description, keywords, url, image, type }) => {
     <Helmet>
       <title>{title}</title>
       <meta name='description' content={description} />
-      <meta name='keyword' content={keywords} />
+      <meta name='keywords' content={keywords} />
       <meta name="robots" content="index, follow" />
       <meta name="googlebot" content="index, follow" />
       <meta name="author" content="Bihar wala taste" />
@@ -33,10 +33,10 @@ const Meta = ({ title, description, keywords, url, image, type }) => {
 };
 
 Meta.defaultProps = {
-  title: 'Bihar wala taste - Authentic Bihari Food, Thekua & Gujiya Online',
-  description: 'Experience the best of Bihar with our authentic, traditional, and homemade delicacies. From the rich history of Bihar, we bring you hand-crafted Thekua, Nimki, Tilkut, Peda, and more. Authentic village taste delivered fresh.',
-  keywords: 'Bihari food online, best Bihari food, authentic Bihari sweets, Thekua online India, buy Gujiya online, Nimki snacks, Gaya Tilkut online, Deoghar Peda, Khaja from Silao, history of Bihar food, traditional Bihari snacks, Sattu online, Bihari snacks home delivery, Bihar wala taste',
-  url: 'https://www.biharwalataste.com',
+  title: 'Bihar - Authentic Bihari Food, Thekua & Traditions | Bihar wala taste',
+  description: 'The soul of Bihar delivered to your doorstep. Experience authentic Bihar food, traditional Bihari snacks like Thekua, and the rich culinary history of Bihar. We bring you the true village taste of Bihar, freshly made and hand-crafted.',
+  keywords: 'Bihar, Bihar food, Bihari food, Bihar wala, Bihar wala taste, Thekua, Bihari Thekua, best Bihari food online, authentic Bihari sweets, buy Gujiya online, Nimki snacks, Gaya Tilkut online, Deoghar Peda, Khaja from Silao, traditional Bihari snacks, Sattu online, Bihari snacks home delivery',
+  url: 'https://biharwalataste.com',
   image: '/biharwalatastelogo.webp',
   type: 'website'
 };

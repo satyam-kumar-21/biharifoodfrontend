@@ -79,11 +79,11 @@ const ProductScreen = () => {
       ) : (
         <>
           <Meta
-            title={`${product.name} - Bihar wala taste`}
-            description={product.shortDescription ? product.shortDescription.replace(/<[^>]*>?/gm, '') : `Buy authentic ${product.name} online. Hand-crafted in Bihar with traditional recipes.`}
-            keywords={`${product.name}, buy ${product.name} online, Bihari ${product.category}, authentic Bihari food, Bihar wala taste, Bihar sweets`}
-            url={`https://www.biharwalataste.com/product/${product._id}`}
-            image={product.images && product.images.length > 0 ? product.images[0].url : '/biharwalatastelogo.png'}
+            title={`${product.name} - Authentic Bihar Food | Bihar wala taste`}
+            description={product.shortDescription ? product.shortDescription.replace(/<[^>]*>?/gm, '') : `Buy authentic ${product.name} from Bihar online. Hand-crafted using traditional Bihari recipes for the true village taste.`}
+            keywords={`${product.name}, Bihar ${product.name}, buy ${product.name} online, Bihari ${product.category}, Bihar food, Bihar wala taste, authentic Bihar sweets, Bihar snacks`}
+            url={`https://biharwalataste.com/product/${product._id}`}
+            image={product.images && product.images.length > 0 ? product.images[0].url : '/biharwalatastelogo.webp'}
             type="product"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">

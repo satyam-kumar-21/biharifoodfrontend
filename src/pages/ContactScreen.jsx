@@ -28,7 +28,13 @@ const ContactScreen = () => {
   };
 
   return (
-    <><Meta title='Contact - Bihar wala taste' />
+    <>
+      <Meta 
+        title="Contact Bihar wala taste - Reach Us in Patna, Bihar" 
+        description="Have questions about our Bihar food products? Reach out to Bihar wala taste. We are located in Patna, Bihar, and ship authentic Bihari delicacies across India."
+        keywords="contact Bihar wala taste, Bihar food customer care, Patna food shop, Bihar snacks delivery help, authentic Bihari food contact"
+        url="https://biharwalataste.com/contact"
+      />
       <div className="max-w-6xl mx-auto py-8 space-y-12">
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold font-hindi text-primary">Contact</h1>

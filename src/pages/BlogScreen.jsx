@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { blogData } from '../data/blogData';
 import { motion } from 'framer-motion';
 import { Calendar, User, ArrowRight } from 'lucide-react';
@@ -8,9 +8,10 @@ const BlogScreen = () => {
   return (
     <div className="space-y-12 pb-20">
       <Meta 
-        title="Bihari Food Blog - Bihar wala taste" 
-        description="Read about the rich culinary heritage of Bihar. From recipes to history, explore the world of authentic Bihari food through our blog."
-        keywords="Bihari food blog, Thekua recipe, Litti Chokha history, Sattu benefits, Bihari food culture, traditional Indian recipes"
+        title="Bihar Food Blog - Stories & Traditions of Bihar | Bihar wala taste" 
+        description="Explore the rich culinary heritage of Bihar through our blog. Read about Bihar food history, traditional recipes like Thekua, and the culture of Bihar."
+        keywords="Bihar food blog, history of Bihar food, Thekua story, Bihari culture, Bihar traditions, authentic Bihar stories, Bihar wala taste blog"
+        url="https://biharwalataste.com/blogs"
       />
       {/* Header */}
       <div className="text-center space-y-4 max-w-2xl mx-auto">
