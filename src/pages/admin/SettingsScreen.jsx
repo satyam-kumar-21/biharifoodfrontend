@@ -4,16 +4,17 @@ import { useUploadProductImageMutation } from '../../slices/productsApiSlice';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import { toast } from 'react-hot-toast';
-import { 
-  Settings as SettingsIcon, 
-  CreditCard, 
-  Banknote, 
-  Save, 
-  Image as ImageIcon, 
-  MapPin, 
-  Mail, 
+import {
+  Settings as SettingsIcon,
+  CreditCard,
+  Banknote,
+  Save,
+  Image as ImageIcon,
+  MapPin,
+  Mail,
   Phone,
-  Store
+  Store,
+  Truck
 } from 'lucide-react';
 
 const SettingsScreen = () => {
@@ -21,6 +22,7 @@ const SettingsScreen = () => {
   const [updateSettings, { isLoading: isUpdating }] = useUpdateSettingsMutation();
   const [uploadImage, { isLoading: isUploading }] = useUploadProductImageMutation();
 
+  const [shippingCharge, setShippingCharge] = useState(0);
   const [isCodEnabled, setIsCodEnabled] = useState(true);
   const [isOnlinePaymentEnabled, setIsOnlinePaymentEnabled] = useState(true);
   const [logo, setLogo] = useState('');
@@ -29,6 +31,28 @@ const SettingsScreen = () => {
   const [phone, setPhone] = useState('');
   const [authMode, setAuthMode] = useState('mobile_otp');
   const [freeShippingThreshold, setFreeShippingThreshold] = useState(500);
+  useEffect(() => {
+    if (settings) {
+      setIsCodEnabled(settings.isCodEnabled);
+      setIsOnlinePaymentEnabled(settings.isOnlinePaymentEnabled);
+      setLogo(settings.logo || '');
+      setAddress(settings.address || '');
+      setEmail(settings.email || '');
+      setPhone(settings.phone || '');
+      setAuthMode(settings.authMode || 'mobile_otp');
+      setFreeShippingThreshold(settings.freeShippingThreshold || 500);
+      setShippingCharge(settings.shippingCharge || 0);
+    }
+  }, [settings]);
+
+
+
+  // const [logo, setLogo] = useState('');
+  // const [address, setAddress] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [phone, setPhone] = useState('');
+  // const [authMode, setAuthMode] = useState('mobile_otp');
+  // const [freeShippingThreshold, setFreeShippingThreshold] = useState(500);
 
   useEffect(() => {
     if (settings) {
@@ -58,12 +82,12 @@ const SettingsScreen = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      await updateSettings({ 
-        isCodEnabled, 
-        isOnlinePaymentEnabled, 
-        logo, 
-        address, 
-        email, 
+      await updateSettings({
+        isCodEnabled,
+        isOnlinePaymentEnabled,
+        logo,
+        address,
+        email,
         phone,
         authMode,
         freeShippingThreshold
@@ -99,7 +123,7 @@ const SettingsScreen = () => {
               <h2 className="text-xl font-black uppercase tracking-widest text-gray-400 flex items-center gap-2">
                 <Store size={20} /> Brand Identity
               </h2>
-              
+
               <div className="space-y-4">
                 <label className="block text-sm font-bold text-gray-700">Store Logo</label>
                 <div className="flex items-center gap-8">
@@ -111,9 +135,9 @@ const SettingsScreen = () => {
                     )}
                   </div>
                   <div className="space-y-3 flex-1">
-                    <input 
-                      type="text" 
-                      placeholder="Logo URL" 
+                    <input
+                      type="text"
+                      placeholder="Logo URL"
                       value={logo}
                       onChange={(e) => setLogo(e.target.value)}
                       className="w-full p-3 bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:border-primary transition"
@@ -135,14 +159,14 @@ const SettingsScreen = () => {
               <h2 className="text-xl font-black uppercase tracking-widest text-gray-400 flex items-center gap-2">
                 <MapPin size={20} /> Contact Details
               </h2>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-2 flex items-center gap-1">
                     <Mail size={12} /> Email Address
                   </label>
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-primary transition font-bold"
@@ -152,8 +176,8 @@ const SettingsScreen = () => {
                   <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-2 flex items-center gap-1">
                     <Phone size={12} /> Phone Number
                   </label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-primary transition font-bold"
@@ -163,7 +187,7 @@ const SettingsScreen = () => {
                   <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-2 flex items-center gap-1">
                     <MapPin size={12} /> Store Address
                   </label>
-                  <textarea 
+                  <textarea
                     rows="3"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
@@ -178,9 +202,9 @@ const SettingsScreen = () => {
               <h2 className="text-xl font-black uppercase tracking-widest text-gray-400 flex items-center gap-2">
                 <SettingsIcon size={20} /> Authentication Method
               </h2>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div 
+                <div
                   className={`p-6 rounded-3xl border-2 transition-all cursor-pointer flex flex-col gap-4 ${authMode === 'mobile_otp' ? 'border-primary bg-primary/5' : 'border-gray-100 bg-gray-50'}`}
                   onClick={() => setAuthMode('mobile_otp')}
                 >
@@ -193,7 +217,7 @@ const SettingsScreen = () => {
                   </div>
                 </div>
 
-                <div 
+                <div
                   className={`p-6 rounded-3xl border-2 transition-all cursor-pointer flex flex-col gap-4 ${authMode === 'mobile_password' ? 'border-primary bg-primary/5' : 'border-gray-100 bg-gray-50'}`}
                   onClick={() => setAuthMode('mobile_password')}
                 >
@@ -206,7 +230,7 @@ const SettingsScreen = () => {
                   </div>
                 </div>
 
-                <div 
+                <div
                   className={`p-6 rounded-3xl border-2 transition-all cursor-pointer flex flex-col gap-4 ${authMode === 'email_password_otp' ? 'border-primary bg-primary/5' : 'border-gray-100 bg-gray-50'}`}
                   onClick={() => setAuthMode('email_password_otp')}
                 >
@@ -221,16 +245,16 @@ const SettingsScreen = () => {
               </div>
             </div>
 
-             {/* Payment Methods Section */}
+            {/* Payment Methods Section */}
             <div className="p-8 md:p-12 space-y-8">
               <h2 className="text-xl font-black uppercase tracking-widest text-gray-400 flex items-center gap-2">
                 <CreditCard size={20} /> Payment Gateways
               </h2>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* COD Toggle */}
                 <div className={`p-6 rounded-3xl border-2 transition-all cursor-pointer flex items-center justify-between group ${isCodEnabled ? 'border-primary bg-primary/5' : 'border-gray-100 bg-gray-50'}`}
-                     onClick={() => setIsCodEnabled(!isCodEnabled)}>
+                  onClick={() => setIsCodEnabled(!isCodEnabled)}>
                   <div className="flex items-center gap-4">
                     <div className={`p-4 rounded-2xl transition-all ${isCodEnabled ? 'bg-primary text-white shadow-lg' : 'bg-white text-gray-400'}`}>
                       <Banknote size={24} />
@@ -247,7 +271,7 @@ const SettingsScreen = () => {
 
                 {/* Online Payment Toggle */}
                 <div className={`p-6 rounded-3xl border-2 transition-all cursor-pointer flex items-center justify-between group ${isOnlinePaymentEnabled ? 'border-primary bg-primary/5' : 'border-gray-100 bg-gray-50'}`}
-                     onClick={() => setIsOnlinePaymentEnabled(!isOnlinePaymentEnabled)}>
+                  onClick={() => setIsOnlinePaymentEnabled(!isOnlinePaymentEnabled)}>
                   <div className="flex items-center gap-4">
                     <div className={`p-4 rounded-2xl transition-all ${isOnlinePaymentEnabled ? 'bg-primary text-white shadow-lg' : 'bg-white text-gray-400'}`}>
                       <CreditCard size={24} />
@@ -269,14 +293,14 @@ const SettingsScreen = () => {
               <h2 className="text-xl font-black uppercase tracking-widest text-gray-400 flex items-center gap-2">
                 <Truck size={20} /> Shipping Configuration
               </h2>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-2 flex items-center gap-1">
                     Free Shipping Threshold (₹)
                   </label>
-                  <input 
-                    type="number" 
+                  <input
+                    type="number"
                     value={freeShippingThreshold}
                     onChange={(e) => setFreeShippingThreshold(e.target.value)}
                     className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-primary transition font-bold"
@@ -288,8 +312,8 @@ const SettingsScreen = () => {
 
             {/* Footer / Save Button */}
             <div className="p-8 bg-gray-50 flex justify-end">
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={isUpdating}
                 className="village-button-primary px-12 py-4 flex items-center gap-2"
               >

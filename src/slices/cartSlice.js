@@ -6,8 +6,8 @@ const initialState = localStorage.getItem('cart')
       cartItems: [], 
       shippingAddress: {}, 
       paymentMethod: 'Razorpay',
-      freeShippingThreshold: 500,
-      shippingPriceValue: 0
+      freeShippingThreshold: 0,
+      shippingPrice: 0,
     };
 
 const addDecimals = (num) => {
@@ -20,16 +20,9 @@ const updateCart = (state) => {
     state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   );
 
-  // Calculate shipping price
-  const threshold = Number(state.freeShippingThreshold || 500);
-  
-  // If items price is over threshold, shipping is free
-  if (Number(state.itemsPrice) >= threshold) {
-    state.shippingPrice = addDecimals(0);
-  } else {
-    // Otherwise use the shipping price from state (calculated via Shiprocket or fallback)
-    state.shippingPrice = addDecimals(Number(state.shippingPriceValue || 40));
-  }
+  // Shipping is free for all orders
+  state.shippingPrice = addDecimals(0);
+
 
   // Calculate tax price (5% GST)
   state.taxPrice = addDecimals(Number((0.05 * state.itemsPrice).toFixed(2)));

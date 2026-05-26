@@ -51,28 +51,55 @@ const OrderScreen = () => {
     }
   };
 
-  // Load Razorpay Script
+  // Load Razorpay Script (avoid duplicate loading)
   const loadRazorpayScript = () => {
     return new Promise((resolve) => {
+      if (window.Razorpay) {
+        console.log('Razorpay script already loaded');
+        return resolve(true);
+      }
+      const existingScript = document.querySelector('script[src="https://checkout.razorpay.com/v1/checkout.js"]');
+      if (existingScript) {
+        existingScript.onload = () => resolve(true);
+        existingScript.onerror = () => resolve(false);
+        return;
+      }
       const script = document.createElement('script');
       script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-      script.onload = () => resolve(true);
-      script.onerror = () => resolve(false);
+      script.onload = () => {
+        console.log('Razorpay script loaded');
+        resolve(true);
+      };
+      script.onerror = () => {
+        console.error('Failed to load Razorpay script');
+        resolve(false);
+      };
       document.body.appendChild(script);
     });
   };
 
   const handlePayment = async () => {
-    const res = await loadRazorpayScript();
-
-    if (!res) {
-      toast.error('Razorpay SDK failed to load. Are you online?');
+    console.log('Initiating payment for order:', orderId);
+    const scriptLoaded = await loadRazorpayScript();
+    if (!scriptLoaded) {
+      toast.error('Razorpay SDK failed to load. Please check internet connection.');
       return;
     }
-
+    if (!window.Razorpay) {
+      toast.error('Razorpay SDK not available.');
+      return;
+    }
     try {
+      // Ensure amount is an integer (paise) and non-zero
+      const amount = Math.round(parseFloat(order.totalPrice) * 100);
+      console.log('Payment amount (paise):', amount);
+      if (!amount || amount <= 0) {
+        toast.error('Invalid order amount for payment.');
+        return;
+      }
+      // Create Razorpay order on backend (use totalPrice, backend will convert to paise)
       const razorpayOrder = await createRazorpayOrder(order.totalPrice).unwrap();
-      
+      console.log('Razorpay order created:', razorpayOrder);
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount: razorpayOrder.amount,
@@ -81,12 +108,22 @@ const OrderScreen = () => {
         description: 'पारंपरिक बिहारी स्वाद',
         order_id: razorpayOrder.id,
         handler: async (response) => {
+          console.log('Payment successful, verifying...', response);
           try {
             await verifyRazorpayPayment(response).unwrap();
-            await payOrder({ orderId, details: { id: response.razorpay_payment_id, status: 'success', update_time: Date.now().toString(), email_address: userInfo.email } });
+            await payOrder({
+              orderId,
+              details: {
+                id: response.razorpay_payment_id,
+                status: 'success',
+                update_time: Date.now().toString(),
+                email_address: userInfo.email,
+              },
+            });
             refetch();
             toast.success('Payment successful!');
           } catch (err) {
+            console.error('Payment verification error:', err);
             toast.error(err?.data?.message || err.error);
           }
         },
@@ -95,14 +132,12 @@ const OrderScreen = () => {
           email: userInfo.email,
           contact: order.shippingAddress.phone,
         },
-        theme: {
-          color: '#8B4513',
-        },
+        theme: { color: '#8B4513' },
       };
-
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
     } catch (err) {
+      console.error('Razorpay order creation error:', err);
       toast.error(err?.data?.message || err.error);
     }
   };
@@ -318,7 +353,7 @@ const OrderScreen = () => {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">Shipping:</span>
-                <span className="font-bold">₹{order.shippingPrice}</span>
+                <span className="font-bold">₹0</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">Tax:</span>

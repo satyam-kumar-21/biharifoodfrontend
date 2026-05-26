@@ -23,7 +23,7 @@ const App = () => {
     if (settings) {
       dispatch(setCartSettings({
         freeShippingThreshold: settings.freeShippingThreshold || 500,
-        shippingPrice: 40 // Default fallback
+        shippingPrice: 0 // Default fallback
       }));
     }
   }, [settings, dispatch]);
@@ -31,17 +31,17 @@ const App = () => {
   return (
     <LazyMotion features={loadFeatures}>
       <div className="initial-load">
-      <Toaster position="top-center" reverseOrder={false} />
-      <ScrollToTop />
-      {!isAdminPath && <Header />}
-      <main className={`overflow-x-hidden ${isAdminPath ? 'min-h-screen' : 'min-h-[80vh]'} ${['/', '/about-us', '/contact'].includes(location.pathname) ? 'pb-8' : 'py-8'}`}>
-        <div className={isAdminPath ? '' : 'container mx-auto px-4'}>
-          <Suspense fallback={<Loader />}>
-            <Outlet />
-          </Suspense>
-        </div>
-      </main>
-      {!isAdminPath && <Footer />}
+        <Toaster position="top-center" reverseOrder={false} />
+        <ScrollToTop />
+        {!isAdminPath && <Header />}
+        <main className={`overflow-x-hidden ${isAdminPath ? 'min-h-screen' : 'min-h-[80vh]'} ${['/', '/about-us', '/contact'].includes(location.pathname) ? 'pb-8' : 'py-8'}`}>
+          <div className={isAdminPath ? '' : 'container mx-auto px-4'}>
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
+          </div>
+        </main>
+        {!isAdminPath && <Footer />}
       </div>
     </LazyMotion>
   );
